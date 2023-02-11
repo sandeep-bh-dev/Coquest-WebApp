@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
+import ItemGrid from "./components/ItemGrid";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -39,6 +40,12 @@ const router = createBrowserRouter([
 			<div>
 				<b>Home</b>
 			</div>
+		),
+	},
+	{
+		path: "/inventory",
+		element: (
+			<ItemGrid />
 		),
 	},
 ]);
