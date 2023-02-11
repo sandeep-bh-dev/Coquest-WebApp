@@ -39,8 +39,8 @@ const ItemCard = ({
       <CardMedia style={{backgroundColor: 'lightgrey'}}
         component="img"
         height="186"
-        image=""
-        alt=""
+        image=" "
+        alt=" "
       />
       <CardHeader
         action = {
