@@ -47,8 +47,6 @@ root.render(
 	<React.StrictMode>
 		<ThemeProvider theme={theme}>
 			<Toolbar />
-
-			<div style={{ height: 50 }} />
 			<RouterProvider router={router} />
 		</ThemeProvider>
 	</React.StrictMode>
