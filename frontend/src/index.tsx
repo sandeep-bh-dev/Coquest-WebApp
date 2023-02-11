@@ -5,6 +5,7 @@ import Toolbar from "./components/Toolbar";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import "./index.css";
+import TaskCard from "./components/TaskCard";
 
 import { Login } from "./pages/Login";
 import { Notifications } from "./pages/Notifications";
@@ -16,7 +17,24 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <div>Root</div>,
+		element: (
+			<>
+				<TaskCard
+					name="Task Name"
+					community="Community Name"
+					location="Location"
+					description="Some text here"
+					type="small"
+				/>
+				<TaskCard
+					name="Task Name"
+					community="Community Name"
+					location="Location"
+					description="Some text here"
+					type="large"
+				/>
+			</>
+		),
 	},
 	{
 		path: "/login",
