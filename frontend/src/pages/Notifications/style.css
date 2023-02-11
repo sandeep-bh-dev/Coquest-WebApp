@@ -54,8 +54,10 @@
 	border-radius: 10px;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	text-align: left;
 	text-indent: 30px;
+	margin-right: 20px;
 	/* font */
 	font-family: "Poppins";
 	font-weight: 700;
@@ -67,6 +69,7 @@
 	height: 69px;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	text-align: left;
 	text-indent: 30px;
 	border-radius: 10px;

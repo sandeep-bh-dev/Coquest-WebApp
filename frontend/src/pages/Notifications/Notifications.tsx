@@ -29,6 +29,9 @@ function Notifications() {
 		fontWeight: 600,
 		lineHeight: 24,
 	});
+	const StyledArrowIcon = styled(KeyboardArrowRightIcon)({
+		marginRight: 20,
+	});
 
 	return (
 		<div>
@@ -40,43 +43,43 @@ function Notifications() {
 				<div className="notifications-container-left">
 					<div className="display-new-notifications-title">
 						New notification from Project...
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 					<div className="display-notifications-title">
 						Notification from
-						<KeyboardArrowRightIcon />
+						<StyledArrowIcon />
 					</div>
 				</div>
 				<StyledBox className="notifications-container-right">
