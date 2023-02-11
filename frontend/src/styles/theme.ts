@@ -13,6 +13,23 @@ const theme = createTheme({
                 position: 'static'
             }
         },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 10
+                }
+            },
+            defaultProps: {
+                raised: true
+            }
+        },
+        MuiCardHeader: {
+            styleOverrides: {  
+                subheader: {
+                    color: 'black'
+                }
+            }
+        },
         MuiToolbar: {
             styleOverrides: {
                 root: {

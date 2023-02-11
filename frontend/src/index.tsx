@@ -5,6 +5,7 @@ import Toolbar from "./components/Toolbar";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import "./index.css";
+import TaskCard from "./components/TaskCard";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -13,7 +14,24 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <div>Root</div>,
+		element: (
+			<>
+				<TaskCard
+					name="Task Name"
+					community="Community Name"
+					location="Location"
+					description="Some text here"
+					type="small"
+				/>
+				<TaskCard
+					name="Task Name"
+					community="Community Name"
+					location="Location"
+					description="Some text here"
+					type="large"
+				/>
+			</>
+		),
 	},
 	{
 		path: "/home",
@@ -29,6 +47,8 @@ root.render(
 	<React.StrictMode>
 		<ThemeProvider theme={theme}>
 			<Toolbar />
+
+			<div style={{ height: 50 }} />
 			<RouterProvider router={router} />
 		</ThemeProvider>
 	</React.StrictMode>
