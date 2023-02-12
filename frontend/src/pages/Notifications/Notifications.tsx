@@ -6,33 +6,33 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-function Notifications() {
-	const StyledBox = styled(Box)({
-		display: "flex",
-		flexWrap: "wrap",
-		"& > :not(style)": {
-			m: 1,
-			width: 699,
-			height: 722,
-		},
-		borderRadius: 10,
-	});
-	const StyledButton = styled(Button)({
-		width: 91.49,
-		height: 40,
-		marginTop: 66,
-		marginLeft: 566.5,
-		backgroundColor: "#D9D9D9",
-		borderRadius: 20,
-		color: "black",
-		fontSize: 16,
-		fontWeight: 600,
-		lineHeight: 24,
-	});
-	const StyledArrowIcon = styled(KeyboardArrowRightIcon)({
-		marginRight: 20,
-	});
+const StyledBox = styled(Box)({
+	display: "flex",
+	flexWrap: "wrap",
+	"& > :not(style)": {
+		m: 1,
+		width: 699,
+		height: 722,
+	},
+	borderRadius: 10,
+});
+const StyledButton = styled(Button)({
+	width: 91.49,
+	height: 40,
+	marginTop: 66,
+	marginLeft: 566.5,
+	backgroundColor: "#D9D9D9",
+	borderRadius: 20,
+	color: "black",
+	fontSize: 16,
+	fontWeight: 600,
+	lineHeight: 24,
+});
+const StyledArrowIcon = styled(KeyboardArrowRightIcon)({
+	marginRight: 20,
+});
 
+function Notifications() {
 	return (
 		<div>
 			<div className="title-container">
