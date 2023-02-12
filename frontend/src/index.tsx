@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Toolbar from "./components/Toolbar";
+import LeftSideBar from "./components/LeftSideBar";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import "./index.css";
@@ -14,24 +15,7 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: (
-			<>
-				<TaskCard
-					name="Task Name"
-					community="Community Name"
-					location="Location"
-					description="Some text here"
-					type="small"
-				/>
-				<TaskCard
-					name="Task Name"
-					community="Community Name"
-					location="Location"
-					description="Some text here"
-					type="large"
-				/>
-			</>
-		),
+		element: <div></div>,
 	},
 	{
 		path: "/home",
@@ -47,6 +31,7 @@ root.render(
 	<React.StrictMode>
 		<ThemeProvider theme={theme}>
 			<Toolbar />
+			<LeftSideBar />
 			<RouterProvider router={router} />
 		</ThemeProvider>
 	</React.StrictMode>
