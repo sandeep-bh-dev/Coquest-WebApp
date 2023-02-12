@@ -3,10 +3,12 @@ import styled from "@emotion/styled";
 import ItemCard from "../ItemCard";
 
 const Title = styled.h1({
-  width: 175,
-  height: 54,
+  width: '100%',
+  textAlign: 'left',
   fontWeight: 600,
   fontSize: 36,
+  marginTop: '60px',
+  marginBottom: '20px',
   marginLeft: '21%',
   fontFamily: 'Poppins'
 });
@@ -15,15 +17,24 @@ const Container = styled.div({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  marginTop: '20px'
+  position: 'relative'
 });
 
 const Grid = styled.div({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
-  gridGap: '20px',
+  gridGap: '16px',
   width: '80%',
-  maxWidth: '1100px'
+  maxWidth: '1100px',
+  '@media (max-width: 1000px)': {
+    gridTemplateColumns: 'repeat(3, 1fr)'
+  },
+  '@media (max-width: 800px)': {
+    gridTemplateColumns: 'repeat(2, 1fr)'
+  },
+  '@media (max-width: 600px)': {
+    gridTemplateColumns: 'repeat(1, 1fr)'
+  }
 });
 
 const ItemGrid = () => {

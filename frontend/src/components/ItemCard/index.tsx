@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardHeader from "@mui/material/CardHeader";
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ItemMenu from '../ItemMenu';
 
 type ItemCardProps = CardProps & {
 	taskName: string;
@@ -39,14 +39,12 @@ const ItemCard = ({
       <CardMedia style={{backgroundColor: 'lightgrey'}}
         component="img"
         height="186"
-        image=" "
-        alt=" "
+        image=""
+        alt=""
       />
       <CardHeader
         action = {
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
+          <ItemMenu />
         }
         title={<Title>{taskName}</Title>}
         subheader={<Subtitle>{itemName}</Subtitle>}
