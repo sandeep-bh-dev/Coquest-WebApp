@@ -5,14 +5,6 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import styled from '@emotion/styled';
 
-const options = [
-  'View',
-  'Move',
-  'Remove'
-];
-
-const ITEM_HEIGHT = 48;
-
 const StyledMenuItem = styled(MenuItem)({
   fontWeight: 400,
   fontFamily: 'Poppins',
@@ -22,12 +14,17 @@ const StyledMenuItem = styled(MenuItem)({
 
 const StyledMenu = styled(Menu)({
   '& .MuiPaper-root': {
-    maxHeight: `${ITEM_HEIGHT * 4.5}px`,
     width: '96px',
     borderRadius: '10px',
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)'
   }
 });
+
+const options = [
+  'View',
+  'Move',
+  'Remove'
+];
 
 export default function ItemMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -37,6 +34,23 @@ export default function ItemMenu() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleOptionClick = (option: string) => {
+    switch (option) {
+      case 'View':
+        console.log('View was clicked');
+        break;
+      case 'Move':
+        console.log('Move was clicked');
+        break;
+      case 'Remove':
+        console.log('Remove was clicked');
+        break;
+      default:
+        break;
+    }
+    handleClose();
   };
 
   return (
@@ -65,7 +79,8 @@ export default function ItemMenu() {
         onClose={handleClose}
       >
         {options.map((option) => (
-          <StyledMenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+          <StyledMenuItem 
+          key={option} onClick={() => handleOptionClick(option)}>
             {option}
           </StyledMenuItem>
         ))}

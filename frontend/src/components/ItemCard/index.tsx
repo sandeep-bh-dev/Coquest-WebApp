@@ -3,17 +3,16 @@ import styled from "@emotion/styled";
 import Card, { CardProps } from "@mui/material/Card";
 import CardMedia from '@mui/material/CardMedia';
 import CardHeader from "@mui/material/CardHeader";
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ItemMenu from '../ItemMenu';
 
 type ItemCardProps = CardProps & {
-	taskName: string;
-	itemName: string;
+  taskName: string;
+  itemName: string;
 };
 
 const Title = styled(Typography)({
-	variant: "overline",
+  variant: "overline",
   fontWeight: 400,
   fontSize: 12,
   lineHeight: "18px"
@@ -27,32 +26,31 @@ const Subtitle = styled(Typography)({
 });
 
 const ItemCard = ({
-	taskName,
+  taskName,
   itemName,
 }: ItemCardProps) => {
-	const CustomCard = styled(Card)({
-		height: 254,
-		width: 248.43,
-	});
+  const CustomCard = styled(Card)({
+    height: 254,
+    width: 248.43,
+  });
   return (
     <CustomCard>
-      <CardMedia style={{backgroundColor: 'lightgrey'}}
+      <CardMedia style={{ backgroundColor: 'lightgrey' }}
         component="img"
         height="186"
         image=""
         alt=""
       />
       <CardHeader
-        action = {
+        action={
           <ItemMenu />
         }
         title={<Title>{taskName}</Title>}
         subheader={<Subtitle>{itemName}</Subtitle>}
-        />
+      />
     </CustomCard>
   );
 }
 
 export default ItemCard;
 
-  
