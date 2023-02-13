@@ -1,1 +1,1 @@
-export {default as CreateCoop} from "./CreateCoop";
+export {default as CreateCoop} from "./CreateCoop"
