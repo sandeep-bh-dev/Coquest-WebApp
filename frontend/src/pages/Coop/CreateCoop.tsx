@@ -1,13 +1,25 @@
 import styled from "@emotion/styled";
 import {
+    Avatar,
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    CardProps,
     Checkbox,
     Chip,
     FormControlLabel,
     FormGroup,
+    IconButton,
+    InputAdornment,
+    List,
     ListItem,
     MenuItem,
     Radio,
+    Stack,
     TextField,
+    Toolbar,
     Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -15,6 +27,14 @@ import ProgressBar from "../../components/ProgressBar";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import CheckIcon from "@mui/icons-material/Check";
+import SearchIcon from "@mui/icons-material/Search";
+import Search from "@mui/icons-material/Search";
+import DoneIcon from "@mui/icons-material/Done";
+import Done from "@mui/icons-material/Done";
+import TaskCard from "../../components/TaskCard";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { fontWeight } from "@mui/system";
+import GoogleMaps from "./googlemap";
 
 type TextProps = {
     text: string;
@@ -89,12 +109,7 @@ function Mission() {
 }
 
 function Hashtags() {
-    // interface ChipData {
-    //     key: number;
-    //     label: string;
-    // }
-
-    const [chipData, setChipData] = useState([
+    const [hashtag, setHashTag] = useState([
         { key: 0, label: "communitygarden", active: false },
         { key: 1, label: "hashtag", active: false },
         { key: 2, label: "hashtag", active: false },
@@ -103,39 +118,72 @@ function Hashtags() {
         { key: 5, label: "hashtag", active: false },
     ]);
 
+    // const [hashtag, setHashtag] = useState("");
+    const [numberOfHashtags, setNumberOfHashtags] = useState(0);
+    const [arrayOfHashtags, addHashtag] = useState([]);
+
+    const Hashtags = arrayOfHashtags.map((data, index) => (
+        <ListItem key={data}>
+            <Chip
+                size="small"
+                avatar={<Avatar>#</Avatar>}
+                label={data}
+                key={index}
+                onDelete={onDelete(data)}
+            />
+        </ListItem>
+    ));
+
+    const newHashtag = () => {
+        if (numberOfHashtags < 3) {
+            setNumberOfHashtags(numberOfHashtags + 1);
+            addHashtag((arrayOfHashtags) => arrayOfHashtags.concat());
+        } else {
+            console.log("Too much hashtags");
+        }
+    };
+
     const onDelete = (chipToDelete: { key: any; label?: string }) => () => {
-        setChipData((chips) =>
+        setHashTag((chips) =>
             chips.filter((chip) => chip.key !== chipToDelete.key)
         );
     };
 
-    // const onClick = (ChipActive: {label?: string; active: any}) => () =>{
-    //     label = "clicked"
-    // }
+    const Container = styled.div({
+        // border: "1px solid",
+        display: "flex",
+        paddingTop: 10,
+    });
 
     return (
         <div>
             <TextField label="Hashtags" fullWidth />
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    border: "1px solid",
-                    alignItems: "start",
-                    flexDirection: "column",
-                }}
-            >
-                {chipData.map((data) => {
-                    return (
-                        <ListItem key={data.key}>
-                            <Chip
-                                label={data.label}
-                                onDelete={onDelete(data)}
-                            ></Chip>
-                        </ListItem>
-                    );
-                })}
-            </div>
+            <Container>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        // border: "1px solid",
+                        alignItems: "start",
+                        flexDirection: "column",
+                        width: 600,
+                    }}
+                ></div>
+                <Button
+                    variant="outlined"
+                    size="small"
+                    color="inherit"
+                    onClick={newHashtag}
+                    style={{
+                        background: "#F0F0F0",
+                        textTransform: "none",
+                        width: 110,
+                        height: 30,
+                    }}
+                >
+                    Add Hashtag
+                </Button>
+            </Container>
         </div>
     );
 }
@@ -169,6 +217,86 @@ function CheckBox() {
     );
 }
 
+function SearchBar() {
+    const SearchBox = styled(TextField)(() => ({
+        "& fieldset": {
+            borderRadius: "25px",
+        },
+    }));
+
+    const Container = styled.div({
+        display: "flex",
+        flexDirection: "column",
+        gap: 15,
+    });
+
+    return (
+        <Container>
+            <Typography variant="body2">
+                Search for similar co-ops in area:
+            </Typography>
+            <SearchBox
+                placeholder="Search…"
+                variant="outlined"
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <SearchIcon />
+                        </InputAdornment>
+                    ),
+                }}
+            />
+            <Stack direction="row" spacing={1}>
+                <Chip icon={<DoneIcon />} label="Co-op" size="small" />
+                <Chip icon={<DoneIcon />} label="Co-op name" size="small" />
+            </Stack>
+            <GoogleMaps />
+        </Container>
+    );
+}
+
+function CoopCard() {
+    return (
+        <Card
+            style={{
+                width: 215,
+                height: 225,
+            }}
+        >
+            <CardMedia
+                sx={{ height: 160, width: 230 }}
+                image="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+                title="photo"
+            />
+            <CardHeader
+                action={
+                    <IconButton>
+                        <MoreVertIcon />
+                    </IconButton>
+                }
+                titleTypographyProps={{
+                    fontSize: 10,
+                    fontWeight: 400,
+                }}
+                subheaderTypographyProps={{
+                    fontSize: 16,
+                    fontWeight: 600,
+                }}
+                title="LOCATION"
+                subheader="Co-op name"
+            ></CardHeader>
+        </Card>
+    );
+}
+
+const CardContainer = styled.div({
+    display: "flex",
+    justifyContent: "space-between",
+    alightItem: "center",
+    flexWrap: "wrap",
+    gap: 25,
+});
+
 function CreateCoop() {
     return (
         <Page>
@@ -180,6 +308,15 @@ function CreateCoop() {
                 <Mission />
                 <Hashtags />
                 <CheckBox />
+                <SearchBar />
+                <CardContainer>
+                    <CoopCard />
+                    <CoopCard />
+                    <CoopCard />
+                    <CoopCard />
+                    <CoopCard />
+                    <CoopCard />
+                </CardContainer>
             </Form>
         </Page>
     );
