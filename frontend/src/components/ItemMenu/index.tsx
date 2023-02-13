@@ -57,7 +57,9 @@ const ItemMenu = () => {
 
     return (
         <div>
-            <ItemModal open={isModalOpen} onClose = {() => setIsModalOpen(false)}/>
+            <ItemModal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)} />
             <IconButton
                 aria-label="more"
                 id="long-button"
@@ -83,7 +85,8 @@ const ItemMenu = () => {
             >
                 {options.map((option) => (
                     <StyledMenuItem
-                        key={option} onClick={() => handleOptionClick(option)}>
+                        key={option}
+                        onClick={() => handleOptionClick(option)}>
                         {option}
                     </StyledMenuItem>
                 ))}

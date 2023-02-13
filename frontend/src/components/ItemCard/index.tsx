@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardHeader from "@mui/material/CardHeader";
 import Typography from '@mui/material/Typography';
 import ItemMenu from '../ItemMenu';
+import ItemModal from '../ItemModal';
 
 type ItemCardProps = CardProps & {
     taskName: string;
@@ -26,7 +27,7 @@ const Subtitle = styled(Typography)({
 });
 
 
-const ItemCard = ( {
+const ItemCard = ({
     taskName,
     itemName
 }: ItemCardProps) => {
@@ -34,8 +35,12 @@ const ItemCard = ( {
         height: 254,
         width: 248.43,
     });
+    const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
     return (
         <CustomCard>
+            <ItemModal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)} />
             <CardMedia
                 style={{
                     backgroundColor: 'lightgrey',
@@ -45,6 +50,7 @@ const ItemCard = ( {
                 height="186"
                 image=""
                 alt=""
+                onClick={()=>setIsModalOpen(true)}
             />
             <CardHeader
                 action={
