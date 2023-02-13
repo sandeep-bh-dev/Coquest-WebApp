@@ -3,7 +3,6 @@ import {
     Avatar,
     Button,
     Card,
-    CardContent,
     CardHeader,
     CardMedia,
     CardProps,
@@ -17,6 +16,7 @@ import {
     ListItem,
     MenuItem,
     Radio,
+    Skeleton,
     Stack,
     TextField,
     Toolbar,
@@ -34,14 +34,20 @@ import Done from "@mui/icons-material/Done";
 import TaskCard from "../../components/TaskCard";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fontWeight } from "@mui/system";
-import GoogleMaps from "./googlemap";
+import NextandBackButton from "../../components/NextandBackButton";
 
 type TextProps = {
     text: string;
 };
 
 const Header = ({ text }: TextProps) => (
-    <Typography fontSize={30} fontWeight={600} lineHeight={1.5} variant="h1">
+    <Typography
+        fontSize={30}
+        fontWeight={600}
+        lineHeight={1.5}
+        variant="h1"
+        style={{ display: "flex", justifyContent: "center" }}
+    >
         {text}
     </Typography>
 );
@@ -66,31 +72,22 @@ const categories = [
 
 const Page = styled.div({
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
-    padding: 50,
+    marginBottom: 100,
     // border: "1px solid",
 });
 
 const Form = styled.div({
     // border: "1px solid",
     display: "flex",
-    alignItem: "start",
-    justifyContent: "center",
     flexDirection: "column",
-    gap: 20,
+    gap: 40,
     width: 700,
 });
 
 function Categories() {
     return (
-        <TextField
-            select
-            label="Select a category"
-            style={{
-                width: 500,
-            }}
-        >
+        <TextField select label="Select a category">
             {categories.map((option) => (
                 <MenuItem key={option.label} value={option.label}>
                     {option.label}
@@ -250,7 +247,9 @@ function SearchBar() {
                 <Chip icon={<DoneIcon />} label="Co-op" size="small" />
                 <Chip icon={<DoneIcon />} label="Co-op name" size="small" />
             </Stack>
-            <GoogleMaps />
+            <Skeleton variant="rectangular" width={"100%"} height={500}>
+                Map is Loading...
+            </Skeleton>
         </Container>
     );
 }
@@ -299,26 +298,31 @@ const CardContainer = styled.div({
 
 function CreateCoop() {
     return (
-        <Page>
-            <Form>
-                <Header text="Create co-op"></Header>
-                <TextField label="Co-op name" />
-                <Categories />
-                <Summary />
-                <Mission />
-                <Hashtags />
-                <CheckBox />
-                <SearchBar />
-                <CardContainer>
-                    <CoopCard />
-                    <CoopCard />
-                    <CoopCard />
-                    <CoopCard />
-                    <CoopCard />
-                    <CoopCard />
-                </CardContainer>
-            </Form>
-        </Page>
+        <>
+            <ProgressBar />
+            <NextandBackButton />
+            <Page>
+                <Form>
+                    <Header text="Create co-op"></Header>
+                    <TextField label="Co-op name" />
+                    <Categories />
+                    <Summary />
+                    <Mission />
+                    <Hashtags />
+                    <CheckBox />
+                    <SearchBar />
+
+                    <CardContainer>
+                        <CoopCard />
+                        <CoopCard />
+                        <CoopCard />
+                        <CoopCard />
+                        <CoopCard />
+                        <CoopCard />
+                    </CardContainer>
+                </Form>
+            </Page>
+        </>
     );
 }
 

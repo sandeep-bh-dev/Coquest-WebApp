@@ -8,6 +8,7 @@ import theme from "./styles/theme";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
 import { CreateCoop } from "./pages/Coop";
+import { Login } from "./pages/Login";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: "/Coop",
         element: <CreateCoop />,
+    },
+    {
+        path: "/Login",
+        element: <Login />,
     },
 ]);
 
