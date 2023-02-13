@@ -33,16 +33,16 @@ const ProgressBar = () => {
             }}
         >
             <Ball state value={"1"} />
-            <Typography variant="body2">Sign up</Typography>
+            <Typography variant="body2">Basic Information</Typography>
             <Divider style={{ width: "40px", backgroundColor: "black" }} />
             <Ball value={"2"} />
-            <Typography variant="body2">Connect social media</Typography>
+            <Typography variant="body2">Scheduling</Typography>
             <Divider style={{ width: "60px", backgroundColor: "black" }} />
             <Ball value={"3"} />
-            <Typography variant="body2">Customize profiles</Typography>
+            <Typography variant="body2">Operations</Typography>
             <Divider style={{ width: "60px", backgroundColor: "black" }} />
             <Ball value={"4"} />
-            <Typography variant="body2">Join groups</Typography>
+            <Typography variant="body2">Promotion</Typography>
         </div>
     );
 };
