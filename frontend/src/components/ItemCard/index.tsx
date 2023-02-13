@@ -25,9 +25,10 @@ const Subtitle = styled(Typography)({
     lineHeight: "24px"
 });
 
-const ItemCard = ({
+
+const ItemCard = ( {
     taskName,
-    itemName,
+    itemName
 }: ItemCardProps) => {
     const CustomCard = styled(Card)({
         height: 254,
@@ -35,7 +36,11 @@ const ItemCard = ({
     });
     return (
         <CustomCard>
-            <CardMedia style={{ backgroundColor: 'lightgrey' }}
+            <CardMedia
+                style={{
+                    backgroundColor: 'lightgrey',
+                    cursor: 'pointer'
+                }}
                 component="img"
                 height="186"
                 image=""

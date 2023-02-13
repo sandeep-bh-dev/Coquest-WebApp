@@ -4,6 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import styled from '@emotion/styled';
+import ItemModal from '../ItemModal';
 
 const StyledMenuItem = styled(MenuItem)({
     fontWeight: 400,
@@ -26,7 +27,7 @@ const options = [
     'Remove'
 ];
 
-export default function ItemMenu() {
+const ItemMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,10 +37,11 @@ export default function ItemMenu() {
         setAnchorEl(null);
     };
 
+    const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
     const handleOptionClick = (option: string) => {
         switch (option) {
             case 'View':
-                console.log('View was clicked');
+                setIsModalOpen(true)
                 break;
             case 'Move':
                 console.log('Move was clicked');
@@ -55,6 +57,7 @@ export default function ItemMenu() {
 
     return (
         <div>
+            <ItemModal open={isModalOpen} onClose = {() => setIsModalOpen(false)}/>
             <IconButton
                 aria-label="more"
                 id="long-button"
@@ -88,3 +91,5 @@ export default function ItemMenu() {
         </div>
     );
 }
+
+export default ItemMenu;
