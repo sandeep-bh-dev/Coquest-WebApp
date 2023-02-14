@@ -143,7 +143,9 @@ const ItemModal = ({ open, onClose }: ItemModalProps) => {
 						<ItemDescription>
 							Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.
 						</ItemDescription>
-						<InfoStack direction="row" spacing={2}>
+						<InfoStack
+							direction="row"
+							spacing={2}>
 							<ItemHeader>
 								<div>Group name:</div>
 								<div>Task:</div>

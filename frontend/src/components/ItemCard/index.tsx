@@ -38,7 +38,8 @@ const ItemCard = ({
         <CustomCard>
             <ItemModal
                 open={isModalOpen}
-                onClose={() => setIsModalOpen(false)} />
+                onClose={() => setIsModalOpen(false)}
+            />
             <CardMedia
                 style={{
                     backgroundColor: 'lightgrey',

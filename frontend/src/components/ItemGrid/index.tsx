@@ -38,19 +38,53 @@ const Grid = styled.div({
 });
 
 const ItemGrid = () => {
+    const items = [
+        {
+            taskName: "Project 1",
+            itemName: "Item 1"
+        },
+        {
+            taskName: "Project 2",
+            itemName: "Item 2"
+        },
+        {
+            taskName: "Project 3",
+            itemName: "Item 3"
+        },
+        {
+            taskName: "Project 4",
+            itemName: "Item 4"
+        },
+        {
+            taskName: "Project 5",
+            itemName: "Item 5"
+        },
+        {
+            taskName: "Project 6",
+            itemName: "Item 6"
+        },
+        {
+            taskName: "Project 7",
+            itemName: "Item 7"
+        },
+        {
+            taskName: "Project 8",
+            itemName: "Item 8"
+        }
+    ];
+
     return (
         <>
             <Title>Inventory</Title>
             <Container>
                 <Grid>
-                    <ItemCard taskName="PROJECT OR TASK NAME" itemName="Item name" />
-                    <ItemCard taskName="PROJECT OR TASK NAME" itemName="Item name" />
-                    <ItemCard taskName="PROJECT OR TASK NAME" itemName="Item name" />
-                    <ItemCard taskName="PROJECT OR TASK NAME" itemName="Item name" />
-                    <ItemCard taskName="PROJECT OR TASK NAME" itemName="Item name" />
-                    <ItemCard taskName="PROJECT OR TASK NAME" itemName="Item name" />
-                    <ItemCard taskName="PROJECT OR TASK NAME" itemName="Item name" />
-                    <ItemCard taskName="PROJECT OR TASK NAME" itemName="Item name" />
+                    {items.map((item, index) => (
+                        <ItemCard
+                            key={index}
+                            taskName={item.taskName}
+                            itemName={item.itemName}
+                        />
+                    ))}
                 </Grid>
             </Container>
         </>
