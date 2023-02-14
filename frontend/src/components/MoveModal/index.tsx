@@ -106,6 +106,11 @@ const MoveModal = ({ open, onClose }: MoveModalProps) => {
     return (
         <div>
             <ItemModal
+                description="Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa."
+                groupName="Car share"
+                task="Buy [this item]"
+                owner="John Doe"
+                date={new Date(2023, 0, 20)}
                 open={isItemModalOpen}
                 onClose={() => setIsItemModalOpen(false)} />
             <Modal

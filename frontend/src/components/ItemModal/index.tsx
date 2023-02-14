@@ -119,9 +119,14 @@ const CloseModalIcon = styled(CloseIcon)({
 type ItemModalProps = {
 	open: boolean,
 	onClose: () => void
+	description: string,
+	groupName: string,
+	task: string,
+	owner: string,
+	date: Date
 };
 
-const ItemModal = ({ open, onClose }: ItemModalProps) => {
+const ItemModal = ({ open, onClose, description, groupName, task, owner, date }: ItemModalProps) => {
 	const [isMoveModalOpen, setIsMoveModalOpen] = React.useState<boolean>(false);
 	return (
 		<div>
@@ -141,7 +146,7 @@ const ItemModal = ({ open, onClose }: ItemModalProps) => {
 							Item name
 						</ItemName>
 						<ItemDescription>
-							Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.
+							{description}
 						</ItemDescription>
 						<InfoStack
 							direction="row"
@@ -153,10 +158,10 @@ const ItemModal = ({ open, onClose }: ItemModalProps) => {
 								<div>Date:</div>
 							</ItemHeader>
 							<ItemSub>
-								<div>Car share</div>
-								<div style={{ textDecoration: 'underline' }}>Buy [this item]</div>
-								<div>John Doe</div>
-								<div>Jan 20, 2023</div>
+								<div>{groupName}</div>
+								<div style={{ textDecoration: 'underline' }}>Text</div>
+								<div>{owner}</div>
+								<div>{date.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
 							</ItemSub>
 						</InfoStack>
 						<ButtonStack

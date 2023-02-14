@@ -33,13 +33,17 @@ const ItemCard = ({
         height: 254,
         width: 248.43,
     });
-    const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+    const [isItemModalOpen, setIsItemModalOpen] = React.useState<boolean>(false);
     return (
         <CustomCard>
             <ItemModal
-                open={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-            />
+                description="Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa."
+                groupName="Car share"
+                task="Buy [this item]"
+                owner="John Doe"
+                date={new Date(2023, 1, 20)}
+                open={isItemModalOpen}
+                onClose={() => setIsItemModalOpen(false)} />
             <CardMedia
                 style={{
                     backgroundColor: 'lightgrey',
@@ -49,7 +53,7 @@ const ItemCard = ({
                 height="186"
                 image=""
                 alt=""
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => setIsItemModalOpen(true)}
             />
             <CardHeader
                 action={
