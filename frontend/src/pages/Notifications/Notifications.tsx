@@ -32,62 +32,83 @@ const StyledArrowIcon = styled(KeyboardArrowRightIcon)({
 	marginRight: 20,
 });
 
-function Notifications() {
+type NotificationsProps = {
+	title: string;
+};
+
+type NewNotificationsNumberProps = {
+	number: number;
+};
+
+type NotificationsImageProps = {
+	image?: string;
+};
+
+type NotificationsContentProps = {
+	content: string;
+};
+
+const NewNotificationsNumber = ({ number }: NewNotificationsNumberProps) => {
+	return <div className="notifications-new-notify">{number} new.</div>;
+};
+
+const NewNotificationsCard = ({ title }: NotificationsProps) => {
+	return (
+		<div className="display-new-notifications-title">
+			{title}
+			<StyledArrowIcon />
+		</div>
+	);
+};
+const OldNotificationsCard = ({ title }: NotificationsProps) => {
+	return (
+		<div className="display-notifications-title">
+			{title}
+			<StyledArrowIcon />
+		</div>
+	);
+};
+
+const NotificationsImage = ({ image }: NotificationsImageProps) => {
+	return (
+		<div className="notifications-container-right-image-holder">
+			<img src={image} alt="notifications-content-img" />;
+		</div>
+	);
+};
+
+const NotificationsContent = ({ content }: NotificationsContentProps) => {
+	return (
+		<div className="notifications-container-right-contain">{content}</div>
+	);
+};
+
+const Notifications = () => {
 	return (
 		<div>
 			<div className="title-container">
 				<h1 className="notifications-title">Notifications</h1>
-				<h5 className="notifications-new-notify">1 new.</h5>
+				<NewNotificationsNumber number={1} />
 			</div>
+
 			<div className="notifications-container">
 				<div className="notifications-container-left">
-					<div className="display-new-notifications-title">
-						New notification from Project...
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
-					<div className="display-notifications-title">
-						Notification from
-						<StyledArrowIcon />
-					</div>
+					<NewNotificationsCard title="New Notification from" />
+					<OldNotificationsCard title="Notification from" />
+					<OldNotificationsCard title="Notification from" />
+					<OldNotificationsCard title="Notification from" />
+					<OldNotificationsCard title="Notification from" />
+					<OldNotificationsCard title="Notification from" />
+					<OldNotificationsCard title="Notification from" />
+					<OldNotificationsCard title="Notification from" />
+					<OldNotificationsCard title="Notification from" />
 				</div>
+
 				<StyledBox className="notifications-container-right">
 					<Paper elevation={3}>
-						<div className="notifications-container-right-image-holder"></div>
-						<div className="notifications-container-right-contain">
-							<p>
-								Description. Lorem ipsum dolor sit amet,
+						<NotificationsImage />
+						<NotificationsContent
+							content="Description. Lorem ipsum dolor sit amet,
 								consectetur adipiscing elit, sed do eiusmod
 								tempor incididunt ut labore et dolore magna
 								aliqua. Congue eu consequat ac felis donec et
@@ -101,15 +122,15 @@ function Notifications() {
 								nunc eget. Tellus elementum sagittis vitae et
 								leo. Adipiscing vitae proin sagittis nisl
 								rhoncus mattis rhoncus. Turpis egestas pretium
-								aenean pharetra magna ac placerat.
-							</p>
-						</div>
+								aenean pharetra magna ac placerat."
+						/>
+
 						<StyledButton>More</StyledButton>
 					</Paper>
 				</StyledBox>
 			</div>
 		</div>
 	);
-}
+};
 
 export default Notifications;
