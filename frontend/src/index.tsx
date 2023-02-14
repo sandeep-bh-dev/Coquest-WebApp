@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
+import { CreateProgram } from "./pages/Login/Programs/CreateProgram";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
 			</div>
 		),
 	},
+	{
+		//delete
+		path: "/programs/create",
+		element: <CreateProgram />,
+	}, //delete
 ]);
 
 root.render(
