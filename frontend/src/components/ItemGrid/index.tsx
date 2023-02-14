@@ -9,7 +9,7 @@ const Title = styled.h1({
     fontSize: 36,
     marginTop: '60px',
     marginBottom: '20px',
-    marginLeft: '21%',
+    marginLeft: '12%',
     fontFamily: 'Poppins'
 });
 

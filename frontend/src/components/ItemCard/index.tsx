@@ -12,18 +12,18 @@ type ItemCardProps = CardProps & {
     itemName: string;
 };
 
-const Title = styled(Typography)({
-    variant: "overline",
+const TaskName = styled(Typography)({
+    variant: 'overline',
     fontWeight: 400,
     fontSize: 12,
-    lineHeight: "18px"
+    lineHeight: '18px'
 });
 
-const Subtitle = styled(Typography)({
-    variant: "subtitle2",
+const ItemName = styled(Typography)({
+    variant: 'subtitle2',
     fontWeight: 600,
     fontSize: 16,
-    lineHeight: "24px"
+    lineHeight: '24px'
 });
 
 
@@ -50,14 +50,14 @@ const ItemCard = ({
                 height="186"
                 image=""
                 alt=""
-                onClick={()=>setIsModalOpen(true)}
+                onClick={() => setIsModalOpen(true)}
             />
             <CardHeader
                 action={
                     <ItemMenu />
                 }
-                title={<Title>{taskName}</Title>}
-                subheader={<Subtitle>{itemName}</Subtitle>}
+                title={<TaskName>{taskName}</TaskName>}
+                subheader={<ItemName>{itemName}</ItemName>}
             />
         </CustomCard>
     );
