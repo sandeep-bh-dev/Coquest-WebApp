@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
+import MoveModal from '../MoveModal';
 
 const StyledBox = styled(Box)({
 	position: 'absolute',
@@ -100,7 +101,6 @@ const MoveButton = styled(Button)({
 	textTransform: 'none',
 	border: '1px solid #000000',
 	borderRadius: '20px',
-
 	height: 40,
 	width: 92,
 	'&:hover': {
@@ -116,13 +116,13 @@ const CloseModalIcon = styled(CloseIcon)({
 	cursor: 'pointer'
 });
 
-
 type ItemModalProps = {
 	open: boolean,
 	onClose: () => void
 };
 
 const ItemModal = ({ open, onClose }: ItemModalProps) => {
+	const [isMoveModalOpen, setIsMoveModalOpen] = React.useState<boolean>(false);
 	return (
 		<div>
 			<Modal
@@ -157,16 +157,27 @@ const ItemModal = ({ open, onClose }: ItemModalProps) => {
 								<div>Jan 20, 2023</div>
 							</ItemSub>
 						</InfoStack>
-						<ButtonStack direction="row" spacing={2}>
-							<RemoveButton variant="outlined" startIcon={<DeleteIcon />}>
+						<ButtonStack
+							direction="row"
+							spacing={2}
+						>
+							<RemoveButton
+								variant="outlined"
+								startIcon={<DeleteIcon />}
+							>
 								Remove
 							</RemoveButton>
-							<MoveButton variant="outlined">
+							<MoveButton
+								onClick={() => setIsMoveModalOpen(true)}>
 								Move
 							</MoveButton>
 						</ButtonStack>
 					</ItemContent>
-					<CloseModalIcon onClick={onClose} />
+					<CloseModalIcon
+						onClick={onClose} />
+					<MoveModal
+						open={isMoveModalOpen}
+						onClose={() => setIsMoveModalOpen(false)} />
 				</StyledBox>
 			</Modal>
 		</div >

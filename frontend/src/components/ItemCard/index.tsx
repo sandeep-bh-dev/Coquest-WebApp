@@ -13,14 +13,12 @@ type ItemCardProps = CardProps & {
 };
 
 const TaskName = styled(Typography)({
-    variant: 'overline',
     fontWeight: 400,
     fontSize: 12,
     lineHeight: '18px'
 });
 
 const ItemName = styled(Typography)({
-    variant: 'subtitle2',
     fontWeight: 600,
     fontSize: 16,
     lineHeight: '24px'
