@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from "@emotion/styled";
 import ItemCard from "../ItemCard";
+import { Items } from '../ItemArray';
 
 const Title = styled.h1({
     width: '100%',
@@ -38,49 +39,16 @@ const Grid = styled.div({
 });
 
 const ItemGrid = () => {
-    const items = [
-        {
-            taskName: "Project 1",
-            itemName: "Item 1"
-        },
-        {
-            taskName: "Project 2",
-            itemName: "Item 2"
-        },
-        {
-            taskName: "Project 3",
-            itemName: "Item 3"
-        },
-        {
-            taskName: "Project 4",
-            itemName: "Item 4"
-        },
-        {
-            taskName: "Project 5",
-            itemName: "Item 5"
-        },
-        {
-            taskName: "Project 6",
-            itemName: "Item 6"
-        },
-        {
-            taskName: "Project 7",
-            itemName: "Item 7"
-        },
-        {
-            taskName: "Project 8",
-            itemName: "Item 8"
-        }
-    ];
-
     return (
         <>
             <Title>Inventory</Title>
             <Container>
                 <Grid>
-                    {items.map((item, index) => (
+                    {Items.map((item, index) => (
                         <ItemCard
                             key={index}
+                            item={item}
+                            itemId={item.itemId}
                             taskName={item.taskName}
                             itemName={item.itemName}
                         />

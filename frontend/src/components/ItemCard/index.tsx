@@ -6,8 +6,12 @@ import CardHeader from "@mui/material/CardHeader";
 import Typography from '@mui/material/Typography';
 import ItemMenu from '../ItemMenu';
 import ItemModal from '../ItemModal';
+import { Items } from '../ItemArray';
+import { Item } from '../ItemArray';
 
 type ItemCardProps = CardProps & {
+    item: Item,
+    itemId: string;
     taskName: string;
     itemName: string;
 };
@@ -24,26 +28,27 @@ const ItemName = styled(Typography)({
     lineHeight: '24px'
 });
 
+const CustomCard = styled(Card)({
+    height: 254,
+    width: 248.43,
+});
 
 const ItemCard = ({
+    item,
     taskName,
     itemName
 }: ItemCardProps) => {
-    const CustomCard = styled(Card)({
-        height: 254,
-        width: 248.43,
-    });
     const [isItemModalOpen, setIsItemModalOpen] = React.useState<boolean>(false);
     return (
         <CustomCard>
-            <ItemModal
-                description="Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa."
-                groupName="Car share"
-                task="Buy [this item]"
-                owner="John Doe"
-                date={new Date(2023, 1, 20)}
-                open={isItemModalOpen}
-                onClose={() => setIsItemModalOpen(false)} />
+            {Items.map((item) => (
+                <ItemModal
+                    key={item.itemId}
+                    item={item}
+                    open={isItemModalOpen}
+                    onClose={() => setIsItemModalOpen(false)}
+                />
+            ))}
             <CardMedia
                 style={{
                     backgroundColor: 'lightgrey',

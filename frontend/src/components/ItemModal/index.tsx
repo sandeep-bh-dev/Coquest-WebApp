@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
 import MoveModal from '../MoveModal';
+import { Item } from '../ItemArray';
 
 const StyledBox = styled(Box)({
 	position: 'absolute',
@@ -117,16 +118,17 @@ const CloseModalIcon = styled(CloseIcon)({
 });
 
 type ItemModalProps = {
+	item: Item,
 	open: boolean,
-	onClose: () => void
-	description: string,
-	groupName: string,
-	task: string,
-	owner: string,
-	date: Date
+	onClose: () => void,
 };
-
-const ItemModal = ({ open, onClose, description, groupName, task, owner, date }: ItemModalProps) => {
+	
+const ItemModal = ({
+	item,
+	open,
+	onClose,
+}: ItemModalProps) => {
+	const { itemId, taskName, itemName, description, groupName, task, owner, date } = item;
 	const [isMoveModalOpen, setIsMoveModalOpen] = React.useState<boolean>(false);
 	return (
 		<div>
@@ -140,10 +142,10 @@ const ItemModal = ({ open, onClose, description, groupName, task, owner, date }:
 					<ItemImage />
 					<ItemContent>
 						<TaskName>
-							PROJECT OR TASK NAME
+							{taskName}
 						</TaskName>
 						<ItemName>
-							Item name
+							{itemName}
 						</ItemName>
 						<ItemDescription>
 							{description}
@@ -159,7 +161,7 @@ const ItemModal = ({ open, onClose, description, groupName, task, owner, date }:
 							</ItemHeader>
 							<ItemSub>
 								<div>{groupName}</div>
-								<div style={{ textDecoration: 'underline' }}>Text</div>
+								<div style={{ textDecoration: 'underline' }}>{task}</div>
 								<div>{owner}</div>
 								<div>{date.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
 							</ItemSub>

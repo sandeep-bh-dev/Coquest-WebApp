@@ -60,14 +60,16 @@ const ItemMenu = () => {
 
     return (
         <div>
-            <ItemModal
+            {/*<ItemModal
+                taskName="test"
+                itemName="test2"
                 description="Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa."
                 groupName="Car share"
                 task="Buy [this item]"
                 owner="John Doe"
                 date={new Date(2023, 1, 20)}
                 open={isItemModalOpen}
-                onClose={() => setIsItemModalOpen(false)} />
+    onClose={() => setIsItemModalOpen(false)} /> */}
             <MoveModal
                 open={isMoveModalOpen}
                 onClose={() => setIsMoveModalOpen(false)} />
