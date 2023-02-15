@@ -9,11 +9,11 @@ import "./index.css";
 import TaskCard from "./components/TaskCard";
 
 // Program flow Imports
-import { CreateProgram } from "./pages/Login/Programs/CreateProgram";
-import { BasicInformation } from "./pages/Login/Programs/CreateProgram/BasicInformation";
-import { Operations } from "./pages/Login/Programs/CreateProgram/Operations";
-import { Promotion } from "./pages/Login/Programs/CreateProgram/Promotion";
-import { Budgeting } from "./pages/Login/Programs/CreateProgram/Budgeting";
+import { CreateProgram } from "./pages/Programs/CreateProgram";
+import { BasicInformation } from "./pages/Programs/CreateProgram/BasicInformation";
+import { Operations } from "./pages/Programs/CreateProgram/Operations";
+import { Budgeting } from "./pages/Programs/CreateProgram/Budgeting";
+import { Promotion } from "./pages/Programs/CreateProgram/Promotion";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
