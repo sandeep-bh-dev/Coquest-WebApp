@@ -7,7 +7,13 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
+
+// Program flow Imports
 import { CreateProgram } from "./pages/Login/Programs/CreateProgram";
+import { BasicInformation } from "./pages/Login/Programs/CreateProgram/BasicInformation";
+import { Operations } from "./pages/Login/Programs/CreateProgram/Operations";
+import { Promotion } from "./pages/Login/Programs/CreateProgram/Promotion";
+import { Budgeting } from "./pages/Login/Programs/CreateProgram/Budgeting";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -30,6 +36,24 @@ const router = createBrowserRouter([
 		//delete
 		path: "/programs/create",
 		element: <CreateProgram />,
+		children: [
+			{
+				path: "basic-information",
+				element: <BasicInformation />,
+			},
+			{
+				path: "operations",
+				element: <Operations />,
+			},
+			{
+				path: "budgeting",
+				element: <Budgeting />,
+			},
+			{
+				path: "promotion",
+				element: <Promotion />,
+			},
+		],
 	}, //delete
 ]);
 
