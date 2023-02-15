@@ -5,8 +5,8 @@ import Toolbar from "./components/Toolbar";
 import LeftSideBar from "./components/LeftSideBar";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
+import { Message } from "./pages/Message";
 import "./index.css";
-import TaskCard from "./components/TaskCard";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
 				<b>Home</b>
 			</div>
 		),
+	},
+	{
+		path: "/message",
+		element: <Message />,
 	},
 ]);
 

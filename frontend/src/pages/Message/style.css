@@ -1,0 +1,32 @@
+.title-container {
+	width: 330px;
+	height: 54px;
+	display: flex;
+	align-items: center;
+	margin-top: 121px;
+	margin-left: 212px;
+}
+.messages-title {
+	/* H1 */
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 36px;
+	line-height: 54px;
+
+	/* identical to box height */
+
+	color: #000000;
+}
+.messages-new-notify {
+	margin-left: 29px;
+	margin-top: 6px;
+	margin-bottom: 0px;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 30px;
+	/* identical to box height */
+	color: #999999;
+}
