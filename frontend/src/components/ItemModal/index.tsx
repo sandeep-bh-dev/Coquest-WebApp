@@ -25,10 +25,7 @@ const StyledBox = styled(Box)({
 });
 
 const ItemImage = styled.div({
-	height: 407,
-	width: 407,
-	margin: 40,
-	backgroundColor: 'lightgrey'
+	margin: 40
 });
 
 const ItemContent = styled(Typography)({
@@ -72,7 +69,6 @@ const ItemHeader = styled(Typography)({
 });
 
 const ItemSub = styled(Typography)({
-	width: 87,
 	height: 96,
 	fontWeight: 400,
 	fontSize: 12,
@@ -80,7 +76,7 @@ const ItemSub = styled(Typography)({
 });
 
 const ButtonStack = styled(Stack)({
-	marginTop: 40,
+	marginTop: 40
 });
 
 const RemoveButton = styled(Button)({
@@ -122,13 +118,23 @@ type ItemModalProps = {
 	open: boolean,
 	onClose: () => void,
 };
-	
+
 const ItemModal = ({
 	item,
 	open,
 	onClose,
 }: ItemModalProps) => {
-	const { itemId, taskName, itemName, description, groupName, task, owner, date } = item;
+	const {
+		itemId,
+		image,
+		taskName,
+		itemName,
+		description,
+		groupName,
+		taskLink,
+		owner,
+		date
+	} = item;
 	const [isMoveModalOpen, setIsMoveModalOpen] = React.useState<boolean>(false);
 	return (
 		<div>
@@ -139,7 +145,13 @@ const ItemModal = ({
 				aria-describedby="modal-modal-description"
 			>
 				<StyledBox>
-					<ItemImage />
+					<ItemImage>
+						<img src={image}
+							width="407"
+							height="407"
+							alt="Item image"
+						/>
+					</ItemImage>
 					<ItemContent>
 						<TaskName>
 							{taskName}
@@ -161,7 +173,7 @@ const ItemModal = ({
 							</ItemHeader>
 							<ItemSub>
 								<div>{groupName}</div>
-								<div style={{ textDecoration: 'underline' }}>{task}</div>
+								<div style={{ textDecoration: 'underline' }}>{taskLink}</div>
 								<div>{owner}</div>
 								<div>{date.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
 							</ItemSub>

@@ -49,6 +49,7 @@ const ItemGrid = () => {
                             key={index}
                             item={item}
                             itemId={item.itemId}
+                            image={item.image}
                             taskName={item.taskName}
                             itemName={item.itemName}
                         />

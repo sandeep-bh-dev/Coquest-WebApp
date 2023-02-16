@@ -6,32 +6,38 @@ import CardHeader from "@mui/material/CardHeader";
 import Typography from '@mui/material/Typography';
 import ItemMenu from '../ItemMenu';
 import ItemModal from '../ItemModal';
-import { Items } from '../ItemArray';
 import { Item } from '../ItemArray';
 
-type ItemCardProps = CardProps & {
-    item: Item,
-    itemId: string;
-    taskName: string;
-    itemName: string;
-};
+const CardImage = styled(CardMedia)({
+    cursor: 'pointer'
+});
+
+const ItemHeader = styled(CardHeader)({
+    padding: '10px 18px'
+});
 
 const TaskName = styled(Typography)({
     fontWeight: 400,
-    fontSize: 12,
-    lineHeight: '18px'
+    fontSize: 12
 });
 
 const ItemName = styled(Typography)({
     fontWeight: 600,
-    fontSize: 16,
-    lineHeight: '24px'
+    fontSize: 16
 });
 
 const CustomCard = styled(Card)({
     height: 254,
     width: 248.43,
 });
+
+type ItemCardProps = {
+    item: Item,
+    image: string;
+    itemId: string;
+    taskName: string;
+    itemName: string;
+};
 
 const ItemCard = ({
     item,
@@ -41,28 +47,23 @@ const ItemCard = ({
     const [isItemModalOpen, setIsItemModalOpen] = React.useState<boolean>(false);
     return (
         <CustomCard>
-            {Items.map((item) => (
-                <ItemModal
-                    key={item.itemId}
-                    item={item}
-                    open={isItemModalOpen}
-                    onClose={() => setIsItemModalOpen(false)}
-                />
-            ))}
-            <CardMedia
-                style={{
-                    backgroundColor: 'lightgrey',
-                    cursor: 'pointer'
-                }}
-                component="img"
-                height="186"
-                image=""
-                alt=""
-                onClick={() => setIsItemModalOpen(true)}
+            <ItemModal
+                key={item.itemId}
+                item={item}
+                open={isItemModalOpen}
+                onClose={() => setIsItemModalOpen(false)}
             />
-            <CardHeader
+            <CardImage
+                onClick={() => setIsItemModalOpen(true)}>
+                <img src={item.image}
+                    height="185"
+                />
+            </CardImage>
+            <ItemHeader
                 action={
-                    <ItemMenu />
+                    <ItemMenu
+                        item={item}
+                    />
                 }
                 title={<TaskName>{taskName}</TaskName>}
                 subheader={<ItemName>{itemName}</ItemName>}

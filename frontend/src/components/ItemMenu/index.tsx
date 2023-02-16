@@ -6,12 +6,16 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import styled from '@emotion/styled';
 import ItemModal from '../ItemModal';
 import MoveModal from '../MoveModal';
+import { Item } from '../ItemArray';
+
+const StyledIconButton = styled(IconButton)({
+    padding: '10px 0'
+});
 
 const StyledMenuItem = styled(MenuItem)({
     fontWeight: 400,
     fontFamily: 'Poppins',
     fontSize: 16,
-    lineHeight: '24px'
 });
 
 const StyledMenu = styled(Menu)({
@@ -28,7 +32,11 @@ const options = [
     'Remove'
 ];
 
-const ItemMenu = () => {
+type ItemMenuProps = {
+    item: Item
+};
+
+const ItemMenu = ({ item }: ItemMenuProps) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -60,20 +68,16 @@ const ItemMenu = () => {
 
     return (
         <div>
-            {/*<ItemModal
-                taskName="test"
-                itemName="test2"
-                description="Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa."
-                groupName="Car share"
-                task="Buy [this item]"
-                owner="John Doe"
-                date={new Date(2023, 1, 20)}
+            <ItemModal
+                key={item.itemId}
+                item={item}
                 open={isItemModalOpen}
-    onClose={() => setIsItemModalOpen(false)} /> */}
+                onClose={() => setIsItemModalOpen(false)}
+            />
             <MoveModal
                 open={isMoveModalOpen}
                 onClose={() => setIsMoveModalOpen(false)} />
-            <IconButton
+            <StyledIconButton
                 aria-label="more"
                 id="long-button"
                 aria-controls={open ? 'long-menu' : undefined}
@@ -82,7 +86,7 @@ const ItemMenu = () => {
                 onClick={handleClick}
             >
                 <MoreVertIcon />
-            </IconButton>
+            </StyledIconButton>
             <StyledMenu
                 id="long-menu"
                 MenuListProps={{
