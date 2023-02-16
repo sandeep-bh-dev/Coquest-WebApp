@@ -5,6 +5,8 @@ import Toolbar from "./components/Toolbar";
 import LeftSideBar from "./components/LeftSideBar";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
+import { Message } from "./pages/Message";
+import { Notifications } from "./pages/Notifications";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
 
@@ -24,6 +26,14 @@ const router = createBrowserRouter([
 				<b>Home</b>
 			</div>
 		),
+	},
+	{
+		path: "/message",
+		element: <Message />,
+	},
+	{
+		path: "/notifications",
+		element: <Notifications />,
 	},
 ]);
 
