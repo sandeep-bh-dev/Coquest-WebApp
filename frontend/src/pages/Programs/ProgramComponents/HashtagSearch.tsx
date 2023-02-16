@@ -15,9 +15,14 @@ const SearchBarContainer = styled("div")({
 
 const SearchInputContainer = styled("div")({
 	display: "flex",
+	flexDirection: "row-reverse",
 	alignItems: "center",
 	border: "1px solid black",
 	borderRadius: 28,
+	overflow: "scroll",
+	"::-webkit-scrollbar": {
+		display: "none",
+	},
 });
 
 const SearchIconWrapper = styled("div")({
@@ -113,9 +118,6 @@ const HashtagSearch = (props: { hashtags: string[] }) => {
 	return (
 		<SearchBarContainer>
 			<SearchInputContainer>
-				<SearchIconWrapper>
-					<SearchIcon />
-				</SearchIconWrapper>
 				<InputBase
 					placeholder="Search hashtags"
 					className="placeholder-mod"
@@ -125,7 +127,11 @@ const HashtagSearch = (props: { hashtags: string[] }) => {
 					inputProps={{ "aria-label": "search" }}
 				/>
 				<div>{renderSelectedHashtags()}</div>
+				<SearchIconWrapper>
+					<SearchIcon />
+				</SearchIconWrapper>
 			</SearchInputContainer>
+
 			<HashtagContainer>{renderHashtagButtons()}</HashtagContainer>
 		</SearchBarContainer>
 	);
