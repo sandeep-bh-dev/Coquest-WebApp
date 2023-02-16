@@ -33,7 +33,6 @@ const router = createBrowserRouter([
 		),
 	},
 	{
-		//delete
 		path: "/programs/create",
 		element: <CreateProgram />,
 		children: [
@@ -54,7 +53,7 @@ const router = createBrowserRouter([
 				element: <Promotion />,
 			},
 		],
-	}, //delete
+	},
 ]);
 
 root.render(

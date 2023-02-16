@@ -10,6 +10,7 @@ import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { RadioGroupField } from "../../ProgramComponents/RadioGroupField";
+import HashtagSearch from "../../ProgramComponents/HashtagSearch";
 
 type StyledTextFieldProps = {
 	label: string;
@@ -30,6 +31,7 @@ const StyledTextField = styled(TextField)<StyledTextFieldProps>`
 
 export const BasicInformation = () => {
 	const [categories, setCategories] = useState<string[]>([]); // State of all program types fetched
+	const [hashtags, setHashtags] = useState<string[]>([]);
 
 	const [projectName, setProjectName] = useState<string>(""); // Name state
 	const [selectedType, setSelectedType] = useState(""); // Program type state
@@ -86,6 +88,12 @@ export const BasicInformation = () => {
 	// Fetches on page load for list of Program Types available
 	useEffect(() => {
 		setCategories(["Option 1", "Option 2", "Option 3", "Option 4"]);
+		let tempHtags: string[] = [];
+
+		for (let i = 1; i <= 100; i++) {
+			tempHtags.push(`#hashtag${i}`);
+		}
+		setHashtags(tempHtags);
 	}, []);
 
 	return (
@@ -154,20 +162,8 @@ export const BasicInformation = () => {
 					multiline
 					rows={4}
 				/>
-				<SearchBar>
-					<SearchIcon
-						style={{
-							margin: 13,
-							fontSize: 18,
-							color: "#666666",
-						}}
-					/>
-					<InputBase
-						placeholder="Search hashtags"
-						className="placeholder-mod"
-					/>
-				</SearchBar>
 
+				<HashtagSearch hashtags={hashtags} />
 				<RadioGroupField
 					label="Is this a initiative or charity program?"
 					name="initiative-radio-btn-group"
@@ -228,7 +224,7 @@ const ContentView = styled("div")({
 });
 
 const TitleField = styled(Typography)({
-	marginTop: 45,
+	marginTop: 5,
 	fontWeight: 600,
 	fontSize: 24,
 	textAlign: "center",
@@ -240,6 +236,16 @@ const SearchBar = styled("div")({
 	marginTop: 31,
 	borderRadius: 28,
 	alignItems: "center",
+});
+
+const HashtagContainer = styled("div")({
+	display: "flex",
+	flexWrap: "wrap",
+	marginTop: 10,
+});
+
+const HashtagButton = styled(Button)({
+	margin: 5,
 });
 
 /**  FOR TESTING
