@@ -1,5 +1,7 @@
 import React from "react";
 
-export const Operations = () => {
-	return <div>Operaitons</div>;
+const Operations = () => {
+	return <div>Operations</div>;
 };
+
+export default Operations;

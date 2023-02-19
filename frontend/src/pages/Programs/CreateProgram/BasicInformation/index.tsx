@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-	FormControl,
-	InputBase,
-	MenuItem,
-	Typography,
-	Button,
-} from "@mui/material";
+import { FormControl, MenuItem, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
 import { RadioGroupField } from "../../ProgramComponents/RadioGroupField";
 import HashtagSearch from "../../ProgramComponents/HashtagSearch";
 
@@ -28,8 +21,20 @@ const StyledTextField = styled(TextField)<StyledTextFieldProps>`
 		}
 	}
 `;
+const ContentView = styled("div")({
+	minWidth: 300,
+	width: "60vw",
+	maxWidth: 700,
+});
 
-export const BasicInformation = () => {
+const TitleField = styled(Typography)({
+	marginTop: 5,
+	fontWeight: 600,
+	fontSize: 24,
+	textAlign: "center",
+});
+
+const BasicInformation = () => {
 	const [categories, setCategories] = useState<string[]>([]); // State of all program types fetched
 	const [hashtags, setHashtags] = useState<string[]>([]);
 
@@ -217,53 +222,4 @@ export const BasicInformation = () => {
 	);
 };
 
-const ContentView = styled("div")({
-	minWidth: 300,
-	width: "60vw",
-	maxWidth: 700,
-});
-
-const TitleField = styled(Typography)({
-	marginTop: 5,
-	fontWeight: 600,
-	fontSize: 24,
-	textAlign: "center",
-});
-
-const SearchBar = styled("div")({
-	display: "flex",
-	border: "1px solid black",
-	marginTop: 31,
-	borderRadius: 28,
-	alignItems: "center",
-});
-
-const HashtagContainer = styled("div")({
-	display: "flex",
-	flexWrap: "wrap",
-	marginTop: 10,
-});
-
-const HashtagButton = styled(Button)({
-	margin: 5,
-});
-
-/**  FOR TESTING
- * <Button
-					onClick={() => {
-						console.log("Project name:" + projectName);
-						console.log("Project selectedType:" + selectedType);
-						console.log("Project description:" + description);
-						console.log("Project objective:" + objective);
-						console.log(
-							"Project initiativeOrCharity:" + initiativeOrCharity
-						);
-						console.log("Project initiative:" + initiative);
-						console.log("Project participation:" + participation);
-						console.log("Project experience:" + experience);
-					}}
-				>
-					Click me
-				</Button>
- * 
- */
+export default BasicInformation;

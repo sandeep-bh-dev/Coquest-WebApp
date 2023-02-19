@@ -1,5 +1,7 @@
 import React from "react";
 
-export const Budgeting = () => {
+const Budgeting = () => {
 	return <div>Budgeting</div>;
 };
+
+export default Budgeting;
