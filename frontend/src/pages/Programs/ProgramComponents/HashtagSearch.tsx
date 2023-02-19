@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { InputBase, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import SearchIcon from "@mui/icons-material/Search";
-import PropTypes from "prop-types";
 
 const SearchBarContainer = styled("div")({
 	display: "flex",
@@ -58,7 +57,12 @@ const SelectedHashtagButton = styled(Button)({
 	textTransform: "none",
 });
 
-const HashtagSearch = (props: { hashtags: string[] }) => {
+export interface HashtagSearchProps {
+	hashtags: string[];
+}
+export type HandleHashtagType = (hashtag: string) => void;
+
+const HashtagSearch = (props: HashtagSearchProps) => {
 	const [searchValue, setSearchValue] = useState("");
 	const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
 
@@ -66,13 +70,13 @@ const HashtagSearch = (props: { hashtags: string[] }) => {
 		setSearchValue(event.target.value);
 	};
 
-	const handleHashtagClick = (hashtag: string) => {
+	const handleHashtagClick: HandleHashtagType = (hashtag) => {
 		if (!selectedHashtags.includes(hashtag)) {
 			setSelectedHashtags([...selectedHashtags, hashtag]);
 		}
 	};
 
-	const handleSelectedHashtagClick = (hashtag: string) => {
+	const handleSelectedHashtagClick: HandleHashtagType = (hashtag) => {
 		setSelectedHashtags(
 			selectedHashtags.filter(
 				(selectedHashtag) => selectedHashtag !== hashtag
@@ -135,10 +139,6 @@ const HashtagSearch = (props: { hashtags: string[] }) => {
 			<HashtagContainer>{renderHashtagButtons()}</HashtagContainer>
 		</SearchBarContainer>
 	);
-};
-
-HashtagSearch.propTypes = {
-	hashtags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default HashtagSearch;

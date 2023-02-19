@@ -8,19 +8,24 @@ import {
 	Typography,
 } from "@mui/material";
 
-interface RadioOption {
+export interface RadioOption {
 	value: string;
 	label: string;
 }
 
-interface Props {
+export interface RadioGroupProps {
 	label: string;
 	name: string;
 	options: RadioOption[];
 	onChange: (value: string) => void;
 }
 
-export const RadioGroupField = ({ label, name, options, onChange }: Props) => {
+export const RadioGroupField = ({
+	label,
+	name,
+	options,
+	onChange,
+}: RadioGroupProps) => {
 	const [value, setValue] = useState(options[0].value);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
