@@ -24,9 +24,17 @@ const StyledMenu = styled(Menu)({
         borderRadius: '10px',
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)'
     }
+    '& .MuiPaper-root': {
+        width: '96px',
+        borderRadius: '10px',
+        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)'
+    }
 });
 
 const options = [
+    'View',
+    'Move',
+    'Remove'
     'View',
     'Move',
     'Remove'
