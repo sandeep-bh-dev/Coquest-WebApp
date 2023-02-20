@@ -8,7 +8,6 @@ import ItemMenu from '../ItemMenu';
 import ItemModal from '../ItemModal';
 import { Item } from '../ItemArray';
 
-<<<<<<< HEAD
 const CardImage = styled(CardMedia)({
     cursor: 'pointer'
 });
@@ -68,49 +67,6 @@ const ItemCard = ({
                 }
                 title={<TaskName>{taskName}</TaskName>}
                 subheader={<ItemName>{itemName}</ItemName>}
-=======
-type ItemCardProps = CardProps & {
-    taskName: string;
-    itemName: string;
-};
-
-const Title = styled(Typography)({
-    variant: "overline",
-    fontWeight: 400,
-    fontSize: 12,
-    lineHeight: "18px"
-});
-
-const Subtitle = styled(Typography)({
-    variant: "subtitle2",
-    fontWeight: 600,
-    fontSize: 16,
-    lineHeight: "24px"
-});
-
-const ItemCard = ({
-    taskName,
-    itemName,
-}: ItemCardProps) => {
-    const CustomCard = styled(Card)({
-        height: 254,
-        width: 248.43,
-    });
-    return (
-        <CustomCard>
-            <CardMedia style={{ backgroundColor: 'lightgrey' }}
-                component="img"
-                height="186"
-                image=""
-                alt=""
-            />
-            <CardHeader
-                action={
-                    <ItemMenu />
-                }
-                title={<Title>{taskName}</Title>}
-                subheader={<Subtitle>{itemName}</Subtitle>}
->>>>>>> main
             />
         </CustomCard>
     );

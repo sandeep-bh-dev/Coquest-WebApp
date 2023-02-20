@@ -10,6 +10,7 @@ import { Notifications } from "./pages/Notifications";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
 import ItemGrid from "./components/ItemGrid";
+import APIReferenceComponent from "./APIReferenceComponent";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
 	{
 		path: "/notifications",
 		element: <Notifications />,
+	},
+	{
+		path: "/inventory",
+		element: <ItemGrid />,
+	},
+	{
+		path: "/test",
+		element: <APIReferenceComponent />,
 	},
 ]);
 
