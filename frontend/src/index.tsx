@@ -10,6 +10,15 @@ import { Notifications } from "./pages/Notifications";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
 
+// Program flow Imports
+import {
+	BasicInformation,
+	Budgeting,
+	CreateProgram,
+	Operations,
+	Promotion,
+} from "./pages/Programs/CreateProgram";
+
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
 );
@@ -26,6 +35,28 @@ const router = createBrowserRouter([
 				<b>Home</b>
 			</div>
 		),
+	},
+	{
+		path: "/programs/create",
+		element: <CreateProgram />,
+		children: [
+			{
+				path: "basic-information",
+				element: <BasicInformation />,
+			},
+			{
+				path: "operations",
+				element: <Operations />,
+			},
+			{
+				path: "budgeting",
+				element: <Budgeting />,
+			},
+			{
+				path: "promotion",
+				element: <Promotion />,
+			},
+		],
 	},
 	{
 		path: "/message",
