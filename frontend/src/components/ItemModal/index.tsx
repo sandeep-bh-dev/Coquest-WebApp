@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
 import MoveModal from '../MoveModal';
-import { Item } from '../ItemArray';
+import { Item } from '../ItemList';
 
 const StyledBox = styled(Box)({
 	position: 'absolute',
@@ -25,6 +25,8 @@ const StyledBox = styled(Box)({
 });
 
 const ItemImage = styled.div({
+	width: 407,
+	heigth: 407,
 	margin: 40
 });
 
@@ -125,15 +127,13 @@ const ItemModal = ({
 	onClose,
 }: ItemModalProps) => {
 	const {
-		itemId,
+		itemID,
 		image,
-		taskName,
 		itemName,
 		description,
-		groupName,
 		taskLink,
-		owner,
-		date
+		history,
+		createdAt
 	} = item;
 	const [isMoveModalOpen, setIsMoveModalOpen] = React.useState<boolean>(false);
 	return (
@@ -154,7 +154,7 @@ const ItemModal = ({
 					</ItemImage>
 					<ItemContent>
 						<TaskName>
-							{taskName}
+							Task Name
 						</TaskName>
 						<ItemName>
 							{itemName}
@@ -172,10 +172,10 @@ const ItemModal = ({
 								<div>Date:</div>
 							</ItemHeader>
 							<ItemSub>
-								<div>{groupName}</div>
+								<div>Group Name</div>
 								<div style={{ textDecoration: 'underline' }}>{taskLink}</div>
-								<div>{owner}</div>
-								<div>{date.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+								<div>{history}</div>
+								<div>{createdAt}</div>
 							</ItemSub>
 						</InfoStack>
 						<ButtonStack

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from "@emotion/styled";
-import Card, { CardProps } from "@mui/material/Card";
+import Card from "@mui/material/Card";
 import CardMedia from '@mui/material/CardMedia';
 import CardHeader from "@mui/material/CardHeader";
 import Typography from '@mui/material/Typography';
 import ItemMenu from '../ItemMenu';
 import ItemModal from '../ItemModal';
-import { Item } from '../ItemArray';
+import { Item } from '../ItemList';
 
 const CardImage = styled(CardMedia)({
     cursor: 'pointer'
@@ -33,26 +33,21 @@ const CustomCard = styled(Card)({
 
 type ItemCardProps = {
     item: Item,
-    image: string;
-    itemId: string;
-    taskName: string;
-    itemName: string;
 };
 
 const ItemCard = ({
     item,
-    taskName,
-    itemName
 }: ItemCardProps) => {
     const [isItemModalOpen, setIsItemModalOpen] = React.useState<boolean>(false);
     return (
         <CustomCard>
             <ItemModal
-                key={item.itemId}
+                key={item.itemID}
                 item={item}
                 open={isItemModalOpen}
                 onClose={() => setIsItemModalOpen(false)}
             />
+
             <CardImage
                 onClick={() => setIsItemModalOpen(true)}>
                 <img src={item.image}
@@ -65,8 +60,8 @@ const ItemCard = ({
                         item={item}
                     />
                 }
-                title={<TaskName>{taskName}</TaskName>}
-                subheader={<ItemName>{itemName}</ItemName>}
+                title={<TaskName>PROGRAM OR TASK NAME</TaskName>}
+                subheader={<ItemName>{item.itemName}</ItemName>}
             />
         </CustomCard>
     );

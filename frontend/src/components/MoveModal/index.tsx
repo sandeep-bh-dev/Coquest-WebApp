@@ -6,7 +6,6 @@ import styled from '@emotion/styled';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ItemModal from '../ItemModal';
 
 const StyledBox = styled(Box)({
     position: 'absolute',

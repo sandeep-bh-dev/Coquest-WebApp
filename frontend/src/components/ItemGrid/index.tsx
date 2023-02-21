@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from "@emotion/styled";
 import ItemCard from "../ItemCard";
-import { Items } from '../ItemArray';
+import ItemList, { Item } from "../ItemList";
+import { useState } from 'react';
 
 const Title = styled.h1({
     width: '100%',
@@ -39,20 +40,19 @@ const Grid = styled.div({
 });
 
 const ItemGrid = () => {
+    const [items, setItems] = useState<Item[]>([]);
+
+    const handleItemsLoaded = (items: Item[]) => {
+        setItems(items);
+    };
     return (
         <>
             <Title>Inventory</Title>
             <Container>
                 <Grid>
-                    {Items.map((item, index) => (
-                        <ItemCard
-                            key={index}
-                            item={item}
-                            itemId={item.itemId}
-                            image={item.image}
-                            taskName={item.taskName}
-                            itemName={item.itemName}
-                        />
+                <ItemList onItemsLoaded={handleItemsLoaded} />
+                    {items.map((item) => (
+                        <ItemCard key={item.itemID} item={item} />
                     ))}
                 </Grid>
             </Container>
