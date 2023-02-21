@@ -9,6 +9,7 @@ import ItemModal from '../ItemModal';
 import { Item } from '../ItemList';
 
 const CardImage = styled(CardMedia)({
+    height: 185.87,
     cursor: 'pointer'
 });
 
@@ -52,6 +53,7 @@ const ItemCard = ({
                 onClick={() => setIsItemModalOpen(true)}>
                 <img src={item.image}
                     height="185"
+                    alt={item.itemName}
                 />
             </CardImage>
             <ItemHeader
