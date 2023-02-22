@@ -7,32 +7,36 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
+import { Dashboard } from "./pages/Dashboard";
 
 const root = ReactDOM.createRoot(
-	document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
 const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <div></div>,
-	},
-	{
-		path: "/home",
-		element: (
-			<div>
-				<b>Home</b>
-			</div>
-		),
-	},
+  {
+    path: "/",
+    element: <div></div>,
+  },
+  {
+    path: "/home",
+    element: (
+      <div>
+        <b>Home</b>
+      </div>
+    ),
+  },
 ]);
 
 root.render(
-	<React.StrictMode>
-		<ThemeProvider theme={theme}>
-			<Toolbar />
-			<LeftSideBar />
-			<RouterProvider router={router} />
-		</ThemeProvider>
-	</React.StrictMode>
+  <div>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <Toolbar />
+        <LeftSideBar />
+        <Dashboard />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </React.StrictMode>
+  </div>
 );
