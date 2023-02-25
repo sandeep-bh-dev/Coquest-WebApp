@@ -51,12 +51,16 @@ const theme = createTheme({
 			styleOverrides: {
 				root: {
 					color: "#666666",
+                    "&.Mui-active": {
+                        color: "#4285F4",
+                    },
+                    "&.Mui-completed": { 
+                        color: "#4285F4",
+                      },
 				},
 				active: {
-					color: "#4285F4",
 				},
 				completed: {
-					color: "#4285F4",
 				},
 			},
 		},

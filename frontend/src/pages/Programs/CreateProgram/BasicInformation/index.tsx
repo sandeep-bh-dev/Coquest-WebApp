@@ -4,9 +4,8 @@ import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import { RadioGroupField } from "../../ProgramComponents/RadioGroupField";
 import HashtagSearch from "../../ProgramComponents/HashtagSearch";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import AddIcon from "@mui/icons-material/Add";
+import AddContainer from "../../ProgramComponents/AddContainer";
+
 type StyledTextFieldProps = {
 	label: string;
 	placeholder: string;
@@ -93,6 +92,9 @@ const BasicInformation = () => {
 		setExperience(value);
 	};
 
+	const addProfile = () => {
+		console.log("Adding profile to be implemented...");
+	};
 	// Fetches on page load for list of Program Types available
 	useEffect(() => {
 		setCategories(["Option 1", "Option 2", "Option 3", "Option 4"]);
@@ -220,26 +222,7 @@ const BasicInformation = () => {
 					]}
 					onChange={handleExperienceChange}
 				/>
-				<div
-					style={{
-						marginTop: 26,
-						display: "flex",
-						alignItems: "center",
-					}}
-				>
-					<AddIcon
-						style={{
-							backgroundColor: "#D9D9D9",
-							color: "#666666",
-							borderRadius: "100px",
-							marginRight: 16,
-							padding: 2,
-						}}
-					/>
-					<Typography style={{ fontWeight: 500 }}>
-						Add your profile
-					</Typography>
-				</div>
+				<AddContainer label="Add your profile" onClick={addProfile} />
 			</FormControl>
 		</ContentView>
 	);
