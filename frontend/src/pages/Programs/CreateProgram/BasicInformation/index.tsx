@@ -4,7 +4,9 @@ import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import { RadioGroupField } from "../../ProgramComponents/RadioGroupField";
 import HashtagSearch from "../../ProgramComponents/HashtagSearch";
-
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddIcon from "@mui/icons-material/Add";
 type StyledTextFieldProps = {
 	label: string;
 	placeholder: string;
@@ -25,6 +27,7 @@ const ContentView = styled("div")({
 	minWidth: 300,
 	width: "60vw",
 	maxWidth: 700,
+	marginBottom: 142,
 });
 
 const TitleField = styled(Typography)({
@@ -209,7 +212,7 @@ const BasicInformation = () => {
 				/>
 
 				<RadioGroupField
-					label="Do you have experience in this program?"
+					label="Do you have experience in program planning?"
 					name="experience-radio-btn-group"
 					options={[
 						{ value: "yes", label: "Yes" },
@@ -217,6 +220,26 @@ const BasicInformation = () => {
 					]}
 					onChange={handleExperienceChange}
 				/>
+				<div
+					style={{
+						marginTop: 26,
+						display: "flex",
+						alignItems: "center",
+					}}
+				>
+					<AddIcon
+						style={{
+							backgroundColor: "#D9D9D9",
+							color: "#666666",
+							borderRadius: "100px",
+							marginRight: 16,
+							padding: 2,
+						}}
+					/>
+					<Typography style={{ fontWeight: 500 }}>
+						Add your profile
+					</Typography>
+				</div>
 			</FormControl>
 		</ContentView>
 	);
