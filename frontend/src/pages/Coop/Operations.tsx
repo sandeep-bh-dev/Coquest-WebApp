@@ -17,40 +17,35 @@ import {
     Radio,
     RadioGroup,
     Select,
+    Skeleton,
     TextField,
     Typography,
 } from "@mui/material";
-import { maxHeight, maxWidth } from "@mui/system";
 
 const Page = styled.div({
     display: "flex",
     justifyContent: "center",
     marginBottom: 100,
-    // border: "1px solid",
 });
 
 const Form = styled.div({
-    // border: "1px solid",
     display: "flex",
     flexDirection: "column",
     gap: 20,
     width: 700,
-    // justifyContent: "center",
-    // alignItems: "center",
-    // border: "1px solid",
 });
 
-const TimeDateLocation = () => {
+const TimeDate = () => {
     const DropDown = styled(FormControl)({
         width: 220,
     });
+
     const Container = styled.div({
         display: "flex",
-        justifyContent: "center",
+        // justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
         gap: 15,
-        // border: "1px solid",
     });
 
     const DropDownCont = styled.div({
@@ -62,16 +57,14 @@ const TimeDateLocation = () => {
     });
 
     const RadioContainer = styled.div({
-        // border: "1px solid",
         width: 465,
     });
 
-    const RadioMargin = styled(FormControlLabel)({
-        display: "flex",
+    const CustomRadio = styled(FormControlLabel)({
         marginLeft: 5,
         height: 30,
-        // border: "1px solid",
     });
+
     return (
         <>
             <Typography>
@@ -146,27 +139,43 @@ const TimeDateLocation = () => {
                 </DropDownCont>
                 <RadioContainer>
                     <FormControl>
-                        <Typography>Recurring:</Typography>
+                        <Typography variant="body2"> Recurring:</Typography>
                         <RadioGroup>
-                            <RadioMargin
+                            <CustomRadio
                                 value="daily"
                                 control={<Radio size="small" color="default" />}
-                                label="Daily"
+                                label={
+                                    <Typography variant="body2">
+                                        Daily
+                                    </Typography>
+                                }
                             />
-                            <RadioMargin
+                            <CustomRadio
                                 value="weekly"
                                 control={<Radio size="small" color="default" />}
-                                label="Weekly"
+                                label={
+                                    <Typography variant="body2">
+                                        Weekly
+                                    </Typography>
+                                }
                             />
-                            <RadioMargin
+                            <CustomRadio
                                 value="monthly"
                                 control={<Radio size="small" color="default" />}
-                                label="Monthly"
+                                label={
+                                    <Typography variant="body2">
+                                        Monthly
+                                    </Typography>
+                                }
                             />
-                            <RadioMargin
+                            <CustomRadio
                                 value="custom"
                                 control={<Radio size="small" color="default" />}
-                                label="Custom"
+                                label={
+                                    <Typography variant="body2">
+                                        Custom
+                                    </Typography>
+                                }
                             />
                         </RadioGroup>
                     </FormControl>
@@ -176,7 +185,7 @@ const TimeDateLocation = () => {
     );
 };
 
-const SelectCoop = () => {
+const Location = () => {
     const Container = styled.div({
         display: "flex",
         flexDirection: "column",
@@ -188,10 +197,17 @@ const SelectCoop = () => {
         justifyContent: "space-between",
     });
 
-    const SearchBox = styled(TextField)(() => ({
+    const SearchLocation = styled(TextField)(() => ({
         "& fieldset": {
             borderRadius: "25px",
             width: 550,
+        },
+    }));
+
+    const SearchVenues = styled(TextField)(() => ({
+        "& fieldset": {
+            borderRadius: "25px",
+            width: 450,
         },
     }));
 
@@ -199,11 +215,20 @@ const SelectCoop = () => {
         width: 120,
     });
 
+    const MapContainer = styled.div({
+        display: "flex",
+        justifyContent: "center",
+    });
+
+    const CustomRadio = styled(FormControlLabel)({
+        height: 30,
+    });
+
     return (
         <Container>
             <Typography variant="body2">Select Co-op locations:</Typography>
             <Cont>
-                <SearchBox
+                <SearchLocation
                     placeholder="Search location"
                     variant="outlined"
                     InputProps={{
@@ -229,6 +254,45 @@ const SelectCoop = () => {
                     </Select>
                 </DropDown>
             </Cont>
+            <MapContainer>
+                <Skeleton variant="rectangular" width={"90%"} height={600}>
+                    Map is Loading...
+                </Skeleton>
+            </MapContainer>
+            <FormControl>
+                <Typography variant="body2">
+                    Do you have a neutral meeting space?
+                </Typography>
+                <RadioGroup>
+                    <CustomRadio
+                        value="yes"
+                        control={<Radio size="small" color="default" />}
+                        label={<Typography variant="body2">Yes</Typography>}
+                    />
+                    <CustomRadio
+                        value="no"
+                        control={<Radio size="small" color="default" />}
+                        label={<Typography variant="body2">No</Typography>}
+                    />
+                </RadioGroup>
+            </FormControl>
+            <SearchVenues
+                placeholder="Search venues"
+                variant="outlined"
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <SearchIcon />
+                        </InputAdornment>
+                    ),
+                }}
+            />
+            <TextField
+                label="Additional information for rentals"
+                multiline
+                rows={4}
+                fullWidth
+            />
         </Container>
     );
 };
@@ -241,8 +305,8 @@ function Operations() {
             <Page>
                 <Form>
                     <Header text="Operations" />
-                    <TimeDateLocation />
-                    <SelectCoop />
+                    <TimeDate />
+                    <Location />
                 </Form>
             </Page>
         </>
