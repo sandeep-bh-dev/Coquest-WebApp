@@ -35,22 +35,7 @@ import TaskCard from "../../components/TaskCard";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fontWeight } from "@mui/system";
 import NextandBackButton from "../../components/NextandBackButton";
-
-type TextProps = {
-    text: string;
-};
-
-const Header = ({ text }: TextProps) => (
-    <Typography
-        fontSize={30}
-        fontWeight={600}
-        lineHeight={1.5}
-        variant="h1"
-        style={{ display: "flex", justifyContent: "center" }}
-    >
-        {text}
-    </Typography>
-);
+import Header from "../../components/Header";
 
 const categories = [
     {
@@ -264,7 +249,7 @@ function CoopCard() {
         >
             <CardMedia
                 sx={{ height: 160, width: 230 }}
-                image="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+                image=""
                 title="photo"
             />
             <CardHeader
@@ -300,7 +285,7 @@ function CreateCoop() {
     return (
         <>
             <ProgressBar />
-            <NextandBackButton />
+            <NextandBackButton next="/Coop/Operations/" back="" />
             <Page>
                 <Form>
                     <Header text="Create co-op"></Header>

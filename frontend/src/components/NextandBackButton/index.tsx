@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
+import { Button, ButtonProps } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
-const NextandBackButton = () => {
+type CustomButtonProps = ButtonProps & {
+    next: string;
+    back: string;
+};
+
+const NextandBackButton = ({ next, back }: CustomButtonProps) => {
     const Container = styled.div({
         display: "flex",
         justifyContent: "end",
@@ -12,6 +18,8 @@ const NextandBackButton = () => {
     return (
         <Container>
             <Button
+                component={Link}
+                to={back}
                 style={{
                     color: "black",
                     fontWeight: 500,
@@ -26,6 +34,8 @@ const NextandBackButton = () => {
             <Button
                 variant="contained"
                 disableElevation
+                component={Link}
+                to={next}
                 style={{
                     backgroundColor: "rgb(217, 217, 217)",
                     color: "black",

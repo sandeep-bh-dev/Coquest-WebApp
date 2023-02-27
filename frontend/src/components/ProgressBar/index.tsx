@@ -7,6 +7,10 @@ type BallProps = {
     state?: boolean;
 };
 
+type ProgressBarProps = {
+    type: 1 | 2 | 3 | 4;
+};
+
 const Ball = ({ state, value }: BallProps) => {
     return (
         <div
@@ -36,10 +40,10 @@ const ProgressBar = () => {
             <Typography variant="body2">Basic Information</Typography>
             <Divider style={{ width: "40px", backgroundColor: "black" }} />
             <Ball value={"2"} />
-            <Typography variant="body2">Scheduling</Typography>
+            <Typography variant="body2">Operations</Typography>
             <Divider style={{ width: "60px", backgroundColor: "black" }} />
             <Ball value={"3"} />
-            <Typography variant="body2">Operations</Typography>
+            <Typography variant="body2">Budgeting</Typography>
             <Divider style={{ width: "60px", backgroundColor: "black" }} />
             <Ball value={"4"} />
             <Typography variant="body2">Promotion</Typography>
