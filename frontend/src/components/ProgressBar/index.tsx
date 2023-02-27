@@ -1,24 +1,26 @@
 import React from "react";
 import "./styles.css";
 import { Divider, Typography } from "@mui/material";
+import styled from "@emotion/styled";
 
 type BallProps = {
     value: string;
     state?: boolean;
+    type: 1 | 2 | 3 | 4;
+    page: 1 | 2 | 3 | 4;
 };
 
 type ProgressBarProps = {
-    type: 1 | 2 | 3 | 4;
+    page: 1 | 2 | 3 | 4;
 };
 
-const Ball = ({ state, value }: BallProps) => {
+const Ball = ({ state, value, page, type }: BallProps) => {
     return (
         <div
             className="BallStyles"
             style={{
-                backgroundColor: state
-                    ? "rgb(82, 133, 236)"
-                    : "rgb(102, 102, 102)",
+                backgroundColor:
+                    page == type ? "rgb(82, 133, 236)" : "rgb(102, 102, 102)",
             }}
         >
             {value}
@@ -26,7 +28,7 @@ const Ball = ({ state, value }: BallProps) => {
     );
 };
 
-const ProgressBar = () => {
+const ProgressBar = ({ page }: ProgressBarProps) => {
     return (
         <div
             className="ProgressBarContainer"
@@ -36,16 +38,16 @@ const ProgressBar = () => {
                 padding: 30,
             }}
         >
-            <Ball state value={"1"} />
+            <Ball page={page} type={1} value={"1"} />
             <Typography variant="body2">Basic Information</Typography>
             <Divider style={{ width: "40px", backgroundColor: "black" }} />
-            <Ball value={"2"} />
+            <Ball page={page} type={2} value={"2"} />
             <Typography variant="body2">Operations</Typography>
             <Divider style={{ width: "60px", backgroundColor: "black" }} />
-            <Ball value={"3"} />
+            <Ball page={page} type={3} value={"3"} />
             <Typography variant="body2">Budgeting</Typography>
             <Divider style={{ width: "60px", backgroundColor: "black" }} />
-            <Ball value={"4"} />
+            <Ball page={page} type={4} value={"4"} />
             <Typography variant="body2">Promotion</Typography>
         </div>
     );

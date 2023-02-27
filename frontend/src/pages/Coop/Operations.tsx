@@ -1,16 +1,16 @@
 import React from "react";
 import NextandBackButton from "../../components/NextandBackButton";
 import ProgressBar from "../../components/ProgressBar";
-import Header from "../../components/Header";
+import Header from "../../components/CoopTemplate/Header";
 import styled from "@emotion/styled";
 import EventIcon from "@mui/icons-material/Event";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import SearchIcon from "@mui/icons-material/Search";
+import Page from "../../components/CoopTemplate/Page";
+import Form from "../../components/CoopTemplate/Form";
 import {
     FormControl,
     FormControlLabel,
-    FormLabel,
-    Input,
     InputAdornment,
     InputLabel,
     MenuItem,
@@ -22,24 +22,7 @@ import {
     Typography,
 } from "@mui/material";
 
-const Page = styled.div({
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: 100,
-});
-
-const Form = styled.div({
-    display: "flex",
-    flexDirection: "column",
-    gap: 20,
-    width: 700,
-});
-
 const TimeDate = () => {
-    const DropDown = styled(FormControl)({
-        width: 220,
-    });
-
     const Container = styled.div({
         display: "flex",
         // justifyContent: "center",
@@ -56,6 +39,10 @@ const TimeDate = () => {
         // border: "1px solid",
     });
 
+    const DropDown = styled(FormControl)({
+        width: 220,
+    });
+
     const RadioContainer = styled.div({
         width: 465,
     });
@@ -66,122 +53,109 @@ const TimeDate = () => {
     });
 
     return (
-        <>
-            <Typography>
-                <b>Time, date and location</b>
-            </Typography>
-            <Container>
-                <DropDownCont>
-                    <DropDown>
-                        <InputLabel>Start date</InputLabel>
-                        <Select
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <EventIcon />
-                                </InputAdornment>
+        <Container>
+            <DropDownCont>
+                <DropDown>
+                    <InputLabel>Start date</InputLabel>
+                    <Select
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <EventIcon />
+                            </InputAdornment>
+                        }
+                        id="outlined"
+                        label="Start date"
+                    >
+                        <MenuItem value={"Jan"}>Jan</MenuItem>
+                        <MenuItem value={"Sept"}>Sept</MenuItem>
+                        <MenuItem value={"Dec"}>Dec</MenuItem>
+                    </Select>
+                </DropDown>
+                <DropDown>
+                    <InputLabel>End date</InputLabel>
+                    <Select
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <EventIcon />
+                            </InputAdornment>
+                        }
+                        id="outlined"
+                        label="End date"
+                    >
+                        <MenuItem value={"Jan"}>Jan</MenuItem>
+                        <MenuItem value={"Sept"}>Sept</MenuItem>
+                        <MenuItem value={"Dec"}>Dec</MenuItem>
+                    </Select>
+                </DropDown>
+                <DropDown>
+                    <InputLabel>Start date</InputLabel>
+                    <Select
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <AccessTimeIcon />
+                            </InputAdornment>
+                        }
+                        id="outlined"
+                        label="Start time"
+                    >
+                        <MenuItem value={"Jan"}>Jan</MenuItem>
+                        <MenuItem value={"Sept"}>Sept</MenuItem>
+                        <MenuItem value={"Dec"}>Dec</MenuItem>
+                    </Select>
+                </DropDown>
+                <DropDown>
+                    <InputLabel>End time</InputLabel>
+                    <Select
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <AccessTimeIcon />
+                            </InputAdornment>
+                        }
+                        id="outlined"
+                        label="End time"
+                    >
+                        <MenuItem value={"Jan"}>Jan</MenuItem>
+                        <MenuItem value={"Sept"}>Sept</MenuItem>
+                        <MenuItem value={"Dec"}>Dec</MenuItem>
+                    </Select>
+                </DropDown>
+            </DropDownCont>
+            <RadioContainer>
+                <FormControl>
+                    <Typography variant="body2"> Recurring:</Typography>
+                    <RadioGroup>
+                        <CustomRadio
+                            value="daily"
+                            control={<Radio size="small" color="default" />}
+                            label={
+                                <Typography variant="body2">Daily</Typography>
                             }
-                            id="outlined"
-                            label="Start date"
-                        >
-                            <MenuItem value={"Jan"}>Jan</MenuItem>
-                            <MenuItem value={"Sept"}>Sept</MenuItem>
-                            <MenuItem value={"Dec"}>Dec</MenuItem>
-                        </Select>
-                    </DropDown>
-                    <DropDown>
-                        <InputLabel>End date</InputLabel>
-                        <Select
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <EventIcon />
-                                </InputAdornment>
+                        />
+                        <CustomRadio
+                            value="weekly"
+                            control={<Radio size="small" color="default" />}
+                            label={
+                                <Typography variant="body2">Weekly</Typography>
                             }
-                            id="outlined"
-                            label="End date"
-                        >
-                            <MenuItem value={"Jan"}>Jan</MenuItem>
-                            <MenuItem value={"Sept"}>Sept</MenuItem>
-                            <MenuItem value={"Dec"}>Dec</MenuItem>
-                        </Select>
-                    </DropDown>
-                    <DropDown>
-                        <InputLabel>Start date</InputLabel>
-                        <Select
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <AccessTimeIcon />
-                                </InputAdornment>
+                        />
+                        <CustomRadio
+                            value="monthly"
+                            control={<Radio size="small" color="default" />}
+                            label={
+                                <Typography variant="body2">Monthly</Typography>
                             }
-                            id="outlined"
-                            label="Start time"
-                        >
-                            <MenuItem value={"Jan"}>Jan</MenuItem>
-                            <MenuItem value={"Sept"}>Sept</MenuItem>
-                            <MenuItem value={"Dec"}>Dec</MenuItem>
-                        </Select>
-                    </DropDown>
-                    <DropDown>
-                        <InputLabel>End time</InputLabel>
-                        <Select
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <AccessTimeIcon />
-                                </InputAdornment>
+                        />
+                        <CustomRadio
+                            value="custom"
+                            control={<Radio size="small" color="default" />}
+                            label={
+                                <Typography variant="body2">Custom</Typography>
                             }
-                            id="outlined"
-                            label="End time"
-                        >
-                            <MenuItem value={"Jan"}>Jan</MenuItem>
-                            <MenuItem value={"Sept"}>Sept</MenuItem>
-                            <MenuItem value={"Dec"}>Dec</MenuItem>
-                        </Select>
-                    </DropDown>
-                </DropDownCont>
-                <RadioContainer>
-                    <FormControl>
-                        <Typography variant="body2"> Recurring:</Typography>
-                        <RadioGroup>
-                            <CustomRadio
-                                value="daily"
-                                control={<Radio size="small" color="default" />}
-                                label={
-                                    <Typography variant="body2">
-                                        Daily
-                                    </Typography>
-                                }
-                            />
-                            <CustomRadio
-                                value="weekly"
-                                control={<Radio size="small" color="default" />}
-                                label={
-                                    <Typography variant="body2">
-                                        Weekly
-                                    </Typography>
-                                }
-                            />
-                            <CustomRadio
-                                value="monthly"
-                                control={<Radio size="small" color="default" />}
-                                label={
-                                    <Typography variant="body2">
-                                        Monthly
-                                    </Typography>
-                                }
-                            />
-                            <CustomRadio
-                                value="custom"
-                                control={<Radio size="small" color="default" />}
-                                label={
-                                    <Typography variant="body2">
-                                        Custom
-                                    </Typography>
-                                }
-                            />
-                        </RadioGroup>
-                    </FormControl>
-                </RadioContainer>
-            </Container>
-        </>
+                        />
+                    </RadioGroup>
+                </FormControl>
+            </RadioContainer>
+        </Container>
     );
 };
 
@@ -204,13 +178,6 @@ const Location = () => {
         },
     }));
 
-    const SearchVenues = styled(TextField)(() => ({
-        "& fieldset": {
-            borderRadius: "25px",
-            width: 450,
-        },
-    }));
-
     const DropDown = styled(FormControl)({
         width: 120,
     });
@@ -219,6 +186,13 @@ const Location = () => {
         display: "flex",
         justifyContent: "center",
     });
+
+    const SearchVenues = styled(TextField)(() => ({
+        "& fieldset": {
+            borderRadius: "25px",
+            width: 450,
+        },
+    }));
 
     const CustomRadio = styled(FormControlLabel)({
         height: 30,
@@ -239,7 +213,7 @@ const Location = () => {
                         ),
                     }}
                 />
-                <DropDown fullWidth>
+                <DropDown>
                     <InputLabel>Radius</InputLabel>
                     <Select
                         startAdornment={
@@ -300,11 +274,14 @@ const Location = () => {
 function Operations() {
     return (
         <>
-            <ProgressBar />
-            <NextandBackButton next="" back="/Coop/CreateCoop" />
+            <ProgressBar page={2} />
+            <NextandBackButton next="/Coop/Budgeting" back="/Coop/CreateCoop" />
             <Page>
                 <Form>
                     <Header text="Operations" />
+                    <Typography>
+                        <b>Time, date and location</b>
+                    </Typography>
                     <TimeDate />
                     <Location />
                 </Form>

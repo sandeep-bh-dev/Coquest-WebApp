@@ -35,7 +35,9 @@ import TaskCard from "../../components/TaskCard";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fontWeight } from "@mui/system";
 import NextandBackButton from "../../components/NextandBackButton";
-import Header from "../../components/Header";
+import Header from "../../components/CoopTemplate/Header";
+import Form from "../../components/CoopTemplate/Form";
+import Page from "../../components/CoopTemplate/Page";
 
 const categories = [
     {
@@ -54,21 +56,6 @@ const categories = [
         label: "Goods and Craft collectives - Community Art ",
     },
 ];
-
-const Page = styled.div({
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: 100,
-    // border: "1px solid",
-});
-
-const Form = styled.div({
-    // border: "1px solid",
-    display: "flex",
-    flexDirection: "column",
-    gap: 40,
-    width: 700,
-});
 
 function Categories() {
     return (
@@ -90,85 +77,85 @@ function Mission() {
     return <TextField label="Mission" multiline rows={5} fullWidth />;
 }
 
-function Hashtags() {
-    const [hashtag, setHashTag] = useState([
-        { key: 0, label: "communitygarden", active: false },
-        { key: 1, label: "hashtag", active: false },
-        { key: 2, label: "hashtag", active: false },
-        { key: 3, label: "hashtag", active: false },
-        { key: 4, label: "hashtag", active: false },
-        { key: 5, label: "hashtag", active: false },
-    ]);
+// function Hashtags() {
+//     const [hashtag, setHashTag] = useState([
+//         { key: 0, label: "communitygarden", active: false },
+//         { key: 1, label: "hashtag", active: false },
+//         { key: 2, label: "hashtag", active: false },
+//         { key: 3, label: "hashtag", active: false },
+//         { key: 4, label: "hashtag", active: false },
+//         { key: 5, label: "hashtag", active: false },
+//     ]);
 
-    // const [hashtag, setHashtag] = useState("");
-    const [numberOfHashtags, setNumberOfHashtags] = useState(0);
-    const [arrayOfHashtags, addHashtag] = useState([]);
+//     // const [hashtag, setHashtag] = useState("");
+//     const [numberOfHashtags, setNumberOfHashtags] = useState(0);
+//     const [arrayOfHashtags, addHashtag] = useState([]);
 
-    const Hashtags = arrayOfHashtags.map((data, index) => (
-        <ListItem key={data}>
-            <Chip
-                size="small"
-                avatar={<Avatar>#</Avatar>}
-                label={data}
-                key={index}
-                onDelete={onDelete(data)}
-            />
-        </ListItem>
-    ));
+//     const Hashtags = arrayOfHashtags.map((data, index) => (
+//         <ListItem key={data}>
+//             <Chip
+//                 size="small"
+//                 avatar={<Avatar>#</Avatar>}
+//                 label={data}
+//                 key={index}
+//                 onDelete={onDelete(data)}
+//             />
+//         </ListItem>
+//     ));
 
-    const newHashtag = () => {
-        if (numberOfHashtags < 3) {
-            setNumberOfHashtags(numberOfHashtags + 1);
-            addHashtag((arrayOfHashtags) => arrayOfHashtags.concat());
-        } else {
-            console.log("Too much hashtags");
-        }
-    };
+//     const newHashtag = () => {
+//         if (numberOfHashtags < 3) {
+//             setNumberOfHashtags(numberOfHashtags + 1);
+//             addHashtag((arrayOfHashtags) => arrayOfHashtags.concat());
+//         } else {
+//             console.log("Too much hashtags");
+//         }
+//     };
 
-    const onDelete = (chipToDelete: { key: any; label?: string }) => () => {
-        setHashTag((chips) =>
-            chips.filter((chip) => chip.key !== chipToDelete.key)
-        );
-    };
+//     const onDelete = (chipToDelete: { key: any; label?: string }) => () => {
+//         setHashTag((chips) =>
+//             chips.filter((chip) => chip.key !== chipToDelete.key)
+//         );
+//     };
 
-    const Container = styled.div({
-        // border: "1px solid",
-        display: "flex",
-        paddingTop: 10,
-    });
+//     const Container = styled.div({
+//         // border: "1px solid",
+//         display: "flex",
+//         paddingTop: 10,
+//     });
 
-    return (
-        <div>
-            <TextField label="Hashtags" fullWidth />
-            <Container>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        // border: "1px solid",
-                        alignItems: "start",
-                        flexDirection: "column",
-                        width: 600,
-                    }}
-                ></div>
-                <Button
-                    variant="outlined"
-                    size="small"
-                    color="inherit"
-                    onClick={newHashtag}
-                    style={{
-                        background: "#F0F0F0",
-                        textTransform: "none",
-                        width: 110,
-                        height: 30,
-                    }}
-                >
-                    Add Hashtag
-                </Button>
-            </Container>
-        </div>
-    );
-}
+//     return (
+//         <div>
+//             <TextField label="Hashtags" fullWidth />
+//             <Container>
+//                 <div
+//                     style={{
+//                         display: "flex",
+//                         justifyContent: "space-between",
+//                         // border: "1px solid",
+//                         alignItems: "start",
+//                         flexDirection: "column",
+//                         width: 600,
+//                     }}
+//                 ></div>
+//                 <Button
+//                     variant="outlined"
+//                     size="small"
+//                     color="inherit"
+//                     onClick={newHashtag}
+//                     style={{
+//                         background: "#F0F0F0",
+//                         textTransform: "none",
+//                         width: 110,
+//                         height: 30,
+//                     }}
+//                 >
+//                     Add Hashtag
+//                 </Button>
+//             </Container>
+//         </div>
+//     );
+// }
 
 function CheckBox() {
     return (
@@ -281,19 +268,19 @@ const CardContainer = styled.div({
     gap: 25,
 });
 
-function CreateCoop() {
+function BasicInformation() {
     return (
         <>
-            <ProgressBar />
+            <ProgressBar page={1} />
             <NextandBackButton next="/Coop/Operations/" back="" />
             <Page>
                 <Form>
-                    <Header text="Create co-op"></Header>
+                    <Header text="Start a Co-op" />
                     <TextField label="Co-op name" />
                     <Categories />
                     <Summary />
                     <Mission />
-                    <Hashtags />
+                    {/* <Hashtags /> */}
                     <CheckBox />
                     <SearchBar />
 
@@ -311,4 +298,4 @@ function CreateCoop() {
     );
 }
 
-export default CreateCoop;
+export default BasicInformation;
