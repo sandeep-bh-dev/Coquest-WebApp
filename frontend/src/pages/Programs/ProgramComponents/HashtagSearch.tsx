@@ -95,7 +95,10 @@ const HashtagSearch = (props: HashtagSearchProps) => {
 				<HashtagButton
 					key={hashtag}
 					variant="contained"
-					onClick={() => handleHashtagClick(hashtag)}
+					onClick={() => {
+						setSearchValue("");
+						handleHashtagClick(hashtag);
+					}}
 				>
 					{hashtag}
 				</HashtagButton>
