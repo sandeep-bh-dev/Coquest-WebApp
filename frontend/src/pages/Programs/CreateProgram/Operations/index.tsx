@@ -15,7 +15,7 @@ const ContentView = styled("div")({
 	flexDirection: "column",
 	width: "60vw",
 	maxWidth: 700,
-	marginBottom: 142,
+	marginBottom: 141,
 });
 const TitleField = styled(Typography)({
 	marginTop: 5,
