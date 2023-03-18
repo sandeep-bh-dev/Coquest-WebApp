@@ -32,27 +32,29 @@ const StyledArrowIcon = styled(KeyboardArrowRightIcon)({
 	marginRight: 20,
 });
 
-type NotificationsProps = {
+interface NotificationsProps {
 	title: string;
-};
+}
 
-type NewNotificationsNumberProps = {
+interface NewNotificationsNumberProps {
 	number: number;
-};
+}
 
-type NotificationsImageProps = {
+interface NotificationsImageProps {
 	image?: string;
-};
+}
 
-type NotificationsContentProps = {
+interface NotificationsContentProps {
 	content: string;
-};
+}
 
-const NewNotificationsNumber = ({ number }: NewNotificationsNumberProps) => {
+const NewNotificationsNumber: React.FC<NewNotificationsNumberProps> = ({
+	number,
+}) => {
 	return <div className="notifications-new-notify">{number} new.</div>;
 };
 
-const NewNotificationsCard = ({ title }: NotificationsProps) => {
+const NewNotificationsCard: React.FC<NotificationsProps> = ({ title }) => {
 	return (
 		<div className="display-new-notifications-title">
 			{title}
@@ -60,7 +62,8 @@ const NewNotificationsCard = ({ title }: NotificationsProps) => {
 		</div>
 	);
 };
-const OldNotificationsCard = ({ title }: NotificationsProps) => {
+
+const OldNotificationsCard: React.FC<NotificationsProps> = ({ title }) => {
 	return (
 		<div className="display-notifications-title">
 			{title}
@@ -69,21 +72,23 @@ const OldNotificationsCard = ({ title }: NotificationsProps) => {
 	);
 };
 
-const NotificationsImage = ({ image }: NotificationsImageProps) => {
+const NotificationsImage: React.FC<NotificationsImageProps> = ({ image }) => {
 	return (
 		<div className="notifications-container-right-image-holder">
-			<img src={image} alt="notifications-content-img" />;
+			{image && <img src={image} alt="notifications-content-img" />}
 		</div>
 	);
 };
 
-const NotificationsContent = ({ content }: NotificationsContentProps) => {
+const NotificationsContent: React.FC<NotificationsContentProps> = ({
+	content,
+}) => {
 	return (
 		<div className="notifications-container-right-contain">{content}</div>
 	);
 };
 
-const Notifications = () => {
+const Notifications: React.FC = () => {
 	return (
 		<div>
 			<div className="title-container">
