@@ -1,9 +1,9 @@
 import React from "react";
 import "./style.css";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { styled } from "@mui/material/styles";
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
+import { styled } from "@mui/material/styles";
 
 const StyledIcon = styled(AccountCircleIcon)({
 	fontSize: 67,
@@ -15,76 +15,75 @@ const StyledSentButton = styled(SendIcon)({
 	color: "#666666",
 });
 
-const SentButton = () => {
-	return (
-		<IconButton
-			sx={{
-				display: "flex",
-				marginLeft: "13px",
-				alignItems: "center",
-			}}
-		>
-			<StyledSentButton />
-		</IconButton>
-	);
-};
+const SentButton = () => (
+	<IconButton
+		sx={{
+			display: "flex",
+			marginLeft: "13px",
+			alignItems: "center",
+		}}
+	>
+		<StyledSentButton />
+	</IconButton>
+);
 
-const InputField = () => {
-	return (
-		<input
-			className="chat-input"
-			type="text"
-			name=""
-			id=""
-			placeholder="Write a message"
-			style={{ paddingLeft: "28px" }}
-		/>
-	);
-};
+const InputField = () => (
+	<input
+		className="chat-input"
+		type="text"
+		placeholder="Write a message"
+		style={{ paddingLeft: "28px" }}
+	/>
+);
 
-type MessagesNumberProps = {
+interface MessagesNumberProps {
 	number: number;
-};
+}
 
-const MessagesNumber = ({ number }: MessagesNumberProps) => {
-	return <div className="messages-new-notify">{number} new.</div>;
-};
+const MessagesNumber = ({ number }: MessagesNumberProps) => (
+	<div className="messages-new-notify">{number} new.</div>
+);
 
-type MessageCardProps = {
+interface MessageCardProps {
 	icon: React.ReactElement<typeof AccountCircleIcon>;
 	name: string;
 	message: string;
-};
+}
 
-const MessageCard = ({ icon, name, message }: MessageCardProps) => {
-	return (
-		<div className="messages-container-cards">
-			<div className="message-card-inner-div">
-				<div className="card-icon-div">{icon}</div>
-				<div className="card-content-wrapper">
-					<div className="card-name-div">{name}</div>
-					<div className="card-content-div">{message}</div>
-				</div>
+const MessageCard = ({ icon, name, message }: MessageCardProps) => (
+	<div className="messages-container-cards">
+		<div className="message-card-inner-div">
+			<div className="card-icon-div">{icon}</div>
+			<div className="card-content-wrapper">
+				<div className="card-name-div">{name}</div>
+				<div className="card-content-div">{message}</div>
 			</div>
 		</div>
-	);
-};
+	</div>
+);
 
-const SelectedMessageCard = ({ icon, name, message }: MessageCardProps) => {
-	return (
-		<div className="selected-messages-container-cards">
-			<div className="message-card-inner-div">
-				<div className="card-icon-div">{icon}</div>
-				<div className="card-content-wrapper">
-					<div className="card-name-div">{name}</div>
-					<div className="card-content-div">{message}</div>
-				</div>
+const SelectedMessageCard = ({ icon, name, message }: MessageCardProps) => (
+	<div className="selected-messages-container-cards">
+		<div className="message-card-inner-div">
+			<div className="card-icon-div">{icon}</div>
+			<div className="card-content-wrapper">
+				<div className="card-name-div">{name}</div>
+				<div className="card-content-div">{message}</div>
 			</div>
 		</div>
-	);
-};
+	</div>
+);
 
 const Message = () => {
+	const messageCards = [...Array(6)].map((_, index) => (
+		<MessageCard
+			key={index}
+			icon={<StyledIcon />}
+			name="Name"
+			message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor labore "
+		/>
+	));
+
 	return (
 		<div>
 			<div className="title-container">
@@ -100,14 +99,7 @@ const Message = () => {
 						message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor labore "
 					/>
 
-					{[...Array(6)].map((_, index) => (
-						<MessageCard
-							key={index}
-							icon={<StyledIcon />}
-							name="Name"
-							message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor labore "
-						/>
-					))}
+					{messageCards}
 				</div>
 				<div className="messages-container-right">
 					<div className="chat-name-div">Name</div>
