@@ -4,6 +4,7 @@ import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import { RadioGroupField } from "../../ProgramComponents/RadioGroupField";
 import HashtagSearch from "../../ProgramComponents/HashtagSearch";
+import AddContainer from "../../ProgramComponents/AddContainer";
 
 type StyledTextFieldProps = {
 	label: string;
@@ -25,6 +26,7 @@ const ContentView = styled("div")({
 	minWidth: 300,
 	width: "60vw",
 	maxWidth: 700,
+	marginBottom: 142,
 });
 
 const TitleField = styled(Typography)({
@@ -90,6 +92,9 @@ const BasicInformation = () => {
 		setExperience(value);
 	};
 
+	const addProfile = () => {
+		console.log("Adding profile to be implemented...");
+	};
 	// Fetches on page load for list of Program Types available
 	useEffect(() => {
 		setCategories(["Option 1", "Option 2", "Option 3", "Option 4"]);
@@ -209,7 +214,7 @@ const BasicInformation = () => {
 				/>
 
 				<RadioGroupField
-					label="Do you have experience in this program?"
+					label="Do you have experience in program planning?"
 					name="experience-radio-btn-group"
 					options={[
 						{ value: "yes", label: "Yes" },
@@ -217,6 +222,7 @@ const BasicInformation = () => {
 					]}
 					onChange={handleExperienceChange}
 				/>
+				<AddContainer label="Add your profile" onClick={addProfile} />
 			</FormControl>
 		</ContentView>
 	);

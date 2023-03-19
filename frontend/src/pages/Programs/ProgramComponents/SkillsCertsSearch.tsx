@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { InputBase, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import SearchIcon from "@mui/icons-material/Search";
+import DoneIcon from "@mui/icons-material/Done";
+import { getValue } from "@testing-library/user-event/dist/utils";
 
+const CheckMark = styled(DoneIcon)({
+	marginRight: 13,
+});
 const SearchBarContainer = styled("div")({
 	display: "flex",
 	flexDirection: "column",
@@ -30,7 +35,7 @@ const SearchIconWrapper = styled("div")({
 	color: "#666666",
 });
 
-const HashtagContainer = styled("div")({
+const SkillsCertsContainer = styled("div")({
 	display: "flexWrap",
 	height: 43,
 	overflowY: "scroll",
@@ -48,7 +53,7 @@ const HashtagButton = styled(Button)({
 	textTransform: "none",
 });
 
-const SelectedHashtagButton = styled(Button)({
+const SelectedSkillButton = styled(Button)({
 	margin: 5,
 	marginLeft: 5,
 	backgroundColor: "#F0F0F0",
@@ -57,66 +62,66 @@ const SelectedHashtagButton = styled(Button)({
 	textTransform: "none",
 });
 
-export interface HashtagSearchProps {
-	hashtags: string[];
+export interface SkillSearchProps {
+	skills: string[];
 }
-export type HandleHashtagType = (hashtag: string) => void;
+export type HandleSkillType = (skill: string) => void;
 
-const HashtagSearch = (props: HashtagSearchProps) => {
+const SkillsCertsSearch = (props: SkillSearchProps) => {
 	const [searchValue, setSearchValue] = useState("");
-	const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
+	const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
 	const handleSearchInputChange = (event: any) => {
 		setSearchValue(event.target.value);
 	};
 
-	const handleHashtagClick: HandleHashtagType = (hashtag) => {
-		if (!selectedHashtags.includes(hashtag)) {
-			setSelectedHashtags([...selectedHashtags, hashtag]);
+	const handleHashtagClick: HandleSkillType = (skill) => {
+		if (!selectedSkills.includes(skill)) {
+			setSelectedSkills([...selectedSkills, skill]);
 		}
 	};
 
-	const handleSelectedHashtagClick: HandleHashtagType = (hashtag) => {
-		setSelectedHashtags(
-			selectedHashtags.filter(
-				(selectedHashtag) => selectedHashtag !== hashtag
-			)
+	const handleSelectedSkillClick: HandleSkillType = (skill) => {
+		setSelectedSkills(
+			selectedSkills.filter((selectedSkill) => selectedSkill !== skill)
 		);
 	};
 
-	const renderHashtagButtons = () => {
-		return props.hashtags
+	const renderSkillButtons = () => {
+		return props.skills
 			.filter(
-				(hashtag) =>
-					hashtag.toLowerCase().includes(searchValue) &&
-					!selectedHashtags.includes(hashtag)
+				(skill) =>
+					skill.toLowerCase().includes(searchValue) &&
+					!selectedSkills.includes(skill)
 			)
-			.map((hashtag) => (
+			.map((skill) => (
 				<HashtagButton
-					key={hashtag}
+					key={skill}
 					variant="contained"
 					onClick={() => {
+						handleHashtagClick(skill);
 						setSearchValue("");
-						handleHashtagClick(hashtag);
 					}}
 				>
-					{hashtag}
+					<CheckMark />
+					{skill}
 				</HashtagButton>
 			));
 	};
 
-	const renderSelectedHashtags = () => {
+	const renderSkills = () => {
 		return (
 			<div style={{ display: "flex", flexDirection: "row-reverse" }}>
-				{selectedHashtags.map((hashtag) => (
-					<SelectedHashtagButton
-						key={hashtag}
+				{selectedSkills.map((skill) => (
+					<SelectedSkillButton
+						key={skill}
 						variant="contained"
-						onClick={() => handleSelectedHashtagClick(hashtag)}
+						onClick={() => handleSelectedSkillClick(skill)}
 					>
-						{hashtag}
+						<CheckMark />
+						{skill}
 						<span>&nbsp;&times;</span>
-					</SelectedHashtagButton>
+					</SelectedSkillButton>
 				))}
 			</div>
 		);
@@ -126,22 +131,22 @@ const HashtagSearch = (props: HashtagSearchProps) => {
 		<SearchBarContainer>
 			<SearchInputContainer>
 				<InputBase
-					placeholder="Search hashtags"
+					placeholder="Search skills and certifications"
 					className="placeholder-mod"
 					style={{ width: "90%" }}
 					value={searchValue}
 					onChange={handleSearchInputChange}
 					inputProps={{ "aria-label": "search" }}
 				/>
-				<div>{renderSelectedHashtags()}</div>
+				<div>{renderSkills()}</div>
 				<SearchIconWrapper>
 					<SearchIcon />
 				</SearchIconWrapper>
 			</SearchInputContainer>
 
-			<HashtagContainer>{renderHashtagButtons()}</HashtagContainer>
+			<SkillsCertsContainer>{renderSkillButtons()}</SkillsCertsContainer>
 		</SearchBarContainer>
 	);
 };
 
-export default HashtagSearch;
+export default SkillsCertsSearch;
