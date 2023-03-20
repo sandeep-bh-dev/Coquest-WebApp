@@ -2,9 +2,7 @@ import * as React from 'react';
 import styled from "@emotion/styled";
 import WalletCard from '../WalletCard';
 import WalletInfo from '../WalletInfo';
-import { Stack } from '@mui/system';
-import { Wallets } from '../WalletArray';
-import { Wallet } from '@mui/icons-material';
+import { Wallet, Wallets } from '../WalletData'
 
 const Title = styled.h1({
     width: '100%',
@@ -36,7 +34,14 @@ const WalletColumn = styled.div({
     gridColumn: 1,
 })
 
-const WalletGrid = () => {
+type WalletPageProps = {};
+
+const WalletPage = ({ }: WalletPageProps) => {
+    const [selectedWallet, setSelectedWallet] = React.useState<Wallet | null>(null);
+
+    const handleSelectWallet = (wallet: Wallet) => {
+        setSelectedWallet(wallet);
+    };
     return (
         <>
             <Title>Wallet</Title>
@@ -45,15 +50,17 @@ const WalletGrid = () => {
                     <WalletColumn>
                         {Wallets.map((wallet, walletId) => (
                             <WalletCard
-                                key={walletId}
+                                key={wallet.walletId}
                                 wallet={wallet}
+                                onSelect={handleSelectWallet}
                             />
                         ))}
                     </WalletColumn>
+                    {selectedWallet && <WalletInfo wallet={selectedWallet} />}
                 </Grid>
             </Container>
         </>
     );
 };
 
-export default WalletGrid;
+export default WalletPage;

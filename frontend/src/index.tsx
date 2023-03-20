@@ -9,7 +9,7 @@ import { Message } from "./pages/Message";
 import { Notifications } from "./pages/Notifications";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
-import WalletGrid from "./components/WalletGrid";
+import WalletPage from "./pages/Wallet/WalletPage";
 
 // Program flow Imports
 import {
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/wallet",
-		element: <WalletGrid />,
+		element: <WalletPage />,
 	},
 ]);
 
