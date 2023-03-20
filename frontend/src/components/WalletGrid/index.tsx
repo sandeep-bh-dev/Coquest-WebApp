@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import WalletCard from '../WalletCard';
 import WalletInfo from '../WalletInfo';
 import { Stack } from '@mui/system';
+import { Wallets, Wallet } from '../WalletArray';
 
 const Title = styled.h1({
     width: '100%',
@@ -36,12 +37,13 @@ const WalletGrid = () => {
             <Title>Wallet</Title>
             <Container>
                 <Grid>
-                    <Stack spacing={2}>
-                        <WalletCard type="PERSONAL" name="Wallet name 1" description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. " />
-                        <WalletCard type="PERSONAL" name="Wallet name 1" description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. " />
-                        <WalletCard type="PERSONAL" name="Wallet name 1" description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. " />
-                        <WalletCard type="PERSONAL" name="Wallet name 1" description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. " />
-                    </Stack>
+                    {Wallets.map((wallet, index) => (
+                        <WalletCard
+                            key={index}
+                            wallet={wallet}
+                        />
+                    ))}
+
                     <WalletInfo type="PERSONAL" name="Wallet name 1" />
                 </Grid>
             </Container>
