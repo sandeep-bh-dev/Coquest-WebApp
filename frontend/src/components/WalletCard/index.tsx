@@ -2,14 +2,16 @@ import * as React from 'react';
 import styled from "@emotion/styled";
 import Card from "@mui/material/Card";
 import Typography from '@mui/material/Typography';
+import { Wallet } from '../WalletArray';
 
 const CustomCard = styled(Card)({
     height: 140,
-    width: 389
+    width: 389,
+    marginBottom: 20
 });
 
 const CardContainer = styled(Typography)({
-    padding: "20px 24px"
+    padding: "20px 24px",
 });
 
 const WalletType = styled(Typography)({
@@ -29,22 +31,18 @@ const Description = styled(Typography)({
 });
 
 type WalletCardProps = {
-    type: String,
-    name: String,
-    description: String
+    wallet: Wallet
 }
 
 const WalletCard = ({
-    type,
-    name,
-    description
+    wallet
 }: WalletCardProps) => {
     return (
         <CustomCard>
             <CardContainer>
-                <WalletType>{type}</WalletType>
-                <WalletName>{name}</WalletName>
-                <Description>{description}</Description>
+                <WalletType>{wallet.walletType}</WalletType>
+                <WalletName>{wallet.walletName}</WalletName>
+                <Description>{wallet.description}</Description>
             </CardContainer>
         </CustomCard>
     );

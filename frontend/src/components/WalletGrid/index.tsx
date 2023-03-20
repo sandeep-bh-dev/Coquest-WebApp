@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import WalletCard from '../WalletCard';
 import WalletInfo from '../WalletInfo';
 import { Stack } from '@mui/system';
-import { Wallets, Wallet } from '../WalletArray';
+import { Wallets } from '../WalletArray';
+import { Wallet } from '@mui/icons-material';
 
 const Title = styled.h1({
     width: '100%',
@@ -12,7 +13,7 @@ const Title = styled.h1({
     fontSize: 36,
     marginTop: '60px',
     marginBottom: '20px',
-    marginLeft: '23%',
+    marginLeft: '15%',
     fontFamily: 'Poppins'
 });
 
@@ -31,20 +32,24 @@ const Grid = styled.div({
     maxWidth: '1100px',
 });
 
+const WalletColumn = styled.div({
+    gridColumn: 1,
+})
+
 const WalletGrid = () => {
     return (
         <>
             <Title>Wallet</Title>
             <Container>
                 <Grid>
-                    {Wallets.map((wallet, index) => (
-                        <WalletCard
-                            key={index}
-                            wallet={wallet}
-                        />
-                    ))}
-
-                    <WalletInfo type="PERSONAL" name="Wallet name 1" />
+                    <WalletColumn>
+                        {Wallets.map((wallet, walletId) => (
+                            <WalletCard
+                                key={walletId}
+                                wallet={wallet}
+                            />
+                        ))}
+                    </WalletColumn>
                 </Grid>
             </Container>
         </>
