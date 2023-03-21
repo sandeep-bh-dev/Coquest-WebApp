@@ -9,6 +9,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 const InfoCard = styled(Card)({
     height: 723,
@@ -23,7 +25,8 @@ const WalletType = styled(Typography)({
 
 const WalletName = styled(Typography)({
     fontWeight: 600,
-    fontSize: 20
+    fontSize: 20,
+    marginRight: 20
 });
 
 const MainText = styled(Typography)({
@@ -43,22 +46,44 @@ const TransactionHistory = styled(Typography)({
     marginTop: 20
 });
 
-const ColumnHeader = styled(Typography)({
+const TableHeader = styled(TableCell)({
     fontWeight: 600,
-    fontSize: 12,
-    marginLeft: 15
+    fontSize: 12
 });
 
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-) {
-    return { name, calories, fat, carbs, protein };
-}
+const TableData = styled(TableCell)({
+    fontWeight: 400,
+    fontSize: 12
+});
 
+const StyledButton = styled(Button)({
+    color: "#000000",
+    textTransform: "none",
+    border: "2px solid #000000",
+    borderRadius: "20px",
+    fontWeight: 500,
+    fontSize: 16,
+    width: 175,
+    height: 40,
+    position: "absolute",
+    top: 30,
+    right: 150
+});
+
+const BarcodeText = styled(Typography)({
+    fontWeight: 500,
+    fontSize: 12
+});
+
+const Barcode = styled.div({
+    display: 'flex',
+    alignItems: 'center',
+});
+
+const EyeIcon = styled(RemoveRedEyeIcon)({
+    color: "#666666",
+    marginRight: 10
+});
 
 type WalletInfoProps = {
     wallet: Wallet
@@ -69,37 +94,41 @@ const WalletInfo = ({
 }: WalletInfoProps) => {
     return (
         <InfoCard>
+            <StyledButton variant="outlined">Transfer Money</StyledButton>
             <WalletType>{wallet.walletType}</WalletType>
-            <WalletName>{wallet.walletName}</WalletName>
+            <Barcode>
+                <WalletName>{wallet.walletName}</WalletName>
+                <EyeIcon />
+                <BarcodeText>Show Barcode</BarcodeText>
+            </Barcode>
             <MainText>Balance:</MainText>
-            <Balance>$400</Balance>
+            <Balance>${wallet.balance}</Balance>
             <TransactionHistory>Transaction History</TransactionHistory>
-
             <TableContainer>
                 <Table aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Account Name</TableCell>
-                            <TableCell align="center">Date</TableCell>
-                            <TableCell align="right">Amount</TableCell>
+                            <TableHeader>Account Name</TableHeader>
+                            <TableHeader align="center">Date</TableHeader>
+                            <TableHeader align="right">Amount</TableHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {wallet.transactions.map((transaction: Transaction, index) => (
                             <TableRow key={index}>
-                                <TableCell>{transaction.name}</TableCell>
-                                <TableCell>{transaction.date}</TableCell>
-                                <TableCell align="right">
+                                <TableData>{wallet.userId}</TableData>
+                                <TableData align="center">{transaction.date}</TableData>
+                                <TableData align="right">
                                     {transaction.amount >= 0 ? '+ ' : '- '}
                                     ${Math.abs(transaction.amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                                </TableCell>
+                                </TableData>
 
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-        </InfoCard>
+        </InfoCard >
     );
 };
 
