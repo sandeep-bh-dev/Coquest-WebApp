@@ -39,7 +39,7 @@ type WalletPageProps = {};
 const WalletPage = ({ }: WalletPageProps) => {
     const [selectedWallet, setSelectedWallet] = React.useState<Wallet | null>(null);
 
-    const handleSelectWallet = (wallet: Wallet) => {
+    const handleSelectedWallet = (wallet: Wallet) => {
         setSelectedWallet(wallet);
     };
     return (
@@ -52,7 +52,7 @@ const WalletPage = ({ }: WalletPageProps) => {
                             <WalletCard
                                 key={wallet.walletId}
                                 wallet={wallet}
-                                onSelect={handleSelectWallet}
+                                onSelect={handleSelectedWallet}
                             />
                         ))}
                     </WalletColumn>

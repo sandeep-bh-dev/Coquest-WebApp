@@ -80,8 +80,8 @@ const WalletInfo = ({
                     <TableHead>
                         <TableRow>
                             <TableCell>Account Name</TableCell>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Amount</TableCell>
+                            <TableCell align="center">Date</TableCell>
+                            <TableCell align="right">Amount</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -89,7 +89,7 @@ const WalletInfo = ({
                             <TableRow key={index}>
                                 <TableCell>{transaction.name}</TableCell>
                                 <TableCell>{transaction.date}</TableCell>
-                                <TableCell>
+                                <TableCell align="right">
                                     {transaction.amount >= 0 ? '+ ' : '- '}
                                     ${Math.abs(transaction.amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                                 </TableCell>
@@ -99,9 +99,6 @@ const WalletInfo = ({
                     </TableBody>
                 </Table>
             </TableContainer>
-
-
-
         </InfoCard>
     );
 };

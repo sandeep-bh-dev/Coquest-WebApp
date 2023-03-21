@@ -60,7 +60,6 @@ const WalletCard = ({ wallet, onSelect }: WalletCardProps) => {
         onSelect(wallet);
     };
     return (
-
         <CustomCard onClick={handleClick}>
             <CardContainer>
                 <WalletType>{wallet.walletType}</WalletType>
@@ -69,7 +68,6 @@ const WalletCard = ({ wallet, onSelect }: WalletCardProps) => {
                 <SelectArrow />
             </CardContainer>
         </CustomCard>
-
     );
 };
 
