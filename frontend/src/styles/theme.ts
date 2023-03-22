@@ -37,7 +37,33 @@ const theme = createTheme({
                     justifyContent: 'end'
                 }
             }
-        }
+        },MuiStepLabel: {
+			styleOverrides: {
+				active: {
+					color: "#4285F4",
+				},
+				completed: {
+					color: "white",
+				},
+			},
+		},
+		MuiStepIcon: {
+			styleOverrides: {
+				root: {
+					color: "#666666",
+                    "&.Mui-active": {
+                        color: "#4285F4",
+                    },
+                    "&.Mui-completed": { 
+                        color: "#4285F4",
+                      },
+				},
+				active: {
+				},
+				completed: {
+				},
+			},
+		},
     },
     typography: {
         fontFamily: 'Poppins'

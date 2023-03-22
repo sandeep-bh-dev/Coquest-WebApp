@@ -5,11 +5,19 @@ import Toolbar from "./components/Toolbar";
 import LeftSideBar from "./components/LeftSideBar";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
+import { Message } from "./pages/Message";
+import { Notifications } from "./pages/Notifications";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
 
-import { Login } from "./pages/Login";
-import { Notifications } from "./pages/Notifications";
+// Program flow Imports
+import {
+	BasicInformation,
+	Budgeting,
+	CreateProgram,
+	Operations,
+	Promotion,
+} from "./pages/Programs/CreateProgram";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -20,10 +28,10 @@ const router = createBrowserRouter([
 		path: "/",
 		element: <div></div>,
 	},
-	{
-		path: "/login",
-		element: <Login />,
-	},
+	// {
+	// 	path: "/login",
+	// 	element: <Login />,
+	// },
 	{
 		path: "/notifications",
 		element: <Notifications />,
@@ -35,6 +43,36 @@ const router = createBrowserRouter([
 				<b>Home</b>
 			</div>
 		),
+	},
+	{
+		path: "/programs/create",
+		element: <CreateProgram />,
+		children: [
+			{
+				path: "basic-information",
+				element: <BasicInformation />,
+			},
+			{
+				path: "operations",
+				element: <Operations />,
+			},
+			{
+				path: "budgeting",
+				element: <Budgeting />,
+			},
+			{
+				path: "promotion",
+				element: <Promotion />,
+			},
+		],
+	},
+	{
+		path: "/message",
+		element: <Message />,
+	},
+	{
+		path: "/notifications",
+		element: <Notifications />,
 	},
 ]);
 
