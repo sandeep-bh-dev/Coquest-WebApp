@@ -20,7 +20,7 @@ export const Items: Item[] = [
         image: "https://www.colorbook.io/imagecreator.php?hex=d9d9d9&width=1920&height=1080&text=%201920x1080",
         itemName: "Item name 1",
         description: "Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.",
-        groupName: "Car share",
+        groupName: "Car share 1",
         taskLink: "Buy [this item]",
         owner: "John Doe",
         createdAt: "January 20, 2023",
@@ -32,9 +32,9 @@ export const Items: Item[] = [
         image: "https://www.colorbook.io/imagecreator.php?hex=d9d9d9&width=1920&height=1080&text=%201920x1080",
         itemName: "Item name 2",
         description: "Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.",
-        groupName: "Car share",
+        groupName: "Car share 2",
         taskLink: "Buy [this item]",
-        owner: "John Doe",
+        owner: "John Smith",
         createdAt: "November 5, 2020",
         isModalOpen: false
     },
@@ -44,7 +44,7 @@ export const Items: Item[] = [
         image: "https://www.colorbook.io/imagecreator.php?hex=d9d9d9&width=1920&height=1080&text=%201920x1080",
         itemName: "Item name 3",
         description: "Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.",
-        groupName: "Car share",
+        groupName: "Car share 3",
         taskLink: "Buy [this item]",
         owner: "John Doe",
         createdAt: "August 15, 2021",
@@ -56,9 +56,9 @@ export const Items: Item[] = [
         image: "https://www.colorbook.io/imagecreator.php?hex=d9d9d9&width=1920&height=1080&text=%201920x1080",
         itemName: "Item name 4",
         description: "Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.",
-        groupName: "Car share",
+        groupName: "Car share 4",
         taskLink: "Buy [this item]",
-        owner: "John Doe",
+        owner: "Jane Smith",
         createdAt: "August 15, 2021",
         isModalOpen: false
     },
@@ -68,10 +68,10 @@ export const Items: Item[] = [
         image: "https://www.colorbook.io/imagecreator.php?hex=d9d9d9&width=1920&height=1080&text=%201920x1080",
         itemName: "Item name 5",
         description: "Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.",
-        groupName: "Car share",
+        groupName: "Car share 5",
         taskLink: "Buy [this item]",
-        owner: "John Doe",
-        createdAt: "August 15, 2021",
+        owner: "John Smith",
+        createdAt: "March 20, 2021",
         isModalOpen: false
     },
     {
@@ -80,10 +80,10 @@ export const Items: Item[] = [
         image: "https://www.colorbook.io/imagecreator.php?hex=d9d9d9&width=1920&height=1080&text=%201920x1080",
         itemName: "Item name 6",
         description: "Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.",
-        groupName: "Car share",
+        groupName: "Car share 6",
         taskLink: "Buy [this item]",
         owner: "John Doe",
-        createdAt: "August 15, 2021",
+        createdAt: "April 4, 2023",
         isModalOpen: false
     },
     {
@@ -92,10 +92,10 @@ export const Items: Item[] = [
         image: "https://www.colorbook.io/imagecreator.php?hex=d9d9d9&width=1920&height=1080&text=%201920x1080",
         itemName: "Item name 7",
         description: "Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.",
-        groupName: "Car share",
+        groupName: "Car share 7",
         taskLink: "Buy [this item]",
         owner: "John Doe",
-        createdAt: "August 15, 2021",
+        createdAt: "September, 2022",
         isModalOpen: false
     },
     {
@@ -104,10 +104,10 @@ export const Items: Item[] = [
         image: "https://www.colorbook.io/imagecreator.php?hex=d9d9d9&width=1920&height=1080&text=%201920x1080",
         itemName: "Item name 8",
         description: "Description. Lorem ipsum dolor sit amet consectetur. Pellentesque nisi elementum purus lorem dui non. Nec tempor nulla nisi mattis dolor. Diam arcu in augue cras. In tortor vulputate diam egestas. Ultricies natoque massa.",
-        groupName: "Car share",
+        groupName: "Car share 8",
         taskLink: "Buy [this item]",
-        owner: "John Doe",
-        createdAt: "August 15, 2021",
+        owner: "Jane Doe",
+        createdAt: "May 20, 2020",
         isModalOpen: false
     }
 ]

@@ -8,7 +8,7 @@ import theme from "./styles/theme";
 import { Message } from "./pages/Message";
 import { Notifications } from "./pages/Notifications";
 import "./index.css";
-import ItemGrid from "./components/ItemGrid";
+import ItemGrid from "./pages/Inventory/ItemGrid";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement

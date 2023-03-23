@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { get } from "../../apiInterface";
+import { get } from "../../../apiInterface";
 
 export interface Item {
     itemID: string;
