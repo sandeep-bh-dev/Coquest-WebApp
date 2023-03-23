@@ -110,6 +110,7 @@ const BudgetingGrid = () => {
 									handleInputChange(index, event);
 									sumTotal();
 								}}
+								InputProps={{ inputProps: { min: 0 } }}
 								fullWidth
 							/>
 						</Grid>
@@ -125,6 +126,7 @@ const BudgetingGrid = () => {
 								}}
 								InputProps={{
 									startAdornment: <>$</>,
+									inputProps: { min: 0 },
 								}}
 								fullWidth
 							/>
@@ -138,6 +140,7 @@ const BudgetingGrid = () => {
 								value={row.quantity * row.costEach}
 								InputProps={{
 									startAdornment: <>$</>,
+									inputProps: { min: 0 },
 								}}
 								fullWidth
 							/>

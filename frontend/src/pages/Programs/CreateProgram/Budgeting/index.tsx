@@ -136,11 +136,13 @@ const Budgeting = () => {
 				className="placeholder-mod"
 				value={participationCost}
 				onChange={handleParticipationCostChange}
+				type="number"
 				InputLabelProps={{
 					shrink: true,
 				}}
 				InputProps={{
 					startAdornment: <>$</>,
+					inputProps: { min: 0 },
 				}}
 			/>
 			<MaxParticipationContainer>
@@ -148,6 +150,8 @@ const Budgeting = () => {
 					label="Maximum number of participants"
 					placeholder=""
 					className="placeholder-mod"
+					type="number"
+					InputProps={{ inputProps: { min: 0 } }}
 					value={participationNum}
 					onChange={handleParticipationNumChange}
 					InputLabelProps={{
@@ -155,7 +159,7 @@ const Budgeting = () => {
 					}}
 					sx={{
 						"& .MuiInputBase-input.Mui-disabled": {
-							backgroundColor: "#66666640",
+							backgroundColor: "#66666620",
 							borderRadius: 1,
 						},
 					}}
@@ -190,8 +194,10 @@ const Budgeting = () => {
 				InputLabelProps={{
 					shrink: true,
 				}}
+				type="number"
 				InputProps={{
 					startAdornment: <>$</>,
+					inputProps: { min: 0 },
 				}}
 			/>
 			<StyledTextField
