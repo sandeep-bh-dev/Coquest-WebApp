@@ -33,6 +33,16 @@ const RowContainer = styled("div")({
 	width: "110%",
 });
 
+const TotalCostContainer = styled(Grid)({
+	display: "flex",
+	alignItems: "center",
+});
+
+const TotalBudgetLabel = styled(Typography)({
+	width: "50%",
+	marginRight: 20,
+});
+
 const BudgetingGrid = () => {
 	const [rows, setRows] = useState<Row[]>([
 		{ itemName: "", quantity: 0, costEach: 0, costTotal: 0 },
@@ -54,20 +64,34 @@ const BudgetingGrid = () => {
 		setRows(newItems);
 	};
 
+	// const handleInputChange = (index: number, event: any) => {
+	// 	const { name, value } = event.target;
+	// 	const updatedRows = [...rows];
+	// 	updatedRows[index] = { ...updatedRows[index], [name]: value };
+	// 	setRows(updatedRows);
+	// };
 	const handleInputChange = (index: number, event: any) => {
-		const { name, value } = event.target;
-		const updatedRows = [...rows];
-		updatedRows[index] = { ...updatedRows[index], [name]: value };
-		setRows(updatedRows);
+		setRows((prevRows) => {
+			const updatedRows = [...prevRows];
+			updatedRows[index] = {
+				...updatedRows[index],
+				[event.target.name]: event.target.value,
+			};
+			return updatedRows;
+		});
 	};
 
 	const [budgetTotal, setBudgetTotal] = useState<number>(0);
 
-	const sumTotal = () => {
-		const sum = rows.reduce((total, row) => total + row.costTotal, 0);
-		console.log(sum);
+	const sumTotal = (index: number) => {
+		let sum = 0;
+		rows.forEach((row) => {
+			row.costTotal = row.costEach * row.quantity;
+			sum += row.costTotal;
+			console.log(row.costTotal);
+		});
 		setBudgetTotal(sum);
-	}; //------------------------STILL NEEDS TO BE IMPLEMENTED
+	};
 
 	return (
 		<div>
@@ -95,7 +119,7 @@ const BudgetingGrid = () => {
 								value={row.itemName}
 								onChange={(event) => {
 									handleInputChange(index, event);
-									sumTotal();
+									sumTotal(index);
 								}}
 								fullWidth
 							/>
@@ -108,7 +132,7 @@ const BudgetingGrid = () => {
 								value={row.quantity}
 								onChange={(event) => {
 									handleInputChange(index, event);
-									sumTotal();
+									sumTotal(index);
 								}}
 								InputProps={{ inputProps: { min: 0 } }}
 								fullWidth
@@ -122,7 +146,7 @@ const BudgetingGrid = () => {
 								value={row.costEach}
 								onChange={(event) => {
 									handleInputChange(index, event);
-									sumTotal();
+									sumTotal(index);
 								}}
 								InputProps={{
 									startAdornment: <>$</>,
@@ -137,7 +161,7 @@ const BudgetingGrid = () => {
 								required
 								type="number"
 								name="costTotal"
-								value={row.quantity * row.costEach}
+								value={row.costTotal}
 								InputProps={{
 									startAdornment: <>$</>,
 									inputProps: { min: 0 },
@@ -152,18 +176,14 @@ const BudgetingGrid = () => {
 				</RowContainer>
 			))}
 			<Grid container spacing={2}>
-				<Grid item xs={9}>
+				<Grid item xs={7}>
 					<AddContainer
 						label="Add another item"
 						onClick={handleAddRow}
 					/>
 				</Grid>
-				<Grid
-					item
-					xs={3}
-					style={{ display: "flex", alignItems: "center" }}
-				>
-					<Typography>Total cost</Typography>
+				<TotalCostContainer item xs={5}>
+					<TotalBudgetLabel>Total cost</TotalBudgetLabel>
 					<RowTextField
 						disabled
 						type="number"
@@ -172,9 +192,10 @@ const BudgetingGrid = () => {
 						InputProps={{
 							startAdornment: <>$</>,
 						}}
+						sx={{ textAlign: "right" }}
 						fullWidth
 					/>
-				</Grid>
+				</TotalCostContainer>
 			</Grid>
 		</div>
 	);
