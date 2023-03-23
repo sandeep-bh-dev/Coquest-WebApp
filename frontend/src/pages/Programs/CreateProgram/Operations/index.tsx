@@ -140,11 +140,6 @@ const Operations = () => {
 			"organization",
 			"accounting",
 		];
-
-		//For testing purposes
-		// for (let i = 1; i <= 10; i++) {
-		// 	tempSkills.push(`Cert${i}`);
-		// }
 		setSkills(tempSkills);
 	}, []);
 
@@ -213,13 +208,6 @@ const Operations = () => {
 			/>
 			<SkillsCertsSearch skills={skills} />
 			<AddContainer label="Add another position" onClick={addPosition} />
-			{/* <Button
-				onClick={() => {
-					handleSetDateAndTime();
-				}}
-			>
-				Test
-			</Button> */}
 		</ContentView>
 	);
 };
