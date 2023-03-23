@@ -15,7 +15,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 const InfoCard = styled(Card)({
     height: 723,
     width: 642,
-    padding: "24px 24px"
+    padding: "24px 24px",
+    position: "relative"
 });
 
 const WalletType = styled(Typography)({
@@ -67,7 +68,7 @@ const StyledButton = styled(Button)({
     height: 40,
     position: "absolute",
     top: 30,
-    right: 150
+    right: 30
 });
 
 const BarcodeText = styled(Typography)({
