@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from "@emotion/styled";
 import ItemCard from "../ItemCard";
-import ItemList, { Item } from "../ItemList";
-import { useState } from 'react';
+import { Item } from "../ItemList";
+import { useState, useEffect } from 'react';
 
 const Title = styled.h1({
     width: '100%',
@@ -42,15 +42,25 @@ const Grid = styled.div({
 const ItemGrid = () => {
     const [items, setItems] = useState<Item[]>([]);
 
-    const handleItemsLoaded = (items: Item[]) => {
-        setItems(items);
-    };
+    useEffect(() => {
+        const apiUrl = "https://my-gateway-1njig8y6.uc.gateway.dev/regenquest";
+        const query = "query={getItems{itemID userID taskLink itemName createdAt description image history}}";
+        const requestUrl = `${apiUrl}?${query}`;
+
+        fetch(requestUrl, { headers: { "Content-Type": "application/json" } })
+            .then((response) => response.json())
+            .then(({ data }) => {
+                const items = data.getItems as Item[];
+                setItems(items);
+            })
+            .catch((error) => console.error(error));
+    }, []);
+
     return (
         <>
             <Title>Inventory</Title>
             <Container>
                 <Grid>
-                <ItemList onItemsLoaded={handleItemsLoaded} />
                     {items.map((item) => (
                         <ItemCard key={item.itemID} item={item} />
                     ))}

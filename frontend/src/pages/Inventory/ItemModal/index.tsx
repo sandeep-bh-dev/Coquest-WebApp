@@ -78,7 +78,11 @@ const ItemSub = styled(Typography)({
 });
 
 const ButtonStack = styled(Stack)({
-	marginTop: 40
+	position: 'absolute',
+	bottom: 70,
+	right: 70,
+	display: 'flex',
+	justifyContent: 'flex-end',
 });
 
 const RemoveButton = styled(Button)({
@@ -175,7 +179,13 @@ const ItemModal = ({
 								<div>Group Name</div>
 								<div style={{ textDecoration: 'underline' }}>{taskLink}</div>
 								<div>{history}</div>
-								<div>{createdAt}</div>
+								<div>
+									{new Date(createdAt).toLocaleDateString(undefined, {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric'
+									})}
+								</div>
 							</ItemSub>
 						</InfoStack>
 						<ButtonStack
