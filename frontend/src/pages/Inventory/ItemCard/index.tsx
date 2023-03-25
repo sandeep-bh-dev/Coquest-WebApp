@@ -6,9 +6,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Typography from '@mui/material/Typography';
 import ItemMenu from '../ItemMenu';
 import ItemModal from '../ItemModal';
-//import { Item } from '../ItemList';
-import { Items } from '../ItemArray';
-import { Item } from '../ItemArray';
+import { Item } from '../ItemList';
 
 const CardImage = styled(CardMedia)({
     height: 185.87,
@@ -39,17 +37,18 @@ type ItemCardProps = {
 };
 
 const ItemCard = ({
-    item
+    item,
 }: ItemCardProps) => {
     const [isItemModalOpen, setIsItemModalOpen] = React.useState<boolean>(false);
     return (
         <CustomCard>
             <ItemModal
-                key={item.itemId}
+                key={item.itemID}
                 item={item}
                 open={isItemModalOpen}
                 onClose={() => setIsItemModalOpen(false)}
             />
+
             <CardImage
                 onClick={() => setIsItemModalOpen(true)}>
                 <img src={item.image}
@@ -63,7 +62,7 @@ const ItemCard = ({
                         item={item}
                     />
                 }
-                title={<TaskName>{item.taskName}</TaskName>}
+                title={<TaskName>PROGRAM OR TASK NAME</TaskName>}
                 subheader={<ItemName>{item.itemName}</ItemName>}
             />
         </CustomCard>
@@ -71,4 +70,5 @@ const ItemCard = ({
 }
 
 export default ItemCard;
+
 

@@ -8,8 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
 import MoveModal from '../MoveModal';
-//import { Item } from '../ItemList';
-import { Item } from '../ItemArray';
+import { Item } from '../ItemList';
 
 const StyledBox = styled(Box)({
 	position: 'absolute',
@@ -127,7 +126,15 @@ const ItemModal = ({
 	open,
 	onClose,
 }: ItemModalProps) => {
-
+	const {
+		itemID,
+		image,
+		itemName,
+		description,
+		taskLink,
+		history,
+		createdAt
+	} = item;
 	const [isMoveModalOpen, setIsMoveModalOpen] = React.useState<boolean>(false);
 	return (
 		<div>
@@ -139,7 +146,7 @@ const ItemModal = ({
 			>
 				<StyledBox>
 					<ItemImage>
-						<img src={item.image}
+						<img src={image}
 							width="407"
 							height="407"
 							alt="Item image"
@@ -150,10 +157,10 @@ const ItemModal = ({
 							Task Name
 						</TaskName>
 						<ItemName>
-							{item.itemName}
+							{itemName}
 						</ItemName>
 						<ItemDescription>
-							{item.description}
+							{description}
 						</ItemDescription>
 						<InfoStack
 							direction="row"
@@ -166,9 +173,9 @@ const ItemModal = ({
 							</ItemHeader>
 							<ItemSub>
 								<div>Group Name</div>
-								<div style={{ textDecoration: 'underline' }}>{item.taskLink}</div>
-								<div>{item.owner}</div>
-								<div>{item.createdAt}</div>
+								<div style={{ textDecoration: 'underline' }}>{taskLink}</div>
+								<div>{history}</div>
+								<div>{createdAt}</div>
 							</ItemSub>
 						</InfoStack>
 						<ButtonStack

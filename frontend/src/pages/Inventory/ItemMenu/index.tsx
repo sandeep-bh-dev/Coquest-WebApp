@@ -6,8 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import styled from '@emotion/styled';
 import ItemModal from '../ItemModal';
 import MoveModal from '../MoveModal';
-//import { Item } from '../ItemList';
-import { Item } from '../ItemArray';
+import { Item } from '../ItemList';
 
 const StyledIconButton = styled(IconButton)({
     padding: '10px 0'
@@ -36,6 +35,7 @@ const options = [
 type ItemMenuProps = {
     item: Item
 };
+
 const ItemMenu = ({ item }: ItemMenuProps) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -69,7 +69,7 @@ const ItemMenu = ({ item }: ItemMenuProps) => {
     return (
         <div>
             <ItemModal
-                key={item.itemId}
+                key={item.itemID}
                 item={item}
                 open={isItemModalOpen}
                 onClose={() => setIsItemModalOpen(false)}
