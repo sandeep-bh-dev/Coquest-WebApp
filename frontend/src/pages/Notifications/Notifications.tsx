@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import styled from "@emotion/styled";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 
 const StyledBox = styled(Box)({
 	display: "flex",
@@ -34,6 +35,7 @@ const StyledArrowIcon = styled(KeyboardArrowRightIcon)({
 
 interface NotificationsProps {
 	title: string;
+	onClick: () => void;
 }
 
 interface NewNotificationsNumberProps {
@@ -54,18 +56,24 @@ const NewNotificationsNumber: React.FC<NewNotificationsNumberProps> = ({
 	return <div className="notifications-new-notify">{number} new.</div>;
 };
 
-const NewNotificationsCard: React.FC<NotificationsProps> = ({ title }) => {
+const NewNotificationsCard: React.FC<NotificationsProps> = ({
+	title,
+	onClick,
+}) => {
 	return (
-		<div className="display-new-notifications-title">
+		<div className="display-new-notifications-title" onClick={onClick}>
 			{title}
 			<StyledArrowIcon />
 		</div>
 	);
 };
 
-const OldNotificationsCard: React.FC<NotificationsProps> = ({ title }) => {
+const OldNotificationsCard: React.FC<NotificationsProps> = ({
+	title,
+	onClick,
+}) => {
 	return (
-		<div className="display-notifications-title">
+		<div className="display-notifications-title" onClick={onClick}>
 			{title}
 			<StyledArrowIcon />
 		</div>
@@ -89,48 +97,131 @@ const NotificationsContent: React.FC<NotificationsContentProps> = ({
 };
 
 const Notifications: React.FC = () => {
+	const [selectedNotification, setSelectedNotification] = useState<
+		number | null
+	>(null);
+	const [unreadNotifications, setUnreadNotifications] = useState<any[]>([]);
+	const [allNotifications, setAllNotifications] = useState<any[]>([]);
+
+	useEffect(() => {
+		// Fetch unread notifications
+		fetch(
+			'https://my-gateway-1njig8y6.uc.gateway.dev/regenquest?query={getUnreadNotifications(userID: "notificationstest1") {userID notificationID title content image link date isRead isDeleted}}',
+			{
+				headers: {
+					"x-apollo-operation-name": "getUnreadNotifications",
+				},
+			}
+		)
+			.then((res) => res.json())
+			.then((result) => {
+				console.log(
+					"Unread notifications:",
+					result.data.getUnreadNotifications
+				);
+				setUnreadNotifications(result.data.getUnreadNotifications);
+			});
+
+		fetch(
+			'https://my-gateway-1njig8y6.uc.gateway.dev/regenquest?query={getNotifications(userID: "notificationstest1") {userID notificationID title content image link date isRead isDeleted}}',
+			{
+				headers: {
+					"x-apollo-operation-name": "getNotifications",
+				},
+			}
+		)
+			.then((res) => res.json())
+			.then((result) => {
+				console.log("All notifications:", result.data.getNotifications);
+				setAllNotifications(result.data.getNotifications);
+			});
+	}, []);
+
+	const handleNotificationClick = (index: number) => {
+		setSelectedNotification(index);
+		if (!allNotifications[index].isRead) {
+			fetch(
+				`https://my-gateway-1njig8y6.uc.gateway.dev/regenquest?query={markNotificationAsRead(notificationID:"${allNotifications[index].notificationID}"){code response}}`,
+				{
+					headers: {
+						"x-apollo-operation-name": "markNotificationAsRead",
+					},
+				}
+			)
+				.then((res) => res.json())
+				.then((result) => {
+					console.log(result); // add this line to log the response to the console
+					if (result.data.markNotificationAsRead.code === 0) {
+						const updatedNotifications = [...allNotifications];
+						updatedNotifications[index].isRead = true;
+						setAllNotifications(updatedNotifications);
+
+						// Remove the read notification from the unreadNotifications list
+						const updatedUnreadNotifications =
+							unreadNotifications.filter(
+								(unreadNotification) =>
+									unreadNotification.notificationID !==
+									allNotifications[index].notificationID
+							);
+						setUnreadNotifications(updatedUnreadNotifications);
+					}
+				});
+		}
+	};
+
 	return (
 		<div>
 			<div className="title-container">
 				<h1 className="notifications-title">Notifications</h1>
-				<NewNotificationsNumber number={1} />
-			</div>
-
+				<NewNotificationsNumber number={unreadNotifications.length} />
+			</div>{" "}
 			<div className="notifications-container">
 				<div className="notifications-container-left">
-					<NewNotificationsCard title="New Notification from" />
-					<OldNotificationsCard title="Notification from" />
-					<OldNotificationsCard title="Notification from" />
-					<OldNotificationsCard title="Notification from" />
-					<OldNotificationsCard title="Notification from" />
-					<OldNotificationsCard title="Notification from" />
-					<OldNotificationsCard title="Notification from" />
-					<OldNotificationsCard title="Notification from" />
-					<OldNotificationsCard title="Notification from" />
+					{allNotifications.map((notification, index) => {
+						const Card = notification.isRead
+							? OldNotificationsCard
+							: NewNotificationsCard;
+						return (
+							<Card
+								key={notification.notificationID}
+								title={notification.title}
+								onClick={() => handleNotificationClick(index)}
+							/>
+						);
+					})}
 				</div>
-
 				<StyledBox className="notifications-container-right">
 					<Paper elevation={3}>
-						<NotificationsImage />
-						<NotificationsContent
-							content="Description. Lorem ipsum dolor sit amet,
-								consectetur adipiscing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna
-								aliqua. Congue eu consequat ac felis donec et
-								odio. Posuere lorem ipsum dolor sit amet
-								consectetur adipiscing elit. Tortor aliquam
-								nulla facilisi cras fermentum odio eu feugiat
-								pretium. Diam phasellus vestibulum lorem sed.
-								Tortor vitae purus faucibus ornare. Arcu non
-								odio euismod lacinia at quis risus. A diam
-								maecenas sed enim ut sem. Pharetra vel turpis
-								nunc eget. Tellus elementum sagittis vitae et
-								leo. Adipiscing vitae proin sagittis nisl
-								rhoncus mattis rhoncus. Turpis egestas pretium
-								aenean pharetra magna ac placerat."
-						/>
-
-						<StyledButton>More</StyledButton>
+						{selectedNotification !== null &&
+							allNotifications[selectedNotification] && (
+								<>
+									<NotificationsImage
+										image={
+											allNotifications[
+												selectedNotification
+											].image
+										}
+									/>
+									<NotificationsContent
+										content={
+											allNotifications[
+												selectedNotification
+											].content
+										}
+									/>
+									<Link
+										href={
+											allNotifications[
+												selectedNotification
+											].link
+										}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										<StyledButton>More</StyledButton>
+									</Link>
+								</>
+							)}
 					</Paper>
 				</StyledBox>
 			</div>
