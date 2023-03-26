@@ -6,7 +6,17 @@ import LeftSideBar from "./components/LeftSideBar";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import { Message } from "./pages/Message";
+import { Notifications } from "./pages/Notifications";
 import "./index.css";
+
+// Program flow Imports
+import {
+	BasicInformation,
+	Budgeting,
+	CreateProgram,
+	Operations,
+	Promotion,
+} from "./pages/Programs/CreateProgram";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -26,8 +36,34 @@ const router = createBrowserRouter([
 		),
 	},
 	{
+		path: "/programs/create",
+		element: <CreateProgram />,
+		children: [
+			{
+				path: "basic-information",
+				element: <BasicInformation />,
+			},
+			{
+				path: "operations",
+				element: <Operations />,
+			},
+			{
+				path: "budgeting",
+				element: <Budgeting />,
+			},
+			{
+				path: "promotion",
+				element: <Promotion />,
+			},
+		],
+	},
+	{
 		path: "/message",
 		element: <Message />,
+	},
+	{
+		path: "/notifications",
+		element: <Notifications />,
 	},
 ]);
 
