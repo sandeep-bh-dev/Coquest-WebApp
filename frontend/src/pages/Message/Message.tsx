@@ -10,6 +10,11 @@ const StyledIcon = styled(AccountCircleIcon)({
 	color: "#666666",
 });
 
+const StyledMessageIcon = styled(AccountCircleIcon)({
+	fontSize: 48,
+	color: "#666666",
+});
+
 const StyledSentButton = styled(SendIcon)({
 	fontSize: 44,
 	color: "#666666",
@@ -106,7 +111,55 @@ const Message = () => {
 					<div
 						className="chat-container"
 						style={{ border: "1px solid black" }}
-					></div>
+					>
+						<div
+							className="chat-content-container-from-this-user"
+							style={{ border: "1px solid black" }}
+						>
+							<div
+								className="chat-message-content-from-this-user"
+								style={{ border: "1px solid black" }}
+							>
+								{" "}
+								<div className="chat-message-content-inner">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+									incididunt ut labore et dolore magna aliqua.
+									Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip
+									ex ea commodo consequat. Duis aute irure
+									dolor
+								</div>
+							</div>
+							<div className="message-icon-div">
+								<StyledMessageIcon />
+							</div>
+						</div>
+						<div
+							className="chat-content-container-from-other-user"
+							style={{ border: "1px solid black" }}
+						>
+							<div className="message-icon-div">
+								<StyledMessageIcon />
+							</div>
+
+							<div
+								className="chat-message-content-from-other-user"
+								style={{ border: "1px solid black" }}
+							>
+								{" "}
+								<div className="chat-message-content-inner">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+									incididunt ut labore et dolore magna aliqua.
+									Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip
+									ex ea commodo consequat. Duis aute irure
+									dolor
+								</div>
+							</div>
+						</div>
+					</div>
 					<div className="chat-input-div">
 						<InputField />
 						<SentButton />
