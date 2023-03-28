@@ -44,8 +44,8 @@
 	width: 450px;
 	height: 929px;
 }
-.selected-messages-container-cards {
-	width: 450px;
+.unread-messages-container-cards {
+	width: 1137px;
 	height: 119px;
 
 	background: #d9d9d9;
@@ -103,7 +103,7 @@
 	background-color: #f0f0f0;
 }
 .chat-name-div {
-	width: 74px;
+	width: 200px;
 	height: 36px;
 	margin-left: 275px;
 	margin-top: 22px;
@@ -124,49 +124,55 @@
 	margin-top: 24px;
 	width: 558px;
 	height: 475px;
+	overflow-y: auto;
+	max-height: 475px;
 }
 .chat-content-container-from-this-user {
-	width: 488px;
-	height: 192px;
-	margin-left: 34px;
-	margin-top: 26px;
 	display: flex;
+	flex-direction: row-reverse;
+	align-items: flex-start;
+	margin-right: 20px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
+
 .chat-content-container-from-other-user {
-	width: 488px;
-	height: 192px;
-	margin-left: 34px;
-	margin-top: 26px;
 	display: flex;
+	align-items: flex-start;
+	margin-left: 34px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 .message-icon-div {
 	width: 48px;
 	height: 48px;
 	background: #ffffff;
 	border-radius: 100%;
+	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 13px;
+	margin-right: 8px;
 }
 .chat-message-content-from-other-user {
-	width: 432px;
-	height: 191px;
+	display: inline-block;
+	width: auto;
+	max-width: 60%;
 	border-radius: 16px;
 	background-color: #da9eff;
 	margin-left: 26px;
 }
 .chat-message-content-from-this-user {
-	width: 432px;
-	height: 191px;
+	display: inline-block;
+	width: auto;
+	max-width: 60%;
 	border-radius: 16px;
 	background-color: #86b7ff;
 	margin-right: 26px;
 }
 .chat-message-content-inner {
-	margin-left: 44px;
-	margin-right: 26px;
-	margin-top: 25px;
-	margin-bottom: 23px;
+	display: inline-block;
+	width: auto;
+	padding: 8px 16px;
 }
 .chat-input-div {
 	display: flex;
