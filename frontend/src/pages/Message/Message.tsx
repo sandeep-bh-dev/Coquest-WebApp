@@ -132,27 +132,37 @@ const StyledSentButton = styled(SendIcon)({
 	color: "#666666",
 });
 
-const SentButton = () => (
+interface InputFieldProps {
+	onInputChange: (value: string) => void;
+	value: string;
+}
+
+type SentButtonProps = {
+	onSubmit: () => void;
+};
+
+const InputField: React.FC<InputFieldProps> = ({ onInputChange, value }) => (
+	<input
+		className="chat-input"
+		type="text"
+		placeholder="Write a message"
+		style={{ paddingLeft: "28px" }}
+		value={value}
+		onChange={(e) => onInputChange(e.target.value)}
+	/>
+);
+const SentButton: React.FC<SentButtonProps> = ({ onSubmit }) => (
 	<IconButton
 		sx={{
 			display: "flex",
 			marginLeft: "13px",
 			alignItems: "center",
 		}}
+		onClick={onSubmit}
 	>
 		<StyledSentButton />
 	</IconButton>
 );
-
-const InputField = () => (
-	<input
-		className="chat-input"
-		type="text"
-		placeholder="Write a message"
-		style={{ paddingLeft: "28px" }}
-	/>
-);
-
 interface MessagesNumberProps {
 	number: number;
 }
@@ -193,19 +203,66 @@ const MessageCard = ({
 );
 
 const Message = () => {
+	const currentUserID = "zeeshanID";
+	const [message, setMessage] = useState("");
+	const [messages, setMessages] = useState<MessageType[]>([]);
+
+	type MessageType = {
+		id: string;
+		sentFrom: string;
+		message: string;
+	};
+
+	function sendMessage(content: string) {
+		const newMessage = {
+			id: `messageID${Object.keys(mockMessageContents).length + 1}`,
+			sentFrom: "this-user",
+			message: content,
+		};
+
+		// Add the message to the mockMessageContents array
+		if (selectedChat) {
+			if (mockMessageContents[selectedChat.id]) {
+				mockMessageContents[selectedChat.id].push(newMessage);
+			} else {
+				mockMessageContents[selectedChat.id] = [newMessage];
+			}
+		}
+
+		return newMessage;
+	}
+
+	function addMessageToUI(newMessage: MessageType) {
+		setMessages([...messages, newMessage]);
+	}
+
+	function handleSubmit() {
+		if (!message.trim()) {
+			return;
+		}
+
+		// Call the sendMessage function and handle the response
+		const newMessage = sendMessage(message);
+
+		// Update the chat UI with the new message
+		addMessageToUI(newMessage);
+
+		// Clear the message state
+		setMessage("");
+	}
+
 	const [selectedChat, setSelectedChat] = useState<
 		null | typeof mockMessages[0]
 	>(null);
 
 	const handleChatSelection = (chat: typeof mockMessages[0]) => {
 		setSelectedChat(chat);
+		setMessages([...mockMessageContents[chat.id]]);
 	};
 
-	const currentUserID = "zeeshanID";
-
 	const messageCards = mockMessages.map((chat) => {
-		const isUnread = mockMessageContents[chat.id].some((message) =>
-			message.unreadBy.includes(currentUserID)
+		const isUnread = mockMessageContents[chat.id]?.some((message) =>
+			message.unreadBy?.includes(currentUserID)
 		);
 
 		return (
@@ -214,7 +271,7 @@ const Message = () => {
 				icon={<StyledIcon />}
 				name={chat.name}
 				message={chat.description}
-				isUnread={isUnread}
+				isUnread={!!isUnread}
 				onClick={() => handleChatSelection(chat)}
 			/>
 		);
@@ -222,40 +279,47 @@ const Message = () => {
 
 	const renderMessages = () => {
 		if (selectedChat !== null) {
-			return mockMessageContents[selectedChat.id].map(
-				(message, index) => (
-					<div
-						key={index}
-						className={`chat-content-container-${
-							message.sentFrom === currentUserID
-								? "from-this-user"
-								: "from-other-user"
-						}`}
-					>
+			return messages.map((message, index) => (
+				<div
+					key={index}
+					className={`chat-content-container ${
+						message.sentFrom === currentUserID
+							? "chat-content-container-from-this-user"
+							: "chat-content-container-from-other-user"
+					}`}
+				>
+					{message.sentFrom === currentUserID ? (
+						<div className="message-icon-div-right">
+							<StyledMessageIcon />
+						</div>
+					) : (
 						<div className="message-icon-div">
 							<StyledMessageIcon />
 						</div>
-						<div
-							className={`chat-message-content-${
-								message.sentFrom === currentUserID
-									? "from-this-user"
-									: "from-other-user"
-							}`}
-						>
-							<div className="chat-message-content-inner">
-								{message.message}
-							</div>
+					)}
+					<div
+						className={`chat-message-content ${
+							message.sentFrom === currentUserID
+								? "chat-message-content-from-this-user"
+								: "chat-message-content-from-other-user"
+						}`}
+					>
+						<div className="chat-message-content-inner">
+							{message.message}
 						</div>
 					</div>
-				)
-			);
+				</div>
+			));
 		}
 		return <div>Select a chat to display messages</div>;
 	};
 
 	return (
-		<div>
-			{/* ... */}
+		<div className="message">
+			<div className="title-container">
+				<h1 className="messages-title">Messages</h1>
+				<MessagesNumber number={1} />
+			</div>
 			<div className="messages-container">
 				<div className="messages-container-left">{messageCards}</div>
 				<div className="messages-container-right">
@@ -268,8 +332,12 @@ const Message = () => {
 					</div>
 					<div className="chat-container">{renderMessages()}</div>
 					<div className="chat-input-div">
-						<InputField />
-						<SentButton />
+						<InputField
+							onInputChange={(value) => setMessage(value)}
+							value={message}
+						/>
+
+						<SentButton onSubmit={handleSubmit} />
 					</div>
 				</div>
 			</div>
