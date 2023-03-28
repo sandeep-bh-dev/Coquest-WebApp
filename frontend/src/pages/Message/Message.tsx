@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SendIcon from "@mui/icons-material/Send";
@@ -140,10 +140,11 @@ interface MessageCardProps {
 	icon: React.ReactElement<typeof AccountCircleIcon>;
 	name: string;
 	message: string;
+	onClick: () => void;
 }
 
-const MessageCard = ({ icon, name, message }: MessageCardProps) => (
-	<div className="messages-container-cards">
+const MessageCard = ({ icon, name, message, onClick }: MessageCardProps) => (
+	<div className="messages-container-cards" onClick={onClick}>
 		<div className="message-card-inner-div">
 			<div className="card-icon-div">{icon}</div>
 			<div className="card-content-wrapper">
@@ -167,14 +168,53 @@ const SelectedMessageCard = ({ icon, name, message }: MessageCardProps) => (
 );
 
 const Message = () => {
-	const messageCards = [...Array(6)].map((_, index) => (
+	const [selectedChat, setSelectedChat] = useState<number | null>(null);
+
+	const handleChatSelection = (index: number) => {
+		setSelectedChat(index);
+	};
+
+	const messageCards = mockMessages.map((chat, index) => (
 		<MessageCard
 			key={index}
 			icon={<StyledIcon />}
-			name="Name"
-			message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor labore "
+			name={chat.name}
+			message={chat.description}
+			onClick={() => handleChatSelection(index)}
 		/>
 	));
+	const renderMessages = () => {
+		if (selectedChat !== null) {
+			return mockMessageContents[selectedChat].map((message, index) => (
+				<div
+					key={index}
+					className={`chat-content-container-${
+						message.sentFrom === "zeeshanID"
+							? "from-this-user"
+							: "from-other-user"
+					}`}
+					style={{ border: "1px solid black" }}
+				>
+					<div className="message-icon-div">
+						<StyledMessageIcon />
+					</div>
+					<div
+						className={`chat-message-content-${
+							message.sentFrom === "zeeshanID"
+								? "from-this-user"
+								: "from-other-user"
+						}`}
+						style={{ border: "1px solid black" }}
+					>
+						<div className="chat-message-content-inner">
+							{message.message}
+						</div>
+					</div>
+				</div>
+			));
+		}
+		return <div>Select a chat to display messages</div>;
+	};
 
 	return (
 		<div>
@@ -184,68 +224,18 @@ const Message = () => {
 			</div>
 
 			<div className="messages-container">
-				<div className="messages-container-left">
-					<SelectedMessageCard
-						icon={<StyledIcon />}
-						name="Name"
-						message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor labore "
-					/>
-
-					{messageCards}
-				</div>
+				<div className="messages-container-left">{messageCards}</div>
 				<div className="messages-container-right">
-					<div className="chat-name-div">Name</div>
+					<div className="chat-name-div">
+						{selectedChat !== null
+							? mockMessages[selectedChat].name
+							: "No chat selected"}
+					</div>
 					<div
 						className="chat-container"
 						style={{ border: "1px solid black" }}
 					>
-						<div
-							className="chat-content-container-from-this-user"
-							style={{ border: "1px solid black" }}
-						>
-							<div
-								className="chat-message-content-from-this-user"
-								style={{ border: "1px solid black" }}
-							>
-								{" "}
-								<div className="chat-message-content-inner">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor
-								</div>
-							</div>
-							<div className="message-icon-div">
-								<StyledMessageIcon />
-							</div>
-						</div>
-						<div
-							className="chat-content-container-from-other-user"
-							style={{ border: "1px solid black" }}
-						>
-							<div className="message-icon-div">
-								<StyledMessageIcon />
-							</div>
-
-							<div
-								className="chat-message-content-from-other-user"
-								style={{ border: "1px solid black" }}
-							>
-								{" "}
-								<div className="chat-message-content-inner">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor
-								</div>
-							</div>
-						</div>
+						{renderMessages()}
 					</div>
 					<div className="chat-input-div">
 						<InputField />
