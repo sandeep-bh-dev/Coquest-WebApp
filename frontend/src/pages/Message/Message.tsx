@@ -5,6 +5,93 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 
+const mockMessages = [
+	{
+		id: "chatID1",
+		members: ["zeeshanID", "zeeshanID1"],
+		name: "Chat 1",
+		description: "Chat 1 description",
+	},
+	{
+		id: "chatID2",
+		members: ["zeeshanID", "zeeshanID1"],
+		name: "Chat 2",
+		description: "Chat 2 description",
+	},
+	{
+		id: "chatID3",
+		members: ["zeeshanID", "zeeshanID1"],
+		name: "Chat 3",
+		description: "Chat 3 description",
+	},
+];
+const mockMessageContents = [
+	[
+		{
+			sentFrom: "zeeshanID",
+			message: "my first message",
+			time: "3/24/2023, 7:32:31 PM",
+			unreadBy: {
+				zeeshanID: 0,
+				zeeshanID1: 1,
+			},
+		},
+		// ... more messages for chatID1 ...
+	],
+	[
+		{
+			sentFrom: "zeeshanID",
+			message: "my 2nd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 1,
+				zeeshanID1: 0,
+			},
+		},
+		// ... more messages for chatID2 ...
+		{
+			sentFrom: "zeeshanID",
+			message: "my 2nd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 1,
+				zeeshanID1: 0,
+			},
+		},
+		{
+			sentFrom: "zeeshanID",
+			message: "my 2nd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 0,
+				zeeshanID1: 1,
+			},
+		},
+		// ... more messages for chatID2 ...
+	],
+	[
+		{
+			sentFrom: "zeeshanID",
+			message: "my 3rd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 1,
+				zeeshanID1: 1,
+			},
+		},
+		{
+			sentFrom: "zeeshanID",
+			message: "my 3rd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 0,
+				zeeshanID1: 1,
+			},
+		},
+	],
+	// ... more message content arrays for other chats ...
+];
+
 const StyledIcon = styled(AccountCircleIcon)({
 	fontSize: 67,
 	color: "#666666",
