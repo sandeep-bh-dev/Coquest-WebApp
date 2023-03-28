@@ -1,9 +1,96 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
+
+const mockMessages = [
+	{
+		id: "chatID1",
+		members: ["zeeshanID", "zeeshanID1"],
+		name: "Chat 1",
+		description: "Chat 1 description",
+	},
+	{
+		id: "chatID2",
+		members: ["zeeshanID", "zeeshanID1"],
+		name: "Chat 2",
+		description: "Chat 2 description",
+	},
+	{
+		id: "chatID3",
+		members: ["zeeshanID", "zeeshanID1"],
+		name: "Chat 3",
+		description: "Chat 3 description",
+	},
+];
+const mockMessageContents = [
+	[
+		{
+			sentFrom: "zeeshanID",
+			message: "my first message",
+			time: "3/24/2023, 7:32:31 PM",
+			unreadBy: {
+				zeeshanID: 0,
+				zeeshanID1: 1,
+			},
+		},
+		// ... more messages for chatID1 ...
+	],
+	[
+		{
+			sentFrom: "zeeshanID",
+			message: "my 2nd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 1,
+				zeeshanID1: 0,
+			},
+		},
+		// ... more messages for chatID2 ...
+		{
+			sentFrom: "zeeshanID",
+			message: "my 2nd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 1,
+				zeeshanID1: 0,
+			},
+		},
+		{
+			sentFrom: "zeeshanID",
+			message: "my 2nd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 0,
+				zeeshanID1: 1,
+			},
+		},
+		// ... more messages for chatID2 ...
+	],
+	[
+		{
+			sentFrom: "zeeshanID",
+			message: "my 3rd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 1,
+				zeeshanID1: 1,
+			},
+		},
+		{
+			sentFrom: "zeeshanID",
+			message: "my 3rd message",
+			time: "3/24/2023, 7:37:51 PM",
+			unreadBy: {
+				zeeshanID: 0,
+				zeeshanID1: 1,
+			},
+		},
+	],
+	// ... more message content arrays for other chats ...
+];
 
 const StyledIcon = styled(AccountCircleIcon)({
 	fontSize: 67,
@@ -53,10 +140,18 @@ interface MessageCardProps {
 	icon: React.ReactElement<typeof AccountCircleIcon>;
 	name: string;
 	message: string;
+	onClick: () => void;
+	selected: boolean;
 }
 
-const MessageCard = ({ icon, name, message }: MessageCardProps) => (
-	<div className="messages-container-cards">
+const MessageCard = ({
+	icon,
+	name,
+	message,
+	onClick,
+	selected,
+}: MessageCardProps) => (
+	<div onClick={onClick}>
 		<div className="message-card-inner-div">
 			<div className="card-icon-div">{icon}</div>
 			<div className="card-content-wrapper">
@@ -80,85 +175,79 @@ const SelectedMessageCard = ({ icon, name, message }: MessageCardProps) => (
 );
 
 const Message = () => {
-	const messageCards = [...Array(6)].map((_, index) => (
+	const [selectedMessage, setSelectedMessage] = useState(0);
+	const [selectedMessageContent, setSelectedMessageContent] = useState<
+		{ sentFrom: string; message: string; time: string }[]
+	>(mockMessageContents[0]);
+
+	const messageCards = mockMessages.map((card, index) => (
 		<MessageCard
 			key={index}
 			icon={<StyledIcon />}
-			name="Name"
-			message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor labore "
+			name={card.name}
+			message={card.description}
+			onClick={() => {
+				setSelectedMessage(index);
+				// Replace the following line with the actual API call to fetch messages for the selected card
+				setSelectedMessageContent(mockMessageContents[index]);
+			}}
+			selected={selectedMessage === index}
 		/>
 	));
 
+	const currentUserId = "messagetest1"; // Replace this with the actual user ID of the current user
+	const chatContent = selectedMessageContent.map((message, index) => {
+		const isFromCurrentUser = message.sentFrom === currentUserId;
+
+		return (
+			<div
+				key={index}
+				className={`chat-content-container-${
+					isFromCurrentUser ? "from-this-user" : "from-other-user"
+				}`}
+			>
+				{isFromCurrentUser ? (
+					<>
+						<div className="chat-message-content-from-this-user">
+							<div className="chat-message-content-inner">
+								{message.message}
+							</div>
+						</div>
+						<div className="message-icon-div">
+							<StyledMessageIcon />
+						</div>
+					</>
+				) : (
+					<>
+						<div className="message-icon-div">
+							<StyledMessageIcon />
+						</div>
+						<div className="chat-message-content-from-other-user">
+							<div className="chat-message-content-inner">
+								{message.message}
+							</div>
+						</div>
+					</>
+				)}
+			</div>
+		);
+	});
+
 	return (
-		<div>
+		<div className="message">
 			<div className="title-container">
 				<h1 className="messages-title">Messages</h1>
-				<MessagesNumber number={1} />
+				<p className="messages-new-notify">3 new</p>
 			</div>
-
 			<div className="messages-container">
-				<div className="messages-container-left">
-					<SelectedMessageCard
-						icon={<StyledIcon />}
-						name="Name"
-						message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor labore "
-					/>
-
-					{messageCards}
-				</div>
+				<div className="messages-container-left">{messageCards}</div>
 				<div className="messages-container-right">
 					<div className="chat-name-div">Name</div>
 					<div
 						className="chat-container"
 						style={{ border: "1px solid black" }}
 					>
-						<div
-							className="chat-content-container-from-this-user"
-							style={{ border: "1px solid black" }}
-						>
-							<div
-								className="chat-message-content-from-this-user"
-								style={{ border: "1px solid black" }}
-							>
-								{" "}
-								<div className="chat-message-content-inner">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor
-								</div>
-							</div>
-							<div className="message-icon-div">
-								<StyledMessageIcon />
-							</div>
-						</div>
-						<div
-							className="chat-content-container-from-other-user"
-							style={{ border: "1px solid black" }}
-						>
-							<div className="message-icon-div">
-								<StyledMessageIcon />
-							</div>
-
-							<div
-								className="chat-message-content-from-other-user"
-								style={{ border: "1px solid black" }}
-							>
-								{" "}
-								<div className="chat-message-content-inner">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor
-								</div>
-							</div>
-						</div>
+						{chatContent}
 					</div>
 					<div className="chat-input-div">
 						<InputField />

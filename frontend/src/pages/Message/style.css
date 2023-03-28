@@ -6,6 +6,7 @@
 	margin-top: 57px;
 	margin-left: 212px;
 }
+
 .messages-title {
 	/* H1 */
 	font-family: "Poppins";
@@ -44,18 +45,25 @@
 	width: 450px;
 	height: 929px;
 }
-.selected-messages-container-cards {
+.messages-container-cards {
 	width: 450px;
 	height: 119px;
 
 	background: #d9d9d9;
 	border-radius: 10px;
 }
-.messages-container-cards {
+.messages-container-cards-read {
 	width: 450px;
 	height: 119px;
 
 	background: #f1f1f1;
+	border-radius: 10px;
+}
+.messages-container-cards-unread {
+	width: 450px;
+	height: 119px;
+
+	background: #d9d9d9;
 	border-radius: 10px;
 }
 .message-card-inner-div {
