@@ -177,6 +177,7 @@ interface MessageCardProps {
 	message: string;
 	isUnread: boolean;
 	onClick: () => void;
+	isSelected: boolean; // Add isSelected prop
 }
 
 const MessageCard = ({
@@ -185,12 +186,16 @@ const MessageCard = ({
 	message,
 	isUnread,
 	onClick,
+	isSelected,
 }: MessageCardProps) => (
 	<div
 		className={`messages-container-cards${
 			isUnread ? " unread-messages-container-cards" : ""
 		}`}
 		onClick={onClick}
+		style={{
+			backgroundColor: isSelected ? "rgba(0, 0, 0, 0.1)" : "transparent",
+		}}
 	>
 		<div className="message-card-inner-div">
 			<div className="card-icon-div">{icon}</div>
@@ -206,6 +211,7 @@ const Message = () => {
 	const currentUserID = "zeeshanID";
 	const [message, setMessage] = useState("");
 	const [messages, setMessages] = useState<MessageType[]>([]);
+	const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 
 	type MessageType = {
 		id: string;
@@ -257,6 +263,7 @@ const Message = () => {
 
 	const handleChatSelection = (chat: typeof mockMessages[0]) => {
 		setSelectedChat(chat);
+		setSelectedCardId(chat.id); // Set the selected card's ID
 		setMessages([...mockMessageContents[chat.id]]);
 	};
 
@@ -264,7 +271,7 @@ const Message = () => {
 		const isUnread = mockMessageContents[chat.id]?.some((message) =>
 			message.unreadBy?.includes(currentUserID)
 		);
-
+		const isSelected = chat.id === selectedCardId;
 		return (
 			<MessageCard
 				key={chat.id}
@@ -273,6 +280,7 @@ const Message = () => {
 				message={chat.description}
 				isUnread={!!isUnread}
 				onClick={() => handleChatSelection(chat)}
+				isSelected={isSelected} // Pass isSelected as a prop
 			/>
 		);
 	});
