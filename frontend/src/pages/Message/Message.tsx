@@ -216,7 +216,7 @@ const Message = () => {
 	function sendMessage(content: string) {
 		const newMessage = {
 			id: `messageID${Object.keys(mockMessageContents).length + 1}`,
-			sentFrom: "this-user",
+			sentFrom: currentUserID, // Use the currentUserID variable here
 			message: content,
 		};
 
