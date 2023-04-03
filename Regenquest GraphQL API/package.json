@@ -4,6 +4,8 @@
   "dependencies": {
     "apollo-server-cloud-functions": "3.x",
     "graphql": "^15.5.0",
-    "mongoose": "^6.9.0"
+    "mongoose": "^6.9.0",
+    "uuid": "^9.0.0",
+    "bcrypt": "^5.1.0"
   }
 }
