@@ -9,6 +9,7 @@ import { Message } from "./pages/Message";
 import { Notifications } from "./pages/Notifications";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
+import WalletPage from "./pages/Wallet/WalletPage";
 
 // Program flow Imports
 import {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
 	{
 		path: "/notifications",
 		element: <Notifications />,
+	},
+	{
+		path: "/wallet",
+		element: <WalletPage />,
 	},
 ]);
 
