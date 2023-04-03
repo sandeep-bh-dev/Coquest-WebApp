@@ -8,6 +8,7 @@ import theme from "./styles/theme";
 import { Message } from "./pages/Message";
 import { Notifications } from "./pages/Notifications";
 import "./index.css";
+import ItemGrid from "./pages/Inventory/ItemGrid";
 import TaskCard from "./components/TaskCard";
 import WalletPage from "./pages/Wallet/WalletPage";
 
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
 		path: "/notifications",
 		element: <Notifications />,
 	},
+  {
+    path: "/inventory",
+		element: <ItemGrid />,
+  },
 	{
 		path: "/wallet",
 		element: <WalletPage />,
