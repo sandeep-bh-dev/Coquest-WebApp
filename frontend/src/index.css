@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dateTimefield { 
+  width: 100%;
+  height: 56px;
+  border: none;
+  outline: none;
+}
+
+.timeField {
+  width: 100%;
+  height: 56px;
+}
+.react-time-picker__wrapper {
+  border: none !important;
+}
+
+.react-time-picker__wrapper * {color: #2c2b2b;
+}
