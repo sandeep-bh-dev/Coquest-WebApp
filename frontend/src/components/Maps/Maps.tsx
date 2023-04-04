@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
+//container that holds the map data
 const MapContainer = styled.div({
   width: "379px",
   height: "655px",
