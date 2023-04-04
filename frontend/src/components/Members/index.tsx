@@ -12,6 +12,8 @@ import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import { borderRadius } from "@mui/system";
 
+
+//creating props for user, link and role
 export type MemberProps = {
   users: string[];
   showAllLink: string;
@@ -46,6 +48,8 @@ const ShowAllLink = styled(Typography)({
 const handleClick = () => {
   console.info("You clicked the button.");
 };
+
+//maps through data to display user info in the members container
 
 const Members = ({ users, showAllLink, userRole }: MemberProps) => {
   return (
