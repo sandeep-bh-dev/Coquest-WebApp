@@ -7,10 +7,13 @@ import Stack from "@mui/material/Stack";
 import { relative } from "path";
 import Link from "@mui/material/Link";
 
+//props for task label and link to task page 
 type MyTasksContainerProps = {
   label: string;
   seeAllLink: string;
 };
+
+//array of task contents 
 
 let taskContents: any[] = [
   {
@@ -65,6 +68,9 @@ const LabelContainer = styled.div({
   position: "relative",
 });
 
+
+//maps through data to display on each task card
+//places the link in upper right hand corner
 const MyTasksContainer = ({ label, seeAllLink }: MyTasksContainerProps) => {
   return (
     <div

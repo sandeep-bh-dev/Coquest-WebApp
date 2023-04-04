@@ -17,6 +17,7 @@ export default function SearchBar() {
             width: 379,
             height: 56,
           },
+           //puts search icon at the front of the bar
           startAdornment: (
             <InputAdornment position="start">
               <IconButton>
@@ -25,10 +26,12 @@ export default function SearchBar() {
             </InputAdornment>
           ),
         }}
+        //styling for search bar 
         className="inputRounded"
         placeholder="Search"
         variant="outlined"
         value={input}
+        //uses on change to set input to target value 
         onChange={(e) => setInput(e.target.value)}
       />
     </div>

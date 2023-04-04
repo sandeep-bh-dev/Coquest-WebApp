@@ -6,6 +6,8 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 
+
+//props that takes the header for post container 
 type PostContainerProps = {
   header: string;
 };
@@ -35,6 +37,8 @@ const OuterContainer = styled.div({
   borderRadius: "10px",
 });
 
+//post container holds the header, posts, and button 
+//maps through post data to display in a 9x9 grid format 
 const PostContainer = ({ header }: PostContainerProps) => {
   return (
     <OuterContainer>

@@ -2,6 +2,7 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import styled from "@emotion/styled";
 
+//takes props for users name and community name 
 type WelcomeMessageProps = {
   name: string;
   communityName: string;
@@ -46,6 +47,7 @@ const CommunityContainer = styled.div({
   position: "relative",
 });
 
+//displays message on screen 
 const WelcomeMessage = ({ name, communityName }: WelcomeMessageProps) => {
   return (
     <div>
