@@ -1,5 +1,7 @@
+// Import all libraries and components
 import * as React from "react";
 
+// Sets the data type for each variable
 export interface Wallet {
     walletId: string,
     walletName: string,
@@ -10,11 +12,13 @@ export interface Wallet {
     transactions: Transaction[],
 }
 
+// Sets the data type for each transaction
 export interface Transaction {
     date: string,
     amount: number;
 }
 
+// Wallet array
 export const Wallets: Wallet[] = [
     {
         walletId: "1",
