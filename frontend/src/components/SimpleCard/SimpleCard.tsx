@@ -5,6 +5,7 @@ import Card, { CardProps } from "@mui/material/Card";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import IconButton from "@mui/material/IconButton";
 
+//uses props to take card label 
 type SimpleCardProps = {
   label: string;
 };
@@ -16,10 +17,13 @@ const Label = styled(Typography)({
   lineHeight: "24px",
 });
 
+
+//places icon button 
 const ChevronIcon = styled(ChevronRightIcon)({
   color: "#666666",
 });
 
+//places all the elements inside the card 
 const SimpleCard = ({ label }: SimpleCardProps) => {
   const CustomCard = styled(Card)({});
   return (
