@@ -1,3 +1,4 @@
+// Import libraries and components
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -8,16 +9,15 @@ import ItemModal from '../ItemModal';
 import MoveModal from '../MoveModal';
 import { Item } from '../ItemList';
 
+// Start of component styling
 const StyledIconButton = styled(IconButton)({
     padding: '10px 0'
 });
-
 const StyledMenuItem = styled(MenuItem)({
     fontWeight: 400,
     fontFamily: 'Poppins',
     fontSize: 16,
 });
-
 const StyledMenu = styled(Menu)({
     '& .MuiPaper-root': {
         width: '96px',
@@ -25,17 +25,16 @@ const StyledMenu = styled(Menu)({
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)'
     }
 });
-
 const options = [
     'View',
     'Move',
     'Remove'
 ];
+// End of component styling
 
 type ItemMenuProps = {
     item: Item
 };
-
 const ItemMenu = ({ item }: ItemMenuProps) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -46,7 +45,9 @@ const ItemMenu = ({ item }: ItemMenuProps) => {
         setAnchorEl(null);
     };
 
+    // State of the item modal, same as in the ItemCard component
     const [isItemModalOpen, setIsItemModalOpen] = React.useState<boolean>(false);
+    // State of the move modal, same as in the MoveModal component
     const [isMoveModalOpen, setIsMoveModalOpen] = React.useState<boolean>(false);
 
     const handleOptionClick = (option: string) => {

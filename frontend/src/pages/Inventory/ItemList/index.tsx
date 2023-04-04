@@ -1,3 +1,4 @@
+// Set the data type of each variable for the items
 export interface Item {
     itemID: string;
     userID: string;

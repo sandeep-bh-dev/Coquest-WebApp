@@ -1,9 +1,11 @@
+// Import libraries and components
 import * as React from 'react';
 import styled from "@emotion/styled";
 import ItemCard from "../ItemCard";
 import { Item } from "../ItemList";
 import { useState, useEffect } from 'react';
 
+// Start of component styling
 const Title = styled.h1({
     width: '100%',
     textAlign: 'left',
@@ -14,14 +16,12 @@ const Title = styled.h1({
     marginLeft: '23%',
     fontFamily: 'Poppins'
 });
-
 const Container = styled.div({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative'
 });
-
 const Grid = styled.div({
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
@@ -38,8 +38,11 @@ const Grid = styled.div({
         gridTemplateColumns: 'repeat(1, 1fr)'
     }
 });
+// End of component styling
+
 
 const ItemGrid = () => {
+    // Assign state
     const [items, setItems] = useState<Item[]>([]);
 
     useEffect(() => {
@@ -47,6 +50,7 @@ const ItemGrid = () => {
         const query = "query={getItems{itemID userID taskLink itemName createdAt description image history}}";
         const requestUrl = `${apiUrl}?${query}`;
 
+        // API call
         fetch(requestUrl, { headers: { "Content-Type": "application/json" } })
             .then((response) => response.json())
             .then(({ data }) => {

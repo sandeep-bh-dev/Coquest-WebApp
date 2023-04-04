@@ -1,3 +1,4 @@
+// Import libraries and components
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -7,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
+// Start of component styling
 const StyledBox = styled(Box)({
     position: 'absolute',
     top: '50%',
@@ -20,7 +22,6 @@ const StyledBox = styled(Box)({
     fontFamily: 'Poppins',
     display: 'flex'
 });
-
 const BackButton = styled(ArrowBackIosIcon)({
     height: 24,
     width: 20,
@@ -32,19 +33,16 @@ const BackButton = styled(ArrowBackIosIcon)({
     left: 0,
     top: 0,
 })
-
 const MoveContent = styled(Typography)({
     width: 718,
     height: 105,
     margin: '70px 30px'
 });
-
 const MoveItem = styled(Typography)({
     fontWeight: 600,
     fontSize: 20,
     marginBottom: 20
 });
-
 const SelectBox = styled(Box)({
     borderRadius: 10,
     padding: '24px 20px',
@@ -56,17 +54,14 @@ const SelectBox = styled(Box)({
         cursor: 'pointer'
     }
 });
-
 const Name = styled(Typography)({
     fontWeight: 600,
     fontSize: 20
 });
-
 const Description = styled(Typography)({
     fontWeight: 400,
     fontSize: 14
 })
-
 const MoveButton = styled(Button)({
     backgroundColor: '#D9D9D9',
     borderRadius: 20,
@@ -83,7 +78,6 @@ const MoveButton = styled(Button)({
         backgroundColor: '#D9D9D9'
     }
 });
-
 const CloseModalIcon = styled(CloseIcon)({
     color: 'grey',
     marginRight: 28,
@@ -93,13 +87,16 @@ const CloseModalIcon = styled(CloseIcon)({
     right: 0,
     top: 0,
 });
+// Start of component styling
 
+// Assign props
 type MoveModalProps = {
     open: boolean,
     onClose: () => void
 };
-
+// Pass props
 const MoveModal = ({ open, onClose }: MoveModalProps) => {
+    // State of the move modal, same as in the ItemMenu component
     const [isItemModalOpen, setIsItemModalOpen] = React.useState<boolean>(false);
 
     return (
