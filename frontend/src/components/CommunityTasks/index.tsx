@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import TaskCard from "../TaskCard";
 import Grid from "@mui/material/Grid";
 
+//text header for card
 const Header = styled(Typography)({
   fontWeight: 600,
   fontSize: "16px",
@@ -12,6 +13,7 @@ const Header = styled(Typography)({
   color: "#0000000",
 });
 
+//container card that holds all information
 const CommunityContainer = styled.div({
   width: "638px",
   height: "329px",
@@ -19,6 +21,7 @@ const CommunityContainer = styled.div({
   backgroundColor: "#D9D9D9",
 });
 
+//array of data 
 let taskContents: any[] = [
   {
     taskName: "Task Name",
@@ -64,6 +67,7 @@ let taskContents: any[] = [
   },
 ];
 
+
 const SeeAllLink = styled(Typography)({
   fontWeight: 400,
   fontSize: "12px",
@@ -106,7 +110,7 @@ const CommunityTasks = () => {
         }}
       >
         <>
-          <Grid container rowSpacing={2}>
+          <Grid container rowSpacing={2}> 
             {taskContents.map((item) => {
               return (
                 <Grid item xs={4} md={8}>
@@ -126,91 +130,6 @@ const CommunityTasks = () => {
     </CommunityContainer>
   );
 };
-
-/* const CommunityTasks = () => {
-  return (
-    <CommunityContainer>
-      <Header
-        style={{
-          position: "relative",
-          left: "30px",
-          top: "25px",
-        }}
-      >
-        All community tasks
-      </Header>
-
-      <Stack
-        spacing={1.7}
-        style={{
-          position: "relative",
-          left: "30px",
-          top: "40px",
-        }}
-      >
-        <TaskCard
-          name="Task name"
-          community="Community name"
-          location="Location"
-          description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. "
-          type="small"
-        />
-        <TaskCard
-          name="Task name"
-          community="Community name"
-          location="Location"
-          description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. "
-          type="small"
-        />
-      </Stack>
-      <Stack
-        spacing={1.7}
-        style={{
-          position: "relative",
-          left: "210px",
-          bottom: "181px",
-        }}
-      >
-        <TaskCard
-          name="Task name"
-          community="Community name"
-          location="Location"
-          description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. "
-          type="small"
-        />
-        <TaskCard
-          name="Task name"
-          community="Community name"
-          location="Location"
-          description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. "
-          type="small"
-        />
-      </Stack>
-      <Stack
-        spacing={1.7}
-        style={{
-          position: "relative",
-          left: "390px",
-          bottom: "401px",
-        }}
-      >
-        <TaskCard
-          name="Task name"
-          community="Community name"
-          location="Location"
-          description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. "
-          type="small"
-        />
-        <TaskCard
-          name="Task name"
-          community="Community name"
-          location="Location"
-          description="Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam. "
-          type="small"
-        />
-      </Stack>
-    </CommunityContainer>
-  );
-}; */
+//using grid to map contents onto the community container card
 
 export default CommunityTasks;
