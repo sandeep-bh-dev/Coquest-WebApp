@@ -1,3 +1,4 @@
+// Import libraries and components
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,6 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MoveModal from '../MoveModal';
 import { Item } from '../ItemList';
 
+// Start of component styling
 const StyledBox = styled(Box)({
 	position: 'absolute',
 	top: '50%',
@@ -23,33 +25,28 @@ const StyledBox = styled(Box)({
 	fontFamily: 'Poppins',
 	display: 'flex'
 });
-
 const ItemImage = styled.div({
 	width: 407,
 	heigth: 407,
 	margin: 40
 });
-
 const ItemContent = styled(Typography)({
 	width: 277,
 	height: 339,
 	marginTop: 60
 });
-
 const TaskName = styled(Typography)({
 	variant: 'overline',
 	fontWeight: 400,
 	fontSize: 12,
 	lineHeight: '18px'
 });
-
 const ItemName = styled(Typography)({
 	variant: 'subtitle1',
 	fontWeight: 600,
 	fontSize: 20,
 	lineHeight: '30px'
 });
-
 const ItemDescription = styled(Typography)({
 	fontWeight: 400,
 	fontSize: 14,
@@ -57,11 +54,9 @@ const ItemDescription = styled(Typography)({
 	lineHeight: '21px',
 	width: 265
 });
-
 const InfoStack = styled(Stack)({
 	marginTop: 10
 })
-
 const ItemHeader = styled(Typography)({
 	width: 84,
 	height: 96,
@@ -69,14 +64,12 @@ const ItemHeader = styled(Typography)({
 	fontSize: 12,
 	lineHeight: '24px'
 });
-
 const ItemSub = styled(Typography)({
 	height: 96,
 	fontWeight: 400,
 	fontSize: 12,
 	lineHeight: '24px'
 });
-
 const ButtonStack = styled(Stack)({
 	position: 'absolute',
 	bottom: 70,
@@ -84,7 +77,6 @@ const ButtonStack = styled(Stack)({
 	display: 'flex',
 	justifyContent: 'flex-end',
 });
-
 const RemoveButton = styled(Button)({
 	color: '#BA4B4B',
 	border: 'none',
@@ -98,7 +90,6 @@ const RemoveButton = styled(Button)({
 		backgroundColor: '#FFFFFF'
 	}
 });
-
 const MoveButton = styled(Button)({
 	color: '#000000',
 	textTransform: 'none',
@@ -111,20 +102,20 @@ const MoveButton = styled(Button)({
 		backgroundColor: '#FFFFFF'
 	}
 });
-
 const CloseModalIcon = styled(CloseIcon)({
 	color: 'grey',
 	marginRight: 28,
 	marginTop: 28,
 	cursor: 'pointer'
 });
+// End of component styling
 
+// Assign props
 type ItemModalProps = {
 	item: Item,
 	open: boolean,
 	onClose: () => void,
 };
-
 const ItemModal = ({
 	item,
 	open,
@@ -138,7 +129,8 @@ const ItemModal = ({
 		taskLink,
 		history,
 		createdAt
-	} = item;
+	} = item; // Assign data props as item
+	// State of the move modal, same as in the ItemCard, and ItemMenu components
 	const [isMoveModalOpen, setIsMoveModalOpen] = React.useState<boolean>(false);
 	return (
 		<div>
