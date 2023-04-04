@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import React, { useState } from "react";
 import "./style.css";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -5,6 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 
+// Define mock chat data
 const mockMessages = [
 	{
 		id: "chatID1",
@@ -117,6 +119,7 @@ const mockMessageContents: Record<string, any[]> = {
 	],
 };
 
+// Define styled components for Material-UI icons
 const StyledIcon = styled(AccountCircleIcon)({
 	fontSize: 67,
 	color: "#666666",
@@ -132,15 +135,27 @@ const StyledSentButton = styled(SendIcon)({
 	color: "#666666",
 });
 
+// Define prop types for various components
 interface InputFieldProps {
 	onInputChange: (value: string) => void;
 	value: string;
 }
-
+interface MessagesNumberProps {
+	number: number;
+}
+interface MessageCardProps {
+	icon: React.ReactElement<typeof AccountCircleIcon>;
+	name: string;
+	message: string;
+	isUnread: boolean;
+	onClick: () => void;
+	isSelected: boolean; // Add isSelected prop
+}
 type SentButtonProps = {
 	onSubmit: () => void;
 };
 
+// Define functional components for InputField, SentButton, MessagesNumber, and MessageCard
 const InputField: React.FC<InputFieldProps> = ({ onInputChange, value }) => (
 	<input
 		className="chat-input"
@@ -163,22 +178,10 @@ const SentButton: React.FC<SentButtonProps> = ({ onSubmit }) => (
 		<StyledSentButton />
 	</IconButton>
 );
-interface MessagesNumberProps {
-	number: number;
-}
 
 const MessagesNumber = ({ number }: MessagesNumberProps) => (
 	<div className="messages-new-notify">{number} new.</div>
 );
-
-interface MessageCardProps {
-	icon: React.ReactElement<typeof AccountCircleIcon>;
-	name: string;
-	message: string;
-	isUnread: boolean;
-	onClick: () => void;
-	isSelected: boolean; // Add isSelected prop
-}
 
 const MessageCard = ({
 	icon,
@@ -207,18 +210,23 @@ const MessageCard = ({
 	</div>
 );
 
+// The Message component represents the main chat application.
 const Message = () => {
+	// Define state variables to store the current user ID, the message input value, the list of messages, and the selected chat card ID.
 	const currentUserID = "zeeshanID";
 	const [message, setMessage] = useState("");
 	const [messages, setMessages] = useState<MessageType[]>([]);
 	const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 
+	// Define the MessageType type for better type checking.
 	type MessageType = {
 		id: string;
 		sentFrom: string;
 		message: string;
 	};
 
+	// sendMessage: Sends a new message given the content string.
+	// Updates the mockMessageContents object with the new message.
 	function sendMessage(content: string) {
 		const newMessage = {
 			id: `messageID${Object.keys(mockMessageContents).length + 1}`,
@@ -238,6 +246,7 @@ const Message = () => {
 		return newMessage;
 	}
 
+	// Functions to handle sending messages, updating UI, and chat selection
 	function addMessageToUI(newMessage: MessageType) {
 		setMessages([...messages, newMessage]);
 	}
@@ -285,6 +294,7 @@ const Message = () => {
 		);
 	});
 
+	// Render message cards and chat messages
 	const renderMessages = () => {
 		if (selectedChat !== null) {
 			return messages.map((message, index) => (
