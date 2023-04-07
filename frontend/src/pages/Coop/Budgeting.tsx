@@ -170,13 +170,13 @@ const Participation = () => {
             </Typography>
             <FormControl>
                 <InputLabel>Cost to participate</InputLabel>
-                <Select id="outlined" label="Start date">
+                <Select id="outlined" label="cost to participate">
                     <MenuItem value={0}>No Cost</MenuItem>
                 </Select>
             </FormControl>
             <FormControl>
                 <InputLabel>Maximum number of participants</InputLabel>
-                <Select id="outlined" label="Start date">
+                <Select id="outlined" label="maximum number of participants">
                     <MenuItem value={10}>10</MenuItem>
                 </Select>
             </FormControl>
@@ -241,7 +241,6 @@ const Crowdfunding = () => {
                 rows={7}
                 fullWidth
             />
-            ;
         </>
     );
 };
@@ -249,7 +248,7 @@ function Budgeting() {
     return (
         <>
             <ProgressBar page={3} />
-            <NextandBackButton next="" back="/Coop/Operations" />
+            <NextandBackButton next="/Coop/Promotion" back="/Coop/Operations" />
             <Page>
                 <Form>
                     <Header text="Budgeting" />

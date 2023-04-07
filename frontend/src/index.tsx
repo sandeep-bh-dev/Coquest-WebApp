@@ -7,7 +7,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
 import "./index.css";
 import TaskCard from "./components/TaskCard";
-import { Budgeting, BasicInformation, Operations } from "./pages/Coop";
+import {
+    Budgeting,
+    BasicInformation,
+    Operations,
+    Promotion,
+} from "./pages/Coop";
 import { Login } from "./pages/Login";
 
 const root = ReactDOM.createRoot(
@@ -40,6 +45,12 @@ const router = createBrowserRouter([
         path: "/Coop/Budgeting",
         element: <Budgeting />,
     },
+
+    {
+        path: "/Coop/Promotion",
+        element: <Promotion />,
+    },
+
     {
         path: "/Login",
         element: <Login />,
