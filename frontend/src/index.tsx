@@ -20,6 +20,7 @@ import {
 	Operations,
 	Promotion,
 } from "./pages/Programs/CreateProgram";
+import FinishPage from "./pages/Programs/CreateProgram/FinishPage";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
 			{
 				path: "promotion",
 				element: <Promotion />,
+			},
+			{
+				path: "finish",
+				element: <FinishPage />,
 			},
 		],
 	},

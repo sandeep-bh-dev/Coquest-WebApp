@@ -57,7 +57,13 @@ const CreateProgram = () => {
 	const [currentPath, setCurrentPath] = useState(
 		getCurrPath(location.pathname)
 	);
-	const paths = ["basic-information", "operations", "budgeting", "promotion"];
+	const paths = [
+		"basic-information",
+		"operations",
+		"budgeting",
+		"promotion",
+		"finish",
+	];
 
 	useEffect(() => {
 		setPageIndex(paths.indexOf(currentPath));
@@ -70,7 +76,7 @@ const CreateProgram = () => {
 				<ProgressStepper pgnum={pageIndex} />
 			</ProgressBarContainer>
 			<NavigateButtons>
-				{pageIndex > 0 && (
+				{pageIndex > 0 && pageIndex < paths.length - 1 && (
 					<Link
 						style={{ textDecoration: "none" }}
 						to={`${paths[pageIndex - 1]}`}
@@ -82,7 +88,7 @@ const CreateProgram = () => {
 						<BackButton>{"<"} Back</BackButton>
 					</Link>
 				)}
-				{pageIndex < paths.length - 1 && (
+				{pageIndex < paths.length - 2 && (
 					<Link
 						style={{ textDecoration: "none" }}
 						to={`${paths[pageIndex + 1]}`}
@@ -94,6 +100,35 @@ const CreateProgram = () => {
 					>
 						<NextButton variant="contained" disableElevation>
 							Next
+						</NextButton>
+					</Link>
+				)}
+				{pageIndex === paths.length - 2 && (
+					<Link
+						style={{ textDecoration: "none" }}
+						to={`${paths[pageIndex + 1]}`}
+						onClick={() => {
+							setCurrentPath(getCurrPath(location.pathname));
+							console.log("Complete");
+							setPageIndex(pageIndex + 1);
+						}}
+					>
+						<NextButton variant="contained" disableElevation>
+							Finish
+						</NextButton>
+					</Link>
+				)}
+				{pageIndex === paths.length - 1 && (
+					<Link
+						style={{ textDecoration: "none" }}
+						to={`${paths[0]}`}
+						onClick={() => {
+							setCurrentPath(getCurrPath(location.pathname));
+							setPageIndex(0);
+						}}
+					>
+						<NextButton variant="contained" disableElevation>
+							Reset
 						</NextButton>
 					</Link>
 				)}
