@@ -9,9 +9,7 @@ import { Message } from "./pages/Message";
 import { Notifications } from "./pages/Notifications";
 import "./index.css";
 import ItemGrid from "./pages/Inventory/ItemGrid";
-import TaskCard from "./components/TaskCard";
 import { Dashboard } from "./pages/Dashboard";
-=======
 import WalletPage from "./pages/Wallet/WalletPage";
 
 // Program flow Imports
@@ -24,26 +22,13 @@ import {
 } from "./pages/Programs/CreateProgram";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+	document.getElementById("root") as HTMLElement
 );
 
 const router = createBrowserRouter([
-
-  {
-    path: "/",
-    element: <div></div>,
-  },
-  {
-    path: "/home",
-    element: (
-      <div>
-        <b>Home</b>
-      </div>
-    ),
-  },
 	{
 		path: "/",
-		element: <div></div>,
+		element: <Dashboard />,
 	},
 	{
 		path: "/home",
@@ -83,10 +68,10 @@ const router = createBrowserRouter([
 		path: "/notifications",
 		element: <Notifications />,
 	},
-  {
-    path: "/inventory",
+	{
+		path: "/inventory",
 		element: <ItemGrid />,
-  },
+	},
 	{
 		path: "/wallet",
 		element: <WalletPage />,
@@ -94,14 +79,13 @@ const router = createBrowserRouter([
 ]);
 
 root.render(
-  <div>
-    <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <Toolbar />
-        <LeftSideBar />
-        <Dashboard />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </React.StrictMode>
-  </div>
+	<div>
+		<React.StrictMode>
+			<ThemeProvider theme={theme}>
+				<Toolbar />
+				<LeftSideBar />
+				<RouterProvider router={router} />
+			</ThemeProvider>
+		</React.StrictMode>
+	</div>
 );
