@@ -275,7 +275,10 @@ function Operations() {
     return (
         <>
             <ProgressBar page={2} />
-            <NextandBackButton next="/Coop/Budgeting" back="/Coop/CreateCoop" />
+            <NextandBackButton
+                next="/Coop/Budgeting"
+                back="/Coop/BasicInformation"
+            />
             <Page>
                 <Form>
                     <Header text="Operations" />
