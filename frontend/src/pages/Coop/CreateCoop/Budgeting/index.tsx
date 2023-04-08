@@ -1,10 +1,7 @@
 import styled from "@emotion/styled";
 import react from "react";
-// import Form from "../../components/CoopTemplate/Form";
-import Header from "../../components/CoopTemplate/Header";
-import Page from "../../components/CoopTemplate/Page";
-import NextandBackButton from "../../components/NextandBackButton";
-import ProgressBar from "../../components/ProgressBar";
+import NextandBackButton from "../../CoopComponents/NextandBackButton";
+import ProgressBar from "../../CoopComponents/ProgressBar";
 import {
     Checkbox,
     Container,
@@ -22,6 +19,8 @@ import {
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import EventIcon from "@mui/icons-material/Event";
+import Header from "../../CoopComponents/CoopTemplate/header";
+import Page from "../../CoopComponents/CoopTemplate/page";
 
 const Form = styled.div({
     display: "flex",
@@ -247,8 +246,6 @@ const Crowdfunding = () => {
 function Budgeting() {
     return (
         <>
-            <ProgressBar page={3} />
-            <NextandBackButton next="/Coop/Promotion" back="/Coop/Operations" />
             <Page>
                 <Form>
                     <Header text="Budgeting" />

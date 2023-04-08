@@ -1,13 +1,8 @@
 import React from "react";
-import NextandBackButton from "../../components/NextandBackButton";
-import ProgressBar from "../../components/ProgressBar";
-import Header from "../../components/CoopTemplate/Header";
 import styled from "@emotion/styled";
 import EventIcon from "@mui/icons-material/Event";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import SearchIcon from "@mui/icons-material/Search";
-import Page from "../../components/CoopTemplate/Page";
-import Form from "../../components/CoopTemplate/Form";
 import {
     FormControl,
     FormControlLabel,
@@ -21,6 +16,11 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
+import Form from "../../CoopComponents/CoopTemplate/form";
+import Header from "../../CoopComponents/CoopTemplate/header";
+import Page from "../../CoopComponents/CoopTemplate/page";
+import NextandBackButton from "../../CoopComponents/NextandBackButton";
+import ProgressBar from "../../CoopComponents/ProgressBar";
 
 const TimeDate = () => {
     const Container = styled.div({
@@ -274,11 +274,6 @@ const Location = () => {
 function Operations() {
     return (
         <>
-            <ProgressBar page={2} />
-            <NextandBackButton
-                next="/Coop/Budgeting"
-                back="/Coop/BasicInformation"
-            />
             <Page>
                 <Form>
                     <Header text="Operations" />

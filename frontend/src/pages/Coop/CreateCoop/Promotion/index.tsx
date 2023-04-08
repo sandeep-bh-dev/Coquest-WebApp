@@ -1,9 +1,5 @@
 import react, { useRef } from "react";
-import NextandBackButton from "../../components/NextandBackButton";
-import ProgressBar from "../../components/ProgressBar";
-import Header from "../../components/CoopTemplate/Header";
-import Page from "../../components/CoopTemplate/Page";
-import Form from "../../components/CoopTemplate/Form";
+
 import {
     Checkbox,
     Chip,
@@ -20,9 +16,12 @@ import {
 import styled from "@emotion/styled";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import CopyTextButton from "../../components/Sharelink";
-import CopyTextFieldButton from "../../components/Sharelink";
-import Sharelink from "../../components/Sharelink";
+import Form from "../../CoopComponents/CoopTemplate/form";
+import Header from "../../CoopComponents/CoopTemplate/header";
+import Page from "../../CoopComponents/CoopTemplate/page";
+import NextandBackButton from "../../CoopComponents/NextandBackButton";
+import ProgressBar from "../../CoopComponents/ProgressBar";
+import Sharelink from "../../CoopComponents/Sharelink";
 
 const Map = () => {
     const MapContainer = styled.div({
@@ -122,8 +121,6 @@ const InviteAndShare = () => {
 function Promotion() {
     return (
         <>
-            <ProgressBar page={4} />
-            <NextandBackButton next="" back="/Coop/Budgeting" />
             <Page>
                 <Form>
                     <Header text="Promotion" />
