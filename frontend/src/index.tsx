@@ -35,6 +35,11 @@ const router = createBrowserRouter([
     },
 
     {
+        path: "/Login",
+        element: <Login />,
+    },
+
+    {
         path: "/pages/Coop",
         element: <CreateCoop />,
         children: [
@@ -55,11 +60,6 @@ const router = createBrowserRouter([
                 element: <Promotion />,
             },
         ],
-    },
-
-    {
-        path: "/Login",
-        element: <Login />,
     },
 ]);
 
