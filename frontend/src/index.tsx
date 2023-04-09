@@ -27,7 +27,7 @@ import {
     CoopBudgeting,
     CoopOperations,
     CoopPromotion,
-} from "./pages/Coop/CreateCoop/CreateCoop";
+} from "./pages/Coop/CreateCoop";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -120,4 +120,5 @@ root.render(
             </ThemeProvider>
         </React.StrictMode>
     </div>
+
 );
