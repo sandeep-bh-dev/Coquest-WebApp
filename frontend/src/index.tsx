@@ -5,15 +5,21 @@ import Toolbar from "./components/Toolbar";
 import LeftSideBar from "./components/LeftSideBar";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./styles/theme";
+import { Message } from "./pages/Message";
+import { Notifications } from "./pages/Notifications";
 import "./index.css";
-import TaskCard from "./pages/Coop/CoopComponents/TaskCard";
+import ItemGrid from "./pages/Inventory/ItemGrid";
+import { Dashboard } from "./pages/Dashboard";
+import WalletPage from "./pages/Wallet/WalletPage";
+
+// Program flow Imports
 import {
-    Budgeting,
     BasicInformation,
+    Budgeting,
+    CreateProgram,
     Operations,
     Promotion,
-} from "./pages/Coop/CreateCoop";
-import { Login } from "./pages/Login";
+} from "./pages/Programs/CreateProgram";
 import CreateCoop from "./pages/Coop/CreateCoop/CreateCoop";
 
 const root = ReactDOM.createRoot(
@@ -23,7 +29,7 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <div></div>,
+        element: <Dashboard />,
     },
     {
         path: "/home",
@@ -33,10 +39,27 @@ const router = createBrowserRouter([
             </div>
         ),
     },
-
     {
-        path: "/Login",
-        element: <Login />,
+        path: "/programs/create",
+        element: <CreateProgram />,
+        children: [
+            {
+                path: "basic-information",
+                element: <BasicInformation />,
+            },
+            {
+                path: "operations",
+                element: <Operations />,
+            },
+            {
+                path: "budgeting",
+                element: <Budgeting />,
+            },
+            {
+                path: "promotion",
+                element: <Promotion />,
+            },
+        ],
     },
 
     {
@@ -61,14 +84,33 @@ const router = createBrowserRouter([
             },
         ],
     },
+
+    {
+        path: "/message",
+        element: <Message />,
+    },
+    {
+        path: "/notifications",
+        element: <Notifications />,
+    },
+    {
+        path: "/inventory",
+        element: <ItemGrid />,
+    },
+    {
+        path: "/wallet",
+        element: <WalletPage />,
+    },
 ]);
 
 root.render(
-    <React.StrictMode>
-        <ThemeProvider theme={theme}>
-            <Toolbar />
-            <LeftSideBar />
-            <RouterProvider router={router} />
-        </ThemeProvider>
-    </React.StrictMode>
+    <div>
+        <React.StrictMode>
+            <ThemeProvider theme={theme}>
+                <Toolbar />
+                <LeftSideBar />
+                <RouterProvider router={router} />
+            </ThemeProvider>
+        </React.StrictMode>
+    </div>
 );
