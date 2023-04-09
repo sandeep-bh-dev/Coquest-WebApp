@@ -14,13 +14,21 @@ import WalletPage from "./pages/Wallet/WalletPage";
 
 // Program flow Imports
 import {
-	BasicInformation,
-	Budgeting,
-	CreateProgram,
-	Operations,
-	Promotion,
+    BasicInformation,
+    Budgeting,
+    CreateProgram,
+    Operations,
+    Promotion,
 } from "./pages/Programs/CreateProgram";
 import FinishPage from "./pages/Programs/CreateProgram/FinishPage";
+
+import {
+    CreateCoop,
+    CoopBasicInformation,
+    CoopBudgeting,
+    CoopOperations,
+    CoopPromotion,
+} from "./pages/Coop/CreateCoop";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -64,7 +72,29 @@ const router = createBrowserRouter([
 				element: <FinishPage />,
 			},
 		],
-	},
+	}, 
+  {
+        path: "/pages/Coop",
+        element: <CreateCoop />,
+        children: [
+            {
+                path: "basic-information",
+                element: <CoopBasicInformation />,
+            },
+            {
+                path: "operations",
+                element: <CoopOperations />,
+            },
+            {
+                path: "budgeting",
+                element: <CoopBudgeting />,
+            },
+            {
+                path: "promotion",
+                element: <CoopPromotion />,
+            },
+        ],
+    },
 	{
 		path: "/message",
 		element: <Message />,
