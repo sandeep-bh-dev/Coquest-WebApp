@@ -231,7 +231,7 @@ const CardContainer = styled.div({
     gap: 25,
 });
 
-function BasicInformation() {
+function CoopBasicInformation() {
     return (
         <Page>
             <Form>
@@ -256,4 +256,4 @@ function BasicInformation() {
     );
 }
 
-export default BasicInformation;
+export default CoopBasicInformation;

@@ -20,7 +20,14 @@ import {
     Operations,
     Promotion,
 } from "./pages/Programs/CreateProgram";
-import CreateCoop from "./pages/Coop/CreateCoop/CreateCoop";
+
+import {
+    CreateCoop,
+    CoopBasicInformation,
+    CoopBudgeting,
+    CoopOperations,
+    CoopPromotion,
+} from "./pages/Coop/CreateCoop/CreateCoop";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -68,19 +75,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "basic-information",
-                element: <BasicInformation />,
+                element: <CoopBasicInformation />,
             },
             {
                 path: "operations",
-                element: <Operations />,
+                element: <CoopOperations />,
             },
             {
                 path: "budgeting",
-                element: <Budgeting />,
+                element: <CoopBudgeting />,
             },
             {
                 path: "promotion",
-                element: <Promotion />,
+                element: <CoopPromotion />,
             },
         ],
     },

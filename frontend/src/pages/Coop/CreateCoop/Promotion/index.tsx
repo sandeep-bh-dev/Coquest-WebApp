@@ -118,7 +118,7 @@ const InviteAndShare = () => {
         </>
     );
 };
-function Promotion() {
+function CoopPromotion() {
     return (
         <>
             <Page>
@@ -133,4 +133,4 @@ function Promotion() {
     );
 }
 
-export default Promotion;
+export default CoopPromotion;

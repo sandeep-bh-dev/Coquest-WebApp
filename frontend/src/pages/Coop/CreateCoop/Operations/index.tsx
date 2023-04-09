@@ -271,7 +271,7 @@ const Location = () => {
     );
 };
 
-function Operations() {
+function CoopOperations() {
     return (
         <>
             <Page>
@@ -288,4 +288,4 @@ function Operations() {
     );
 }
 
-export default Operations;
+export default CoopOperations;
