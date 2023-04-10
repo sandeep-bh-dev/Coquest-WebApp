@@ -29,3 +29,7 @@ code {
 
 .react-time-picker__wrapper * {color: #2c2b2b;
 }
+.map-styling {
+  height: 600px;
+  width: 100%;
+}

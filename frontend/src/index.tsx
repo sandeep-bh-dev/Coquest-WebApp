@@ -20,6 +20,7 @@ import {
     Operations,
     Promotion,
 } from "./pages/Programs/CreateProgram";
+import FinishPage from "./pages/Programs/CreateProgram/FinishPage";
 
 import {
     CreateCoop,
@@ -30,46 +31,49 @@ import {
 } from "./pages/Coop/CreateCoop";
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+	document.getElementById("root") as HTMLElement
 );
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Dashboard />,
-    },
-    {
-        path: "/home",
-        element: (
-            <div>
-                <b>Home</b>
-            </div>
-        ),
-    },
-    {
-        path: "/programs/create",
-        element: <CreateProgram />,
-        children: [
-            {
-                path: "basic-information",
-                element: <BasicInformation />,
-            },
-            {
-                path: "operations",
-                element: <Operations />,
-            },
-            {
-                path: "budgeting",
-                element: <Budgeting />,
-            },
-            {
-                path: "promotion",
-                element: <Promotion />,
-            },
-        ],
-    },
-
-    {
+	{
+		path: "/",
+		element: <Dashboard />,
+	},
+	{
+		path: "/home",
+		element: (
+			<div>
+				<b>Home</b>
+			</div>
+		),
+	},
+	{
+		path: "/programs/create",
+		element: <CreateProgram />,
+		children: [
+			{
+				path: "basic-information",
+				element: <BasicInformation />,
+			},
+			{
+				path: "operations",
+				element: <Operations />,
+			},
+			{
+				path: "budgeting",
+				element: <Budgeting />,
+			},
+			{
+				path: "promotion",
+				element: <Promotion />,
+			},
+			{
+				path: "finish",
+				element: <FinishPage />,
+			},
+		],
+	}, 
+  {
         path: "/pages/Coop",
         element: <CreateCoop />,
         children: [
@@ -91,34 +95,32 @@ const router = createBrowserRouter([
             },
         ],
     },
-
-    {
-        path: "/message",
-        element: <Message />,
-    },
-    {
-        path: "/notifications",
-        element: <Notifications />,
-    },
-    {
-        path: "/inventory",
-        element: <ItemGrid />,
-    },
-    {
-        path: "/wallet",
-        element: <WalletPage />,
-    },
+	{
+		path: "/message",
+		element: <Message />,
+	},
+	{
+		path: "/notifications",
+		element: <Notifications />,
+	},
+	{
+		path: "/inventory",
+		element: <ItemGrid />,
+	},
+	{
+		path: "/wallet",
+		element: <WalletPage />,
+	},
 ]);
 
 root.render(
-    <div>
-        <React.StrictMode>
-            <ThemeProvider theme={theme}>
-                <Toolbar />
-                <LeftSideBar />
-                <RouterProvider router={router} />
-            </ThemeProvider>
-        </React.StrictMode>
-    </div>
-
+	<div>
+		<React.StrictMode>
+			<ThemeProvider theme={theme}>
+				<Toolbar />
+				<LeftSideBar />
+				<RouterProvider router={router} />
+			</ThemeProvider>
+		</React.StrictMode>
+	</div>
 );
