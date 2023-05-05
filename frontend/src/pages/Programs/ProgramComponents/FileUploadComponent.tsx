@@ -1,10 +1,14 @@
+import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 
-const fileTypes = ["JPG", "PNG", "GIF"];
+const fileTypes = ["JPG", "PNG", "GIF", "TXT", "PDF", "DOCX", "ZIP"];
+type Props = {
+	onFileUpload: (file: any) => void;
+};
 
-const FileUploadComponent = () => {
+const FileUploadComponent = ({ onFileUpload }: Props) => {
 	const [file, setFile] = useState({
 		name: "default",
 	});
@@ -13,6 +17,7 @@ const FileUploadComponent = () => {
 	const handleChange = (file: any) => {
 		setFile(file);
 		setFileUploaded(true);
+		onFileUpload(file); // call the prop function with the selected file
 	};
 
 	return (
@@ -22,7 +27,7 @@ const FileUploadComponent = () => {
 				name="file"
 				hoverTitle="Drop Image file here"
 				types={fileTypes}
-				maxSize="2"
+				maxSize="10"
 				multiple={false}
 			/>
 			{fileUploaded && (

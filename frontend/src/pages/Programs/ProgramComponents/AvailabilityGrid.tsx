@@ -42,7 +42,9 @@ const AvailabilityGrid = () => {
 	}>({});
 
 	const handleTest = () => {
-		console.log("test running: current state--- " + selectedValues[0]);
+		console.log(
+			"test running: current state--- " + selectedValues["monday"]
+		);
 	};
 	const handleSelectedValueChange = (name: string, value: string) => {
 		setSelectedValues({
@@ -53,8 +55,8 @@ const AvailabilityGrid = () => {
 	return (
 		<ContainerGrid container spacing={2}>
 			<GridHeader />
-			{days.map((day) => (
-				<Grid item xs={20}>
+			{days.map((day, index) => (
+				<Grid item xs={20} key={index}>
 					<RadioGridRow
 						name={day}
 						onChange={handleSelectedValueChange}
@@ -62,7 +64,7 @@ const AvailabilityGrid = () => {
 					<hr />
 				</Grid>
 			))}
-			<Button onClick={handleTest}>Tester</Button>
+			{/* <Button onClick={handleTest}>Tester</Button> */}
 		</ContainerGrid>
 	);
 };

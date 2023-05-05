@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Typography, TextField } from "@mui/material";
-import { styled, TypographyProps } from "@mui/system";
-import { Outlet } from "react-router-dom";
-import { useLocation, Link } from "react-router-dom";
+import { Button, Typography, TextField, Grid, Card } from "@mui/material";
+import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
 import AddContainer from "../ProgramComponents/AddContainer";
-import { RadioGridRow } from "../ProgramComponents/RadioGridRow";
 import AvailabilityGrid from "../ProgramComponents/AvailabilityGrid";
+import SkillsCertsSearch from "../ProgramComponents/SkillsCertsSearch";
+import FileUploadComponent from "../ProgramComponents/FileUploadComponent";
+import FileCard from "../ProgramComponents/FileCard";
 
 const Container = styled("div")({
 	display: "flex",
@@ -64,9 +65,37 @@ const SubtitleField = styled(Typography)({
 	fontWeight: 800,
 	fontSize: 16,
 });
+
 type StyledTextFieldProps = {
 	label: string;
 	placeholder: string;
+};
+
+type Education = {
+	level: string;
+	institute: string;
+	program: string;
+	degree: string;
+};
+
+type WorkExperience = {
+	position: string;
+	employer: string;
+	location: string;
+	jobResponsibilties: string;
+	skills: string;
+};
+type Reference = {
+	fullName: string;
+	email: string;
+	phone: string;
+};
+
+type Project = {
+	name: string;
+	type: string;
+	description: string;
+	completed: boolean;
 };
 
 const StyledTextField = styled(TextField)<StyledTextFieldProps>`
@@ -92,6 +121,22 @@ const EditProfile = () => {
 	const [address, setAddress] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [email, setEmail] = useState("");
+	const [files, setFiles] = useState<any[]>([]);
+	const [badgeNames, setBadgeNames] = useState<string[]>([]);
+
+	const handleFileUpload = (file: any) => {
+		setFiles([...files, file]); // add the file to the files state
+	};
+
+	// Fetches on page load
+	useEffect(() => {
+		let tempBadges: string[] = [];
+
+		for (let i = 0; i <= 3; i++) {
+			tempBadges.push(`Badge Name`);
+		}
+		setBadgeNames(tempBadges);
+	}, []);
 
 	const add = () => {
 		console.log("Adding to be implemented");
@@ -131,7 +176,11 @@ const EditProfile = () => {
 					<BackButton>{"<"} Back</BackButton>
 				</Link>
 				<TitleField>Edit Profile</TitleField>
-				<SaveButton variant="contained" disableElevation>
+				<SaveButton
+					variant="contained"
+					onClick={() => console.log("Saving")}
+					disableElevation
+				>
 					Save
 				</SaveButton>
 			</Header>
@@ -202,6 +251,52 @@ const EditProfile = () => {
 				<Spacer />
 			</SubtitleWrapper>
 			<AvailabilityGrid />
+			<SubtitleWrapper>
+				<Spacer />
+				<SubtitleField>Projects</SubtitleField>
+			</SubtitleWrapper>
+			<AddWrapper>
+				<AddContainer label="Add project" onClick={add} />
+			</AddWrapper>
+			<Spacer />
+			{/*  The followinhg skills and certs search feature is a reused component, 
+			but does not print skills and certs, instead prints badge names */}
+			<AddWrapper>
+				<SkillsCertsSearch
+					skills={badgeNames}
+					label="Search Badges and Rewards"
+				/>
+			</AddWrapper>
+			<SubtitleWrapper>
+				<Spacer />
+				<SubtitleField>References</SubtitleField>
+			</SubtitleWrapper>
+			<AddWrapper>
+				<AddContainer label="Add personal references" onClick={add} />
+			</AddWrapper>
+			<SubtitleWrapper>
+				<Spacer />
+				<SubtitleField>Document and media</SubtitleField>
+			</SubtitleWrapper>
+			<AddWrapper>
+				<Spacer />
+				<FileUploadComponent onFileUpload={handleFileUpload} />
+				<Spacer />
+				<Grid
+					container
+					spacing={{ xs: 2, md: 4, lg: 2 }}
+					columns={{ xs: 4, sm: 8, md: 12 }}
+				>
+					{files.map((file, index) => (
+						<Grid item xs={2} sm={4} md={4} key={index}>
+							<FileCard fileName={file.name} />
+						</Grid>
+					))}
+				</Grid>
+			</AddWrapper>
+			<Spacer />
+			<Spacer />
+			<Spacer />
 		</Container>
 	);
 };

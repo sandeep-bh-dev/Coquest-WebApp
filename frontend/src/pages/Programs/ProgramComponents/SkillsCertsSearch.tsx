@@ -64,8 +64,9 @@ const SelectedSkillButton = styled(Button)({
 
 export interface SkillSearchProps {
 	skills: string[];
+	label: string;
 }
-export type HandleSkillType = (skill: string) => void;
+export type HandleSkillType = (skill: string, label: string) => void;
 
 const SkillsCertsSearch = (props: SkillSearchProps) => {
 	const [searchValue, setSearchValue] = useState("");
@@ -99,7 +100,7 @@ const SkillsCertsSearch = (props: SkillSearchProps) => {
 					key={skill}
 					variant="contained"
 					onClick={() => {
-						handleHashtagClick(skill);
+						handleHashtagClick(skill, props.label);
 						setSearchValue("");
 					}}
 				>
@@ -116,7 +117,9 @@ const SkillsCertsSearch = (props: SkillSearchProps) => {
 					<SelectedSkillButton
 						key={skill}
 						variant="contained"
-						onClick={() => handleSelectedSkillClick(skill)}
+						onClick={() =>
+							handleSelectedSkillClick(skill, props.label)
+						}
 					>
 						<CheckMark />
 						{skill}
@@ -131,7 +134,7 @@ const SkillsCertsSearch = (props: SkillSearchProps) => {
 		<SearchBarContainer>
 			<SearchInputContainer>
 				<InputBase
-					placeholder="Search skills and certifications"
+					placeholder={props.label}
 					className="placeholder-mod"
 					style={{ width: "90%" }}
 					value={searchValue}
