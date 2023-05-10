@@ -77,7 +77,11 @@ const Promotion = () => {
 			{/* THE FOLLOWING LINE OF CODE MUST BE COMMENTED OUT TO SHOW MAP */}
 			{/* <MapComponent /> */}
 			<SubtitleField>Add a header image</SubtitleField>
-			<FileUploadComponent />
+			<FileUploadComponent
+				onFileUpload={() =>
+					console.log("Promotion file upload -- Success")
+				}
+			/>
 			<SubtitleField>Invite and Share</SubtitleField>
 			<Spacer />
 			<InviteGrid container spacing={1}>

@@ -11,24 +11,26 @@ import "./index.css";
 import ItemGrid from "./pages/Inventory/ItemGrid";
 import { Dashboard } from "./pages/Dashboard";
 import WalletPage from "./pages/Wallet/WalletPage";
+import { Outlet } from "react-router-dom";
 
 // Program flow Imports
 import {
-    BasicInformation,
-    Budgeting,
-    CreateProgram,
-    Operations,
-    Promotion,
+	BasicInformation,
+	Budgeting,
+	CreateProgram,
+	Operations,
+	Promotion,
 } from "./pages/Programs/CreateProgram";
 import FinishPage from "./pages/Programs/CreateProgram/FinishPage";
 
 import {
-    CreateCoop,
-    CoopBasicInformation,
-    CoopBudgeting,
-    CoopOperations,
-    CoopPromotion,
+	CreateCoop,
+	CoopBasicInformation,
+	CoopBudgeting,
+	CoopOperations,
+	CoopPromotion,
 } from "./pages/Coop/CreateCoop";
+import { EditProfile } from "./pages/Programs/EditProfile";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -48,53 +50,69 @@ const router = createBrowserRouter([
 		),
 	},
 	{
-		path: "/programs/create",
-		element: <CreateProgram />,
+		path: "/programs",
+		element: <Outlet />,
+		children: [
+			{
+				path: "create",
+				element: <CreateProgram />,
+				children: [
+					{
+						path: "basic-information",
+						element: <BasicInformation />,
+					},
+					{
+						path: "operations",
+						element: <Operations />,
+					},
+					{
+						path: "budgeting",
+						element: <Budgeting />,
+					},
+					{
+						path: "promotion",
+						element: <Promotion />,
+					},
+					{
+						path: "finish",
+						element: <FinishPage />,
+					},
+				],
+			},
+			{
+				path: "edit",
+				element: <Outlet />,
+				children: [
+					{
+						path: "profile",
+						element: <EditProfile />,
+					},
+				],
+			},
+		],
+	},
+	{
+		path: "/pages/Coop",
+		element: <CreateCoop />,
 		children: [
 			{
 				path: "basic-information",
-				element: <BasicInformation />,
+				element: <CoopBasicInformation />,
 			},
 			{
 				path: "operations",
-				element: <Operations />,
+				element: <CoopOperations />,
 			},
 			{
 				path: "budgeting",
-				element: <Budgeting />,
+				element: <CoopBudgeting />,
 			},
 			{
 				path: "promotion",
-				element: <Promotion />,
-			},
-			{
-				path: "finish",
-				element: <FinishPage />,
+				element: <CoopPromotion />,
 			},
 		],
-	}, 
-  {
-        path: "/pages/Coop",
-        element: <CreateCoop />,
-        children: [
-            {
-                path: "basic-information",
-                element: <CoopBasicInformation />,
-            },
-            {
-                path: "operations",
-                element: <CoopOperations />,
-            },
-            {
-                path: "budgeting",
-                element: <CoopBudgeting />,
-            },
-            {
-                path: "promotion",
-                element: <CoopPromotion />,
-            },
-        ],
-    },
+	},
 	{
 		path: "/message",
 		element: <Message />,

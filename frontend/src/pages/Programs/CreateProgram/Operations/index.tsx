@@ -206,7 +206,10 @@ const Operations = () => {
 				multiline
 				rows={4}
 			/>
-			<SkillsCertsSearch skills={skills} />
+			<SkillsCertsSearch
+				skills={skills}
+				label="Search Skills and Certifications"
+			/>
 			<AddContainer label="Add another position" onClick={addPosition} />
 		</ContentView>
 	);
