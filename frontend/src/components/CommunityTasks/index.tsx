@@ -109,21 +109,20 @@ const CommunityTasks = () => {
 				}}
 			>
 				<>
-					<Grid container rowSpacing={2}>
-						{taskContents.map((item) => {
-							return (
-								<Grid item xs={4} md={8}>
-									<TaskCard
-										name={item.taskName}
-										community={item.communityName}
-										location={item.location}
-										description={item.description}
-										type="small"
-									/>
-								</Grid>
-							);
-						})}
+					<Grid container spacing={2}>
+						{taskContents.map((item, index) => (
+							<Grid item key={index} xs={12} md={6} lg={4}>
+							<TaskCard
+								name={item.taskName}
+								community={item.communityName}
+								location={item.loction}
+								description={item.description}
+								type="small"
+							/>
+							</Grid>
+						))}
 					</Grid>
+
 				</>
 			</div>
 		</CommunityContainer>
