@@ -1,8 +1,23 @@
 import React from "react";
 import { styled } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
-import { LinearProgress } from "@mui/joy";
+import LinearProgress, {
+	linearProgressClasses,
+} from "@mui/material/LinearProgress";
 
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+	height: 10,
+	borderRadius: 5,
+	marginBottom: 20,
+	[`&.${linearProgressClasses.colorPrimary}`]: {
+		backgroundColor:
+			theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
+	},
+	[`& .${linearProgressClasses.bar}`]: {
+		borderRadius: 5,
+		backgroundColor: theme.palette.mode === "light" ? "#1a90ff" : "#308fe8",
+	},
+}));
 interface Program {
 	name: string;
 	location: string;
@@ -27,6 +42,11 @@ const Title = styled(Typography)({
 	marginBottom: 15,
 });
 
+const GridCol2 = styled(Grid)({
+	display: "flex",
+	flexDirection: "column",
+	justifyContent: "center",
+});
 const ProgramPane = (props: ProgramProps) => {
 	return (
 		<Container>
@@ -36,9 +56,13 @@ const ProgramPane = (props: ProgramProps) => {
 					<Title>{props.program.name}</Title>
 					<Typography>{props.program.description}</Typography>
 				</Grid>
-				<Grid item xs={5}>
+				<GridCol2 item xs={5}>
 					<Typography>Progress: {props.program.progress}%</Typography>
-					<LinearProgress color="success" />
+					<BorderLinearProgress
+						variant="determinate"
+						value={props.program.progress}
+					/>
+
 					<Typography>
 						<strong>Time: </strong>
 						{props.program.time}
@@ -51,7 +75,7 @@ const ProgramPane = (props: ProgramProps) => {
 						<strong>Spots open: </strong>
 						{props.program.openSpots} seats left
 					</Typography>
-				</Grid>
+				</GridCol2>
 			</Grid>
 		</Container>
 	);
