@@ -1,13 +1,15 @@
 import React from "react";
 import { styled } from "@mui/system";
-import { Grid, Typography } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 import LinearProgress, {
 	linearProgressClasses,
 } from "@mui/material/LinearProgress";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 10,
 	borderRadius: 5,
+	width: "80%",
 	marginBottom: 20,
 	[`&.${linearProgressClasses.colorPrimary}`]: {
 		backgroundColor:
@@ -15,7 +17,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	},
 	[`& .${linearProgressClasses.bar}`]: {
 		borderRadius: 5,
-		backgroundColor: theme.palette.mode === "light" ? "#1a90ff" : "#308fe8",
+		backgroundColor: theme.palette.mode === "light" ? "#4ECB71" : "#308fe8",
 	},
 }));
 interface Program {
@@ -37,12 +39,12 @@ const Container = styled("div")({
 });
 
 const Title = styled(Typography)({
-	fontSize: 30,
+	fontSize: 25,
 	fontWeight: "525",
 	marginBottom: 15,
 });
 
-const GridCol2 = styled(Grid)({
+const GridCol = styled(Grid)({
 	display: "flex",
 	flexDirection: "column",
 	justifyContent: "center",
@@ -51,12 +53,12 @@ const ProgramPane = (props: ProgramProps) => {
 	return (
 		<Container>
 			<Grid container spacing={2}>
-				<Grid item xs={7}>
+				<Grid item xs={6}>
 					<Typography>{props.program.location}</Typography>
 					<Title>{props.program.name}</Title>
 					<Typography>{props.program.description}</Typography>
 				</Grid>
-				<GridCol2 item xs={5}>
+				<GridCol item xs={5}>
 					<Typography>Progress: {props.program.progress}%</Typography>
 					<BorderLinearProgress
 						variant="determinate"
@@ -75,7 +77,12 @@ const ProgramPane = (props: ProgramProps) => {
 						<strong>Spots open: </strong>
 						{props.program.openSpots} seats left
 					</Typography>
-				</GridCol2>
+				</GridCol>
+				<GridCol item xs={1}>
+					<IconButton>
+						<ArrowForwardIosIcon />
+					</IconButton>
+				</GridCol>
 			</Grid>
 		</Container>
 	);

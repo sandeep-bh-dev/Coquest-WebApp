@@ -7,7 +7,7 @@ const Container = styled("div")({
 	display: "flex",
 	margin: "auto",
 	marginTop: 40,
-	width: 800,
+	width: 835,
 	alignItems: "center",
 	justifyContent: "center",
 	flexDirection: "column",
