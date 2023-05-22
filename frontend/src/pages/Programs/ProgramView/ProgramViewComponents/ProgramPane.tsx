@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
-import LinearProgress from "@mui/material/LinearProgress";
+import { LinearProgress } from "@mui/joy";
 
 interface Program {
 	name: string;
@@ -38,7 +38,7 @@ const ProgramPane = (props: ProgramProps) => {
 				</Grid>
 				<Grid item xs={5}>
 					<Typography>Progress: {props.program.progress}%</Typography>
-					<LinearProgress color="success" thickness="3" />
+					<LinearProgress color="success" />
 					<Typography>
 						<strong>Time: </strong>
 						{props.program.time}

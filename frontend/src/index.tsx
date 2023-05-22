@@ -31,6 +31,7 @@ import {
 	CoopPromotion,
 } from "./pages/Coop/CreateCoop";
 import { EditProfile } from "./pages/Programs/EditProfile";
+import { ProgramView } from "./pages/Programs/ProgramView";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
 						element: <EditProfile />,
 					},
 				],
+			},
+			{
+				path: "view",
+				element: <ProgramView />,
 			},
 		],
 	},

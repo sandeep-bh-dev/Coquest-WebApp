@@ -27,8 +27,8 @@ interface ProgramProps {
 const ProgramListDisplay = (props: ProgramProps) => {
 	return (
 		<Container>
-			{props.programList.map((program) => {
-				return <ProgramPane program={program} />;
+			{props.programList.map((program, index) => {
+				return <ProgramPane program={program} key={index} />;
 			})}
 		</Container>
 	);
