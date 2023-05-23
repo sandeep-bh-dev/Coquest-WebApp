@@ -24,26 +24,27 @@ interface Program {
 	name: string;
 	location: string;
 	description: string;
-	progress: number;
-	time: string;
-	date: string;
-	openSpots: number;
+	progress: number | null;
+	time: string | null;
+	date: string | null;
+	openSpots: number | null;
 }
 interface ProgramProps {
 	program: Program;
 }
-const Container = styled("div")({
-	borderBottom: "1px solid black",
-	width: "100%",
+const Container = styled("div")(({ theme }) => ({
 	padding: 30,
-});
+	margin: "0 auto",
+	[theme.breakpoints.down("sm")]: {
+		width: "80%",
+	},
+}));
 
 const Title = styled(Typography)({
 	fontSize: 25,
 	fontWeight: "525",
 	marginBottom: 15,
 });
-
 const GridCol = styled(Grid)({
 	display: "flex",
 	flexDirection: "column",
@@ -53,29 +54,54 @@ const ProgramPane = (props: ProgramProps) => {
 	return (
 		<Container>
 			<Grid container spacing={2}>
-				<Grid item xs={6}>
-					<Typography>{props.program.location}</Typography>
+				<Grid item xs={6} sm={7}>
+					<Typography>
+						{props.program.location !== null &&
+						props.program.location !== ""
+							? props.program.location
+							: "(Not set yet)"}
+					</Typography>
 					<Title>{props.program.name}</Title>
 					<Typography>{props.program.description}</Typography>
 				</Grid>
-				<GridCol item xs={5}>
-					<Typography>Progress: {props.program.progress}%</Typography>
+				<GridCol item xs={4} sm={4}>
+					<Typography>
+						Progress:{" "}
+						{props.program.progress !== null
+							? props.program.progress
+							: 0}
+						%
+					</Typography>
+
 					<BorderLinearProgress
 						variant="determinate"
-						value={props.program.progress}
+						value={
+							props.program.progress !== null
+								? props.program.progress
+								: 0
+						}
 					/>
 
 					<Typography>
 						<strong>Time: </strong>
-						{props.program.time}
+						{props.program.time !== null &&
+						props.program.time !== ""
+							? props.program.time
+							: "(Not set yet)"}
 					</Typography>
 					<Typography>
 						<strong>Date: </strong>
-						{props.program.date}
+						{props.program.date !== null &&
+						props.program.date !== ""
+							? props.program.date
+							: "(Not set yet)"}
 					</Typography>
 					<Typography>
 						<strong>Spots open: </strong>
-						{props.program.openSpots} seats left
+						{props.program.openSpots !== null
+							? props.program.openSpots
+							: 0}{" "}
+						seats left
 					</Typography>
 				</GridCol>
 				<GridCol item xs={1}>
