@@ -5,6 +5,7 @@ import LinearProgress, {
 	linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Program } from "../../ProgramComponents/TypeDefinitions/Program";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 10,
@@ -20,15 +21,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 		backgroundColor: theme.palette.mode === "light" ? "#4ECB71" : "#308fe8",
 	},
 }));
-interface Program {
-	name: string;
-	location: string;
-	description: string;
-	progress: number | null;
-	time: string | null;
-	date: string | null;
-	openSpots: number | null;
-}
+
 interface ProgramProps {
 	program: Program;
 }

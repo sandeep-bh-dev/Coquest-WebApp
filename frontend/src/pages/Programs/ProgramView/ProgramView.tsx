@@ -7,6 +7,7 @@ import {
 	templatePrograms,
 	populatedPrograms,
 } from "../../../testing/TestProgramsData";
+import { Program } from "../ProgramComponents/TypeDefinitions/Program";
 
 const Container = styled("div")({
 	display: "flex",
@@ -64,15 +65,7 @@ function TabPanel(props: any) {
 
 	return <div hidden={value !== index}>{value === index && children}</div>;
 }
-interface Program {
-	name: string;
-	location: string;
-	description: string;
-	progress: number | null;
-	time: string | null;
-	date: string | null;
-	openSpots: number | null;
-}
+
 const ProgramView = () => {
 	const [value, setValue] = React.useState("one");
 	const [programsList, setProgramsList] = useState<Program[]>([]);

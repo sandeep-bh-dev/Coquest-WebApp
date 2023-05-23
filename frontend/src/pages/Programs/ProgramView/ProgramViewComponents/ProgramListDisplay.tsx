@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "@mui/system";
 import ProgramPane from "./ProgramPane";
+import { Program } from "../../ProgramComponents/TypeDefinitions/Program";
 
 const Container = styled("div")({
 	display: "flex",
@@ -23,15 +24,7 @@ const Container = styled("div")({
 		borderRadius: "10px",
 	},
 });
-interface Program {
-	name: string;
-	location: string;
-	description: string;
-	progress: number | null;
-	time: string | null;
-	date: string | null;
-	openSpots: number | null;
-}
+
 interface ProgramProps {
 	programList: Program[];
 }
