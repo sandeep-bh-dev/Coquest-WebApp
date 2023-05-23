@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-	Button,
-	Typography,
-	TextField,
-	Grid,
-	Card,
-	Tab,
-	Tabs,
-} from "@mui/material";
+import { Typography, Tab, Tabs } from "@mui/material";
 import { styled } from "@mui/system";
 import SearchBar from "../../../components/SearchBar";
 import ProgramListDisplay from "./ProgramViewComponents/ProgramListDisplay";
-import { programs } from "../../../testing/TestProgramsData";
+import {
+	templatePrograms,
+	populatedPrograms,
+} from "../../../testing/TestProgramsData";
 
 const Container = styled("div")({
 	display: "flex",
@@ -37,12 +32,15 @@ const SubtitleWrapper = styled("div")({
 	width: "100%",
 });
 
-const Header = styled("div")({
+const Header = styled("div")(({ theme }) => ({
 	width: "100%",
 	display: "flex",
 	justifyContent: "space-between",
 	alignItems: "center",
-});
+	[theme.breakpoints.down("sm")]: {
+		flexDirection: "column",
+	},
+}));
 
 const CustomTabs = styled(Tabs)({
 	width: "100%",
@@ -70,10 +68,10 @@ interface Program {
 	name: string;
 	location: string;
 	description: string;
-	progress: number;
-	time: string;
-	date: string;
-	openSpots: number;
+	progress: number | null;
+	time: string | null;
+	date: string | null;
+	openSpots: number | null;
 }
 const ProgramView = () => {
 	const [value, setValue] = React.useState("one");
@@ -84,7 +82,10 @@ const ProgramView = () => {
 	};
 
 	useEffect(() => {
-		setProgramsList(programs);
+		return () => {
+			// setProgramsList(templatePrograms); //Template data
+			setProgramsList(populatedPrograms); //Actual test data
+		};
 	}, []);
 
 	return (
