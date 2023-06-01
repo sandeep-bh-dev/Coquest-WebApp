@@ -29,10 +29,6 @@ const Spacer = styled("div")({
 	height: 26,
 });
 
-const SubtitleWrapper = styled("div")({
-	width: "100%",
-});
-
 const Header = styled("div")(({ theme }) => ({
 	width: "100%",
 	display: "flex",

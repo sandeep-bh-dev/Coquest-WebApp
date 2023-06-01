@@ -24,6 +24,8 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 interface ProgramProps {
 	program: Program;
+	// expanded: boolean;
+	// onToggleExpand: () => void;
 }
 const Container = styled("div")(({ theme }) => ({
 	padding: 30,
@@ -44,55 +46,47 @@ const GridCol = styled(Grid)({
 	justifyContent: "center",
 });
 const ProgramPane = (props: ProgramProps) => {
+	const { program } = props;
+
 	return (
 		<Container>
 			<Grid container spacing={2}>
 				<Grid item xs={6} sm={7}>
 					<Typography>
-						{props.program.location !== null &&
-						props.program.location !== ""
-							? props.program.location
+						{program.location !== null && program.location !== ""
+							? program.location
 							: "(Not set yet)"}
 					</Typography>
-					<Title>{props.program.name}</Title>
-					<Typography>{props.program.description}</Typography>
+					<Title>{program.name}</Title>
+					<Typography>{program.description}</Typography>
 				</Grid>
 				<GridCol item xs={4} sm={4}>
 					<Typography>
 						Progress:{" "}
-						{props.program.progress !== null
-							? props.program.progress
-							: 0}
-						%
+						{program.progress !== null ? program.progress : 0}%
 					</Typography>
 
 					<BorderLinearProgress
 						variant="determinate"
-						value={
-							props.program.progress !== null
-								? props.program.progress
-								: 0
-						}
+						value={program.progress !== null ? program.progress : 0}
 					/>
 
 					<Typography>
 						<strong>Time: </strong>
-						{props.program.time !== null &&
-						props.program.time !== ""
-							? props.program.time
+						{program.time !== null && program.time !== ""
+							? program.time
 							: "(Not set yet)"}
 					</Typography>
 					<Typography>
 						<strong>Date: </strong>
-						{props.program.date !== null &&
-						props.program.date !== ""
-							? props.program.date
+						{program.date !== null && program.date !== ""
+							? program.date
 							: "(Not set yet)"}
 					</Typography>
 					<Typography>
 						<strong>Spots open: </strong>
-						{props.program.openSpots !== null
-							? props.program.openSpots
+						{program.openSpots !== null
+							? program.openSpots
 							: 0}{" "}
 						seats left
 					</Typography>

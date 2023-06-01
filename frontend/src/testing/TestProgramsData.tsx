@@ -1,5 +1,6 @@
 export const templatePrograms = [
 	{
+		id: 1,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -10,6 +11,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 2,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -20,6 +22,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 3,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -30,6 +33,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 5,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -40,6 +44,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 6,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -50,6 +55,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 7,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -60,6 +66,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 8,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -70,6 +77,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 9,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -80,6 +88,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 10,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -90,6 +99,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 11,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -100,6 +110,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 12,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -110,6 +121,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 13,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -120,6 +132,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 14,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -130,6 +143,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 15,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -140,6 +154,7 @@ export const templatePrograms = [
 		openSpots: 4,
 	},
 	{
+		id: 16,
 		name: "Program name",
 		location: "Location",
 		description:
@@ -153,6 +168,7 @@ export const templatePrograms = [
 
 export const populatedPrograms = [
 	{
+		id: 1,
 		name: "Yoga in the Park",
 		location: "Central Park",
 		description:
@@ -163,6 +179,7 @@ export const populatedPrograms = [
 		openSpots: 10,
 	},
 	{
+		id: 2,
 		name: "Summer Concert Series",
 		location: "Town Square",
 		description:
@@ -173,6 +190,7 @@ export const populatedPrograms = [
 		openSpots: 50,
 	},
 	{
+		id: 3,
 		name: "Farmers Market",
 		location: "City Hall",
 		description:
@@ -183,6 +201,7 @@ export const populatedPrograms = [
 		openSpots: 0,
 	},
 	{
+		id: 4,
 		name: "Art Walk",
 		location: "Downtown",
 		description:
@@ -193,6 +212,7 @@ export const populatedPrograms = [
 		openSpots: 15,
 	},
 	{
+		id: 5,
 		name: "Beach Cleanup",
 		location: "Ocean Beach",
 		description:
@@ -203,6 +223,7 @@ export const populatedPrograms = [
 		openSpots: 20,
 	},
 	{
+		id: 6,
 		name: "Outdoor Movie Night",
 		location: "Community Park",
 		description:
@@ -213,6 +234,7 @@ export const populatedPrograms = [
 		openSpots: 0,
 	},
 	{
+		id: 7,
 		name: "5K Fun Run",
 		location: "",
 		description:
@@ -223,6 +245,7 @@ export const populatedPrograms = [
 		openSpots: 25,
 	},
 	{
+		id: 8,
 		name: "Food Festival",
 		location: "Main Street",
 		description:
@@ -233,6 +256,7 @@ export const populatedPrograms = [
 		openSpots: null,
 	},
 	{
+		id: 9,
 		name: "",
 		location: "",
 		description: "",
@@ -242,6 +266,7 @@ export const populatedPrograms = [
 		openSpots: null,
 	},
 	{
+		id: 10,
 		name: "",
 		location: "",
 		description: "",
@@ -251,6 +276,7 @@ export const populatedPrograms = [
 		openSpots: null,
 	},
 	{
+		id: 11,
 		name: "",
 		location: "",
 		description: "",

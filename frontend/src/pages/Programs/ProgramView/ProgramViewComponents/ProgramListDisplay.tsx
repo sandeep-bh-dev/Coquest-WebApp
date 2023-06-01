@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/system";
 import ProgramPane from "./ProgramPane";
 import { Program } from "../../ProgramComponents/TypeDefinitions/Program";
@@ -34,21 +34,19 @@ const Breaker = styled("hr")({
 });
 
 const ProgramListDisplay = (props: ProgramProps) => {
+	const validProgramList: Program[] =
+		props.programList.filter(validateProgram);
+
 	return (
 		<Container>
-			{props.programList.map((program, index) => {
+			{validProgramList.map((program, index) => {
 				return (
-					<>
-						{validateProgram(program) && (
-							<>
-								<ProgramPane program={program} key={index} />
-
-								{index + 1 <= props.programList.length && (
-									<Breaker></Breaker>
-								)}
-							</>
+					<React.Fragment key={index}>
+						<ProgramPane program={program} />
+						{index + 1 <= props.programList.length && (
+							<Breaker></Breaker>
 						)}
-					</>
+					</React.Fragment>
 				);
 			})}
 		</Container>
