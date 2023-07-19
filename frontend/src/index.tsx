@@ -52,7 +52,11 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/programs",
-		element: <Outlet />,
+		element: (
+			<>
+				<Outlet />
+			</>
+		),
 		children: [
 			{
 				path: "create",
