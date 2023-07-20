@@ -4,27 +4,42 @@ import SearchBar from "../../components/SearchBar";
 import SimpleCard from "../../components/SimpleCard/SimpleCard";
 import Stack from "@mui/material/Stack";
 import styled from "@emotion/styled";
-import { Container } from "@mui/system";
 import MyTasksContainer from "../../components/MyTasksContainer";
 import Maps from "../../components/Maps/Maps";
 import PostContainer, { ImageBoxes } from "../../components/PostsContainer";
 import CommunityTasks from "../../components/CommunityTasks";
 import Members, { MemberProps } from "../../components/Members";
 
+const Container = styled("div")({
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	justifyContent: "center",
+});
+
+const SearchContainer = styled("div")({});
+
+const Header = styled("div")({
+	width: "90%",
+	padding: 20,
+	display: "flex",
+	justifyContent: "space-between",
+	alignItems: "center",
+});
+
 function Dashboard() {
 	return (
-		<div>
-			<WelcomeMessage name="John Dory" communityName="Community name" />
-			<div
-				style={{
-					left: "793px",
-					top: "-70px",
-					position: "relative",
-				}}
-			>
-				<SearchBar />
-			</div>
-			<div
+		<Container>
+			<Header>
+				<WelcomeMessage
+					name="John Dory"
+					communityName="Community name"
+				/>
+				<SearchContainer>
+					<SearchBar />
+				</SearchContainer>
+			</Header>
+			{/* <div
 				className="container"
 				style={{
 					left: "134px",
@@ -86,8 +101,8 @@ function Dashboard() {
 					showAllLink="#"
 					userRole={["Role", "Role", "Role", "Role"]}
 				/>
-			</div>
-		</div>
+			</div> */}
+		</Container>
 	);
 }
 
