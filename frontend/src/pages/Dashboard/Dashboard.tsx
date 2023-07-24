@@ -9,6 +9,7 @@ import Maps from "../../components/Maps/Maps";
 import PostContainer, { ImageBoxes } from "../../components/PostsContainer";
 import CommunityTasks from "../../components/CommunityTasks";
 import Members, { MemberProps } from "../../components/Members";
+import { Grid, getAppBarUtilityClass } from "@mui/material";
 
 const Container = styled("div")({
 	display: "flex",
@@ -17,7 +18,7 @@ const Container = styled("div")({
 	justifyContent: "center",
 });
 
-const SearchContainer = styled("div")({});
+// const SearchContainer = styled("div")({});
 
 const Header = styled("div")({
 	width: "90%",
@@ -27,6 +28,31 @@ const Header = styled("div")({
 	alignItems: "center",
 });
 
+const CardCont = styled.div({
+	display: "flex",
+	flexDirection: "column",
+	gap: 10,
+	width: "100%",
+});
+
+const DashColumns = styled("div")({
+	display: "flex",
+	width: "93%",
+	height: 650,
+	overflow: "hidden",
+	"@media (max-width: 600px)": {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+});
+
+const DashColumn = styled.div({
+	width: "100%",
+	padding: 10,
+	height: "100%",
+});
 function Dashboard() {
 	return (
 		<Container>
@@ -35,42 +61,29 @@ function Dashboard() {
 					name="John Dory"
 					communityName="Community name"
 				/>
-				<SearchContainer>
+				{/* <SearchContainer>
 					<SearchBar />
-				</SearchContainer>
+				</SearchContainer> */}
 			</Header>
-			{/* <div
-				className="container"
-				style={{
-					left: "134px",
-					top: "52px",
-					position: "relative",
-				}}
-			>
-				<Stack spacing={1.8}>
-					<SimpleCard label="Community overview" />
-					<SimpleCard label="My projects" />
-					<SimpleCard label="Open projects" />
-				</Stack>
-			</div>
-			<div
-				style={{
-					left: "550px",
-					bottom: "166px",
-					position: "relative",
-				}}
-			>
-				<MyTasksContainer label="My Tasks" seeAllLink="#" />
-			</div>
-			<div
-				style={{
-					position: "relative",
-					left: "870px",
-					bottom: "820px",
-				}}
-			>
-				<Maps />
-			</div>
+			<DashColumns>
+				<DashColumn>
+					<CardCont>
+						<SimpleCard label="Community overview" />
+						<SimpleCard label="My projects" />
+						<SimpleCard label="Open projects" />
+					</CardCont>
+					<SimpleCard label="Posts" />
+				</DashColumn>
+				<DashColumn>
+					<MyTasksContainer label="My Tasks" seeAllLink="#" />
+				</DashColumn>
+				<DashColumn>
+					<Maps />
+				</DashColumn>
+			</DashColumns>
+			{/*
+			
+			
 			<div
 				style={{
 					position: "relative",
