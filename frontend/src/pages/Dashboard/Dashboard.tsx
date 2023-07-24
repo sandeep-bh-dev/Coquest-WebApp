@@ -44,6 +44,7 @@ const DashColumns = styled("div")({
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
+		height: "100%",
 		justifyContent: "center",
 	},
 });
