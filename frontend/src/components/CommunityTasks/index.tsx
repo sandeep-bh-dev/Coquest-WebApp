@@ -15,7 +15,7 @@ const Header = styled(Typography)({
 
 const CommunityContainer = styled.div({
 	backgroundColor: "#D9D9D9",
-	borderRadius: 20,
+	borderRadius: 10,
 	width: "95%",
 	height: 329,
 	margin: "auto",

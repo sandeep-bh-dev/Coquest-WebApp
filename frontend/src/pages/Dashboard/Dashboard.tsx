@@ -75,8 +75,9 @@ const CommunityTaskContainer = styled("div")({
 });
 const MembersContainer = styled("div")({
 	width: "33%",
+	padding: 10,
 	"@media (max-width: 600px)": {
-		width: "100%",
+		width: "95%",
 	},
 });
 function Dashboard() {
