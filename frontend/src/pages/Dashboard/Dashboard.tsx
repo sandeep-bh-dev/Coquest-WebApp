@@ -2,14 +2,11 @@ import React from "react";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import SearchBar from "../../components/SearchBar";
 import SimpleCard from "../../components/SimpleCard/SimpleCard";
-import Stack from "@mui/material/Stack";
 import styled from "@emotion/styled";
 import MyTasksContainer from "../../components/MyTasksContainer";
 import Maps from "../../components/Maps/Maps";
-import PostContainer, { ImageBoxes } from "../../components/PostsContainer";
 import CommunityTasks from "../../components/CommunityTasks";
-import Members, { MemberProps } from "../../components/Members";
-import { Grid, getAppBarUtilityClass } from "@mui/material";
+import Members from "../../components/Members";
 import ExtendedSimpleCard from "../../components/ExtendedSimpleCard/SimpleCard";
 
 const Container = styled("div")({
@@ -57,6 +54,31 @@ const DashColumn = styled.div({
 	height: "100%",
 });
 
+const Footer = styled("div")({
+	width: "93%",
+	display: "flex",
+	marginTop: 20,
+	"@media (max-width: 600px)": {
+		flexDirection: "column",
+		alignItems: "center",
+		height: "100%",
+		width: "100%",
+		justifyContent: "center",
+	},
+});
+
+const CommunityTaskContainer = styled("div")({
+	width: "66%",
+	"@media (max-width: 600px)": {
+		width: "100%",
+	},
+});
+const MembersContainer = styled("div")({
+	width: "33%",
+	"@media (max-width: 600px)": {
+		width: "100%",
+	},
+});
 function Dashboard() {
 	return (
 		<Container>
@@ -85,40 +107,18 @@ function Dashboard() {
 					<Maps />
 				</DashColumn>
 			</DashColumns>
-			{/*
-			
-			
-			<div
-				style={{
-					position: "relative",
-					left: "215px",
-					bottom: "1240px",
-				}}
-			>
-				<PostContainer header="Posts"></PostContainer>
-			</div>
-			<div
-				style={{
-					position: "relative",
-					left: "214px",
-					bottom: "1220px",
-				}}
-			>
-				<CommunityTasks />
-			</div>
-			<div
-				style={{
-					position: "relative",
-					left: "867px",
-					bottom: "1548px",
-				}}
-			>
-				<Members
-					users={["You", "Username", "Username", "Username"]}
-					showAllLink="#"
-					userRole={["Role", "Role", "Role", "Role"]}
-				/>
-			</div> */}
+			<Footer>
+				<CommunityTaskContainer>
+					<CommunityTasks />
+				</CommunityTaskContainer>
+				<MembersContainer>
+					<Members
+						users={["You", "Username", "Username", "Username"]}
+						showAllLink="#"
+						userRole={["Role", "Role", "Role", "Role"]}
+					/>
+				</MembersContainer>
+			</Footer>
 		</Container>
 	);
 }

@@ -1,4 +1,3 @@
-
 import React from "react";
 import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
@@ -6,19 +5,30 @@ import Grid from "@mui/material/Grid";
 import TaskCard from "../../pages/Coop/CoopComponents/TaskCard";
 
 const Header = styled(Typography)({
-  fontWeight: 600,
-  fontSize: "16px",
-  lineHeight: "24px",
-  color: "#0000000",
+	fontWeight: 600,
+	paddingTop: 30,
+	paddingLeft: 30,
+	fontSize: "16px",
+	lineHeight: "24px",
+	color: "#0000000",
 });
 
-const CommunityContainer = styled.div(({ contentLength }: { contentLength: number }) => ({
-  width: "638px",
-  height: `${Math.ceil(contentLength / 3) * 125 + 49}px`, 
-  borderRadius: "10px",
-  backgroundColor: "#D9D9D9",
-}));
+const CommunityContainer = styled.div({
+	backgroundColor: "#D9D9D9",
+	borderRadius: 20,
+	width: "95%",
+	height: 329,
+	margin: "auto",
+});
 
+const CustomGrid = styled(Grid)({
+	width: "100%",
+	height: 250,
+	overflow: "auto",
+	margin: "auto",
+	padding: 15,
+	paddingTop: 0,
+});
 const taskContents = [
 	{
 		taskName: "Task Name",
@@ -27,19 +37,21 @@ const taskContents = [
 		description:
 			"Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam.",
 	},
-  {
+	{
 		taskName: "Task Name",
 		communityName: "Community name",
 		loction: "Location",
 		description:
 			"Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam.",
-	},{
+	},
+	{
 		taskName: "Task Name",
 		communityName: "Community name",
 		loction: "Location",
 		description:
 			"Description. Lorem ipsum dolor sit amet consectetur. Nisl sollicitudin aliquam quam.",
-	},{
+	},
+	{
 		taskName: "Task Name",
 		communityName: "Community name",
 		loction: "Location",
@@ -90,64 +102,25 @@ const taskContents = [
 	},
 ];
 
-const SeeAllLink = styled(Typography)({
-  fontWeight: 400,
-  fontSize: "12px",
-  lineHeight: "18px",
-  color: "#000000",
-});
-
-const Label = styled(Typography)({
-  fontWeight: 600,
-  fontSize: 16,
-  color: "#000000",
-  lineHeight: "24px",
-});
-
-const LabelContainer = styled.div({
-  width: "80px",
-  height: "24px",
-  bottom: "1193px",
-  left: "0px",
-  position: "relative",
-});
-
 const CommunityTasks = () => {
-  return (
-    <CommunityContainer contentLength={taskContents.length}>
-      <Header
-        style={{
-          position: "relative",
-          left: "30px",
-          top: "25px",
-        }}
-      >
-        All community tasks
-      </Header>
-      <div
-        style={{
-          position: "relative",
-          left: "30px",
-          top: "40.5px",
-        }}
-      >
-        <Grid container spacing={2}>
-          {taskContents.map((item, index) => (
-            <Grid item key={index} xs={12} md={6} lg={4}>
-              <TaskCard
-                name={item.taskName}
-                community={item.communityName}
-                location={item.loction}
-                description={item.description}
-                type="small"
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    </CommunityContainer>
-  );
+	return (
+		<CommunityContainer>
+			<Header>All community tasks</Header>
+			<CustomGrid container spacing={1}>
+				{taskContents.map((item, index) => (
+					<Grid item key={index} lg={4}>
+						<TaskCard
+							name={item.taskName}
+							community={item.communityName}
+							location={item.loction}
+							description={item.description}
+							type="small"
+						/>
+					</Grid>
+				))}
+			</CustomGrid>
+		</CommunityContainer>
+	);
 };
 
 export default CommunityTasks;
-
