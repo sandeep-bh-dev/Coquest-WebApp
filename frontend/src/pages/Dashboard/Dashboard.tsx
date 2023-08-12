@@ -10,6 +10,7 @@ import PostContainer, { ImageBoxes } from "../../components/PostsContainer";
 import CommunityTasks from "../../components/CommunityTasks";
 import Members, { MemberProps } from "../../components/Members";
 import { Grid, getAppBarUtilityClass } from "@mui/material";
+import ExtendedSimpleCard from "../../components/ExtendedSimpleCard/SimpleCard";
 
 const Container = styled("div")({
 	display: "flex",
@@ -32,6 +33,7 @@ const CardCont = styled.div({
 	display: "flex",
 	flexDirection: "column",
 	gap: 10,
+	marginBottom: 10,
 	width: "100%",
 });
 
@@ -54,6 +56,7 @@ const DashColumn = styled.div({
 	padding: 10,
 	height: "100%",
 });
+
 function Dashboard() {
 	return (
 		<Container>
@@ -73,7 +76,7 @@ function Dashboard() {
 						<SimpleCard label="My projects" />
 						<SimpleCard label="Open projects" />
 					</CardCont>
-					<SimpleCard label="Posts" />
+					<ExtendedSimpleCard label="Posts" />
 				</DashColumn>
 				<DashColumn>
 					<MyTasksContainer label="My Tasks" seeAllLink="#" />
