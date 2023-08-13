@@ -3,26 +3,27 @@ import styled from "@emotion/styled";
 
 //container that holds the map data
 const MapContainer = styled.div({
-  width: "379px",
-  height: "655px",
-  radius: "10px",
+	width: "100%",
+	height: "100%",
+	maxWeight: "100%",
+	radius: "10px",
 });
 
 const Maps = () => {
-  return (
-    <MapContainer>
-      <img
-        style={{
-          width: "379px",
-          height: "655px",
-          borderRadius: "10px",
-          objectFit: "cover",
-        }}
-        src="/map_image.png"
-        alt="Map image"
-      />
-    </MapContainer>
-  );
+	return (
+		<MapContainer>
+			<img
+				style={{
+					width: "100%",
+					height: "98%",
+					borderRadius: "10px",
+					objectFit: "cover",
+				}}
+				src="/map_image.png"
+				alt="Map graphic"
+			/>
+		</MapContainer>
+	);
 };
 
 export default Maps;

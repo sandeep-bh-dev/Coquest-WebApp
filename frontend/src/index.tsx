@@ -32,6 +32,7 @@ import {
 } from "./pages/Coop/CreateCoop";
 import { EditProfile } from "./pages/Programs/EditProfile";
 import { ProgramView } from "./pages/Programs/ProgramView";
+import styled from "@emotion/styled";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -140,8 +141,12 @@ const router = createBrowserRouter([
 	},
 ]);
 
+const Container = styled("div")({
+	width: "100",
+});
+
 root.render(
-	<div>
+	<Container>
 		<React.StrictMode>
 			<ThemeProvider theme={theme}>
 				<Toolbar />
@@ -149,5 +154,5 @@ root.render(
 				<RouterProvider router={router} />
 			</ThemeProvider>
 		</React.StrictMode>
-	</div>
+	</Container>
 );
