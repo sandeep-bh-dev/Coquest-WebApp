@@ -1,7 +1,9 @@
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { IconButton } from "@mui/material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import sanitizePage from "./utils";
 import { Link } from "react-router-dom";
@@ -17,6 +19,14 @@ function Orientation() {
         navigate(`/registration/${newSlug}`);
     }
 
+    // Change the current page number to the parameter, page.
+    // The function will adjust the value to the nearest page boundary if the value provided is out of bounds.
+    function changePage(page: number) {
+        const newPage = sanitizePage(page);
+        changeSlug(newPage.toString());
+        setPage(newPage);
+    }
+
     useEffect(() => {
         const handlePageId = () => {
             let initialPage = 0;
@@ -24,19 +34,12 @@ function Orientation() {
                 const parsedId = +id;
                 if (!isNaN(parsedId)) {
                     initialPage = parsedId;
-                    const sanitized = sanitizePage(initialPage);
-                    if(initialPage !== sanitized) {
-                        initialPage = sanitized;
-                        changeSlug(sanitized.toString());
-                    } else {
-                        setPage(initialPage);
-                    }
+                    changePage(initialPage);
                 } else {
                     setHasError(true);
                 }
             }
         }
-
 
         handlePageId();
     }, [id, navigate]);
@@ -52,6 +55,20 @@ function Orientation() {
         return (
             <Container>
                 <h1>Step {page}</h1>
+
+                <IconButton title="Previous page" onClick={() => {
+                    const newPage = page - 1;
+                    changePage(newPage)
+                    }}>
+                    <ChevronLeft />
+
+                </IconButton>
+                <IconButton title="Next page" onClick={() => {
+                    const newPage = page + 1;
+                    changePage(newPage)
+                    }}>
+                    <ChevronRight />
+                </IconButton>
             </Container>
         );
     }
