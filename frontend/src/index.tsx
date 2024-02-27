@@ -46,8 +46,8 @@ const router = createBrowserRouter([
 		element: <Dashboard />,
 	},
 	{
-		path: "/registration",
-		element: <Orientation />,
+		path: "/registration/:id",
+		element: <Orientation />
 	},
 	{
 		path: "/home",
