@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import sanitizePage from "./utils";
+import { Link } from "react-router-dom";
 
 function Orientation() {
+    const [hasError, setHasError] = useState(false);
     const { id } = useParams();
     const [page, setPage] = useState(0);
     let navigate = useNavigate();
@@ -30,7 +32,7 @@ function Orientation() {
                         setPage(initialPage);
                     }
                 } else {
-                    // TODO: Issue an inline 404 error
+                    setHasError(true);
                 }
             }
         }
@@ -39,11 +41,20 @@ function Orientation() {
         handlePageId();
     }, [id, navigate]);
 
-    return (
-        <Container>
-            <h1>Step {page}</h1>
-        </Container>
-    );
+    if(hasError) {
+        return (
+            <Container>
+                <h1>Oops, this page doesn&#39;t exist!</h1>
+                <p>Did you mean to <Link to="/registration">register</Link>?</p>
+            </Container>
+        );
+    } else {
+        return (
+            <Container>
+                <h1>Step {page}</h1>
+            </Container>
+        );
+    }
 }
 
 export default Orientation;
