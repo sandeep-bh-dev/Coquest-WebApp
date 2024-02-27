@@ -35,6 +35,7 @@ import { ProgramView } from "./pages/Programs/ProgramView";
 import styled from "@emotion/styled";
 import { Orientation } from "./pages/Orientation";
 import RemoveNavComponents from "./components/RemoveNavComponents";
+import OrientationRedirector from "./pages/Orientation/OrientationRedirector";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Dashboard />,
+	},
+	{
+		path: "/registration",
+		element: <OrientationRedirector />,
 	},
 	{
 		path: "/registration/:id",
