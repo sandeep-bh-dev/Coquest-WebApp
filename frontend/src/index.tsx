@@ -36,6 +36,7 @@ import styled from "@emotion/styled";
 import { Orientation } from "./pages/Orientation";
 import RemoveNavComponents from "./components/RemoveNavComponents";
 import OrientationRedirector from "./pages/Orientation/OrientationRedirector";
+import GlobalRedirect from "./components/AutoRedirector/GlobalRedirect";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -161,6 +162,7 @@ root.render(
 		<React.StrictMode>
 			<ThemeProvider theme={theme}>
 				<BrowserRouter>
+					<GlobalRedirect />
 					{/* Prevent the user from accessing links to top-level views while registering */}
 					<RemoveNavComponents pathPrefix="/registration" />
 				</BrowserRouter>
