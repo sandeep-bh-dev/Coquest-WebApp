@@ -5,13 +5,14 @@ import { useParams } from "react-router";
 import { IconButton } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useNavigate } from "react-router";
-import sanitizePage from "./utils";
+import { sanitizePage, RegistrationPages } from "./utils";
 import { Link } from "react-router-dom";
 
 function Orientation() {
     const [hasError, setHasError] = useState(false);
     const { id } = useParams();
-    const [page, setPage] = useState(0);
+    // page is one-indexed
+    const [page, setPage] = useState(1);
     let navigate = useNavigate();
 
     // Alter variadic portion of the URL to the parameter, newSlug.
@@ -52,9 +53,16 @@ function Orientation() {
             </Container>
         );
     } else {
+        // Convert to zero-indexing to access correct indices in component array.
+        // From this point onward, we can assume index will always be a valid index.
+        const index = page - 1;
+
+        const SelectedPageView = RegistrationPages[index].view;
         return (
             <Container>
-                <h1>Step {page}</h1>
+                <h1>Step {page}: {RegistrationPages[index].title}</h1>
+
+                <SelectedPageView />
 
                 <IconButton title="Previous page" onClick={() => {
                     const newPage = page - 1;
