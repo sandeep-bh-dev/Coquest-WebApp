@@ -31,6 +31,10 @@ function Orientation() {
         setPage(newPage);
     }
 
+    function updateData(data: any) {
+        RegistrationPages[page - 1].dataSetter(data);
+    }
+
     useEffect(() => {
         const handlePageId = () => {
             let initialPage = 0;
@@ -65,7 +69,7 @@ function Orientation() {
             <Container>
                 <h1>Step {page}: {RegistrationPages[index].title}</h1>
 
-                <SelectedPageView />
+                <SelectedPageView updateData={updateData} />
 
                 <IconButton title="Previous page" onClick={() => {
                     const newPage = page - 1;
