@@ -1,7 +1,7 @@
 import Bio from "./Pages/Bio";
 import Purpose from "./Pages/Purpose";
 import Interests from "./Pages/Interests";
-import Layers from "./Pages/Layers";
+import Communities from "./Pages/Communities";
 import RelativeLocation from "./Pages/RelativeLocation";
 import { userModel } from "../../models/userobserver";
 import { Motive, Topic, Location } from "../../models/common";
@@ -36,7 +36,7 @@ export const RegistrationPages: RegistrationPage[] = [
     },
     {
         title: "Layers",
-        view: Layers,
+        view: Communities,
         dataSetter: null,
     },
 ];
