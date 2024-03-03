@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { sanitizePage, RegistrationPages } from "./utils";
 import { Link } from "react-router-dom";
+import { userModel } from "../../models/userobserver";
 
 function Orientation() {
     const [hasError, setHasError] = useState(false);
@@ -24,6 +25,8 @@ function Orientation() {
     // The function will adjust the value to the nearest page boundary if the value provided is out of bounds.
     function changePage(page: number) {
         const newPage = sanitizePage(page);
+        // Save page progress as the user progresses through the orientation process
+        userModel.registered = newPage;
         changeSlug(newPage.toString());
         setPage(newPage);
     }
