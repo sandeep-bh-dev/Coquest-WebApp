@@ -21,7 +21,7 @@ export enum Motive {
     VOLUNTEER = "VOLUNTEER",
     INITIATER = "INITIATER",
     ORGANIZER = "ORGANIZER",
-    SPECTATER = "SPECTATER",
+    SPECTATOR = "SPECTATOR",
 }
 
 export type Location = {
