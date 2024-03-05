@@ -12,7 +12,7 @@ export enum Topic {
     ARTS = "ARTS",
     MUSIC = "MUSIC",
     GENERATIVE_ART = "GENERATIVE_ART",
-    BASKETBALL = "BASEBALL",
+    BASKETBALL = "BASKETBALL",
 }
 
 export enum Motive {
