@@ -7,6 +7,8 @@ Depth-varying properties are documented as 'expandable' properties.
 By default, the properties are curtailed, or more simply, not expanded; curtailed properties solely return the ID of the containing objects.
 */
 
+// TODO: For both Topic and Motive, define a collection with these enum variants as documents within MongoDB.
+// For simplicity, sample values are hard-coded here. 
 export enum Topic {
     SPORTS = "SPORTS",
     ARTS = "ARTS",
