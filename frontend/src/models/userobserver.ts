@@ -4,6 +4,9 @@ import { Community } from './communityobserver';
 
 export type User = {
     id: string;
+    name: string;
+    username: string;
+    email: string;
     /*
     The progress of registration; it is either a boolean or a Number[1, NUM_OF_STEPS].
     
@@ -33,6 +36,9 @@ export type User = {
 // A data modal backed by the corresponding document on MongoDB
 export const userModel: User = {
     id: "",
+    name: "",
+    username: "",
+    email: "",
     registered: false,
     location: null,
     image: [],
