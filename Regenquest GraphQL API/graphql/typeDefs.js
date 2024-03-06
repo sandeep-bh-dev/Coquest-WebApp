@@ -3,12 +3,18 @@
 const { gql } = require("apollo-server-cloud-functions");
 
 module.exports = gql`
+  union ExpandableUser = RegenquestUser | string
+
+  type string{
+    value: String
+  }
+
   type regenquestNotification {
     userID: String
     notificationID: String
     title: String
     content: String
-    image: String
+    image: [Image]
     link: String
     date: String
     isRead: Boolean
@@ -20,10 +26,25 @@ module.exports = gql`
     notificationID: String
     title: String
     content: String
-    image: String
+    image: [imageInput]
     link: String
     isRead: Boolean
     isDeleted: Boolean
+  }
+
+  enum Topic {
+    SPORTS
+    ARTS
+    MUSIC
+    GENERATIVE_ART
+    BASKETBALL
+  }
+  
+  enum Motive {
+    VOLUNTEER
+    INITIATER
+    ORGANIZER
+    SPECTATER
   }
 
   type Skill {
@@ -56,17 +77,47 @@ module.exports = gql`
     comment: String
   }
 
+  type Location {
+    lat: Float
+    lng: Float
+  }
+
+  input locationInput {
+    lat: Float
+    lng: Float
+  }
+
+  type Comment {
+    username: String
+    body: String
+  }
+
+  input commentInput {
+    username: String
+    body: String
+  }
+  
+  type Image {
+    contentType: String
+    path: String
+  }
+
+  input imageInput {
+    contentType: String
+    path: String
+  }
+
   type regenquestUser {
     userID: String
     name: String
     username: String
     email: String
     password: String
-    location: String
-    image: String
-    motive: String
+    location: Location
+    image: [Image]
+    motive: [Motive]
     biography: String
-    topics: [String]
+    topics: [Topic]
     communities: [String]
     skills: [Skill]
     badges: [Badge]
@@ -80,11 +131,11 @@ module.exports = gql`
     username: String
     email: String
     password: String
-    location: String
-    image: String
-    motive: String
+    location: locationInput
+    image: [imageInput]
+    motive: [Motive]
     biography: String
-    topics: [String]
+    topics: [Topic]
     communities: [String]
     skills: [skillInput]
     badges: [badgeInput]
@@ -125,11 +176,11 @@ module.exports = gql`
     initiative: String
     type: String
     duration: String
-    location: String
+    location: Location
     startDate: String
     endDate: String
     requirements: [String]
-    members: [String]
+    members: [ExpandableUser]
     history: [String]
     budget: Float
     tasks: [String]
@@ -144,26 +195,16 @@ module.exports = gql`
     initiative: String
     type: String
     duration: String
-    location: String
+    location: locationInput
     startDate: String
     endDate: String
     requirements: [String]
-    members: [String]
+    members: [ExpandableUser]
     history: [String]
     budget: Float
     tasks: [String]
     sessionToken: String
     hashtags: [String]
-  }
-
-  type Comment {
-    username: String
-    body: String
-  }
-
-  input commentInput {
-    username: String
-    body: String
   }
 
   type regenquestPost {
@@ -194,7 +235,7 @@ module.exports = gql`
     itemName: String
     createdAt: String
     description: String
-    image: String
+    image: [Image]
     history: [String]
   }
 
@@ -204,7 +245,7 @@ module.exports = gql`
     taskLink: String
     itemName: String
     description: String
-    image: String
+    image: [imageInput]
     history: [String]
     sessionToken: String
   }
@@ -213,7 +254,7 @@ module.exports = gql`
     eventID: String
     name: String
     theme: String
-    location: String
+    location: Location
     time: String
     description: String
     layer: String
@@ -224,7 +265,7 @@ module.exports = gql`
     eventID: String
     name: String
     theme: String
-    location: String
+    location: locationInput
     time: String
     description: String
     layer: String
@@ -232,24 +273,13 @@ module.exports = gql`
     sessionToken: String
   }
 
-  type Image {
-    contentType: String
-    path: String
-    img: String
-  }
-
-  input imageInput {
-    contentType: String
-    path: String
-    img: String
-  }
-
   type regenquestCommunity {
     communityID: String
     name: String
     description: String
-    members: [String]
-    location: String
+    members: [ExpandableUser]
+    tags: [Topic]
+    location: Location
     image: Image
   }
 
@@ -257,8 +287,9 @@ module.exports = gql`
     communityID: String
     name: String
     description: String
-    members: [String]
-    location: String
+    members: [ExpandableUser]
+    tags: [Topic]
+    location: locationInput
     image: imageInput
     sessionToken: String
   }
@@ -288,7 +319,7 @@ module.exports = gql`
 
   type regenquestChat {
     chatID: String
-    members: [String]
+    members: [ExpandableUser]
     name: String
     description: String
     createdAt: String
@@ -296,7 +327,7 @@ module.exports = gql`
 
   input regenquestChatInput {
     chatID: String
-    members: [String]
+    members: [ExpandableUser]
     name: String
     description: String
   }
