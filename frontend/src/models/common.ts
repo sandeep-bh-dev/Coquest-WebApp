@@ -32,21 +32,21 @@ export type Location = {
 export type Image = {
     // Mime type of Image as defined by IANA
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-    contentType: String;
-    path: String;
+    contentType: string;
+    path: string;
 }
 
 export type Skill = {
-    skillName: String;
-    skillLevel: String;
+    skillName: string;
+    skillLevel: string;
 }
 
 export type Badge = {
-    badgeName: String
-    badgeDescription: String
+    badgeName: string
+    badgeDescription: string
 }
 
 export type Recommendations = {
-    name: String
-    comment: String
+    name: string
+    comment: string
 }
