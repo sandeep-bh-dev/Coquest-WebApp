@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import React from "react";
+import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { IconButton } from "@mui/material";
@@ -17,19 +17,19 @@ function Orientation() {
     let navigate = useNavigate();
 
     // Alter variadic portion of the URL to the parameter, newSlug.
-    function changeSlug(newSlug: string) {
+    const changeSlug = useCallback((newSlug: string) => {
         navigate(`/registration/${newSlug}`);
-    }
+    }, [navigate]);
 
     // Change the current page number to the parameter, page.
     // The function will adjust the value to the nearest page boundary if the value provided is out of bounds.
-    function changePage(page: number) {
+    const changePage = useCallback((page: number) => {
         const newPage = sanitizePage(page);
         // Save page progress as the user progresses through the orientation process
         userModel.registered = newPage;
         changeSlug(newPage.toString());
         setPage(newPage);
-    }
+    }, [changeSlug]);
 
     function updateData(data: any) {
         RegistrationPages[page - 1].dataSetter(data);
@@ -50,7 +50,7 @@ function Orientation() {
         }
 
         handlePageId();
-    }, [id, navigate]);
+    }, [id, navigate, changePage]);
 
     if(hasError) {
         return (
