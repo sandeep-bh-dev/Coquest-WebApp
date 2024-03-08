@@ -44,7 +44,7 @@ module.exports = gql`
     VOLUNTEER
     INITIATER
     ORGANIZER
-    SPECTATER
+    SPECTATOR
   }
 
   type Skill {
