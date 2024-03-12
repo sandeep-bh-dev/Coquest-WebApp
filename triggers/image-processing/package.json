@@ -4,6 +4,7 @@
   "description": "",
   "main": "imageProcessor.js",
   "scripts": {
+    "deploy": "gcloud functions deploy --no-gen2 ProcessImageUpload --runtime nodejs20 --project base-map-workspace --trigger-bucket=us.artifacts.base-map-workspace.appspot.com --entry-point=processImageUpload --set-env-vars IMAGE_POOL=containers/images",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
