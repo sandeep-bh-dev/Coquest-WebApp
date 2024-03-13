@@ -11,7 +11,7 @@ export type Community = {
     tags: [Topic];
     // Coordinate on the world map situated in the relative area of a community 
     location: Location;
-    image: Image;
+    images: Image[];
 };
 
 // TODO: Business logic to bridge application with web API

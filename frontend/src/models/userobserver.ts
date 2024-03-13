@@ -20,7 +20,7 @@ export type User = {
     when geolocating for the first time  
     */
     location: Location | null;
-    image: Image[];
+    images: Image[];
     motives: Motive[];
     biography: string;
     topics: Topic[];
@@ -41,7 +41,7 @@ export const userModel: User = {
     email: "",
     registered: false,
     location: null,
-    image: [],
+    images: [],
     motives: [],
     biography: "",
     communities: [],
