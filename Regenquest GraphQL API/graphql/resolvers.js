@@ -14,6 +14,10 @@ const CrossPlatformUser = require('../models/crossPlatform/User');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const { Storage } = require("@google-cloud/storage");
+const path = require("path");
+
+const storage = new Storage();
 
 module.exports = {
   Query: {
@@ -344,6 +348,33 @@ module.exports = {
         throw new Error('Error deleting notification');
       }
     },
+
+    async generatePresignedURL() {
+      const EXPIRES_IN_MINS  = 15;
+      // Option object to be passed to the 'getSignedUrl()' method
+      const options = {
+        version: 'v4',
+	      action: 'write',
+	      expires: Date.now() + EXPIRES_IN_MINS * 60 * 1000,
+        // Enforce an image mime type
+	      contentType: 'image/',
+	      conditions: [
+	        ['starts-with', '$content-type', 'image/'],
+        ],
+      }
+      try {
+        const uniqueFileName = `${uuid.v4()}`;
+        const [url] = await storage
+	        .bucket(process.env.IMAGE_BUCKET_NAME)
+          .file(path.join(process.env.DIR_PATH, uniqueFileName))
+          .getSignedUrl(options);
+
+        return url;
+      } catch (err) {
+        console.error('Error generating signed URL:', err);
+        throw new Error(`Error generating signed URL: ${err}`);
+      }
+    }
   },
   Mutation: {
     //this method is the resolver for createRegenquestUser,

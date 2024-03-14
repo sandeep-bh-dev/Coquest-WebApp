@@ -359,6 +359,8 @@ module.exports = gql`
     markNotificationAsRead(notificationID: String): mutationResponse
     markAllNotificationsAsRead(userID: String): mutationResponse
     deleteNotification(notificationID: String): mutationResponse
+
+    generatePresignedURL: String!
   }
 
   type Mutation {
