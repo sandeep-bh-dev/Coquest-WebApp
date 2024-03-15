@@ -39,12 +39,14 @@ const theme = createTheme({
             }
         },MuiStepLabel: {
 			styleOverrides: {
-				active: {
-					color: "#4285F4",
-				},
-				completed: {
-					color: "white",
-				},
+                root: {
+                    "&.Mui-active": {
+                        color: "#4285F4",
+                    },
+                    "&.Mui-completed": {
+                        color: "white",
+                    },
+                }
 			},
 		},
 		MuiStepIcon: {
