@@ -2,13 +2,146 @@
 //graphql types and graphql end-points
 const { gql } = require("apollo-server-cloud-functions");
 
+/*
+Normative Note about Output ID fields:
+
+- should be non-nullable to conform to mongoose's default _id query behaviour;
+- should be named _id to match MongoDB
+*/
 module.exports = gql`
+  """
+  Type wrappers for union types.
+  Use these object types in conjunction with other union member types instead of their fundamental type counterparts.
+  """
+  type bool {
+    boolValue: Boolean!
+  }
+
+  type int {
+    numValue: Int!
+  }
+
+  type string {
+    value: String!
+  }
+
+  """
+  Temporary enums containing hard-coded values in place of an independant collections.
+
+  In the future, we will dynamically fetch available topics and motives.
+  """
+  enum topic {
+    SPORTS
+    ARTS
+    MUSIC
+    GENERATIVE_ART
+    BASKETBALL
+  }
+  
+  enum motive {
+    VOLUNTEER
+    INITIATER
+    ORGANIZER
+    SPECTATOR
+  }
+
+  """
+  Discriminator types for unionized types 
+  """
+  enum registeredRepType {
+    BOOLEAN
+    NUMBER
+  }
+  
+  enum expandedRepType {
+    EXPANDED_OBJ
+    ID_STRING
+  }
+
+  """"""
+  type skill {
+    skillName: String
+    skillLevel: String
+  }
+
+  input skillInput {
+    skillName: String
+    skillLevel: String
+  }
+
+  type badge {
+    badgeName: String
+    badgeDescription: String
+  }
+
+  input badgeInput {
+    badgeName: String
+    badgeDescription: String
+  }
+
+  type recommendations {
+    name: String
+    comment: String
+  }
+
+  input recommendationsInput {
+    name: String
+    comment: String
+  }
+
+  type location {
+    lat: Float
+    lng: Float
+  }
+
+  input locationInput {
+    lat: Float
+    lng: Float
+  }
+
+  type comment {
+    username: String
+    body: String
+  }
+
+  input commentInput {
+    username: String
+    body: String
+  }
+  
+  type image {
+    contentType: String
+    path: String
+  }
+
+  input imageInput {
+    contentType: String
+    path: String
+  }
+
+  input registeredInput {
+    type: registeredRepType!
+    boolValue: Boolean
+    numValue: Int
+  }
+
+  input communityInput {
+    type: expandedRepType!
+    objValue: regenquestCommunityInput
+    strValue: String
+  }
+
+  union registered = bool | int
+
+  union expandableUser = regenquestUser | string
+  union expandableCommunity = regenquestCommunity | string
+
   type regenquestNotification {
     userID: String
     notificationID: String
     title: String
     content: String
-    image: String
+    image: [image]
     link: String
     date: String
     isRead: Boolean
@@ -20,77 +153,48 @@ module.exports = gql`
     notificationID: String
     title: String
     content: String
-    image: String
+    image: [imageInput]
     link: String
     isRead: Boolean
     isDeleted: Boolean
   }
 
-  type Skill {
-    skillName: String
-    skillLevel: String
-  }
-
-  input skillInput {
-    skillName: String
-    skillLevel: String
-  }
-
-  type Badge {
-    badgeName: String
-    badgeDescription: String
-  }
-
-  input badgeInput {
-    badgeName: String
-    badgeDescription: String
-  }
-
-  type Recommendations {
-    name: String
-    comment: String
-  }
-
-  input recommendationsInput {
-    name: String
-    comment: String
-  }
-
   type regenquestUser {
+    _id: String!
     userID: String
     name: String
     username: String
     email: String
-    password: String
-    location: String
-    image: String
-    motive: String
+    registered: registered
+    location: location
+    images: [image]
+    motives: [motive]
     biography: String
-    topics: [String]
-    communities: [String]
-    skills: [Skill]
-    badges: [Badge]
+    topics: [topic]
+    communities: [expandableCommunity]
+    skills: [skill]
+    badges: [badge]
     currentLevel: Int
-    recommendations: [Recommendations]
+    recommendations: [recommendations]
   }
 
   input regenquestUserInput {
+    id: String
     userID: String
     name: String
     username: String
     email: String
-    password: String
-    location: String
-    image: String
-    motive: String
+    registered: registeredInput
+    location: locationInput
+    images: [imageInput]
+    motives: [motive]
     biography: String
-    topics: [String]
-    communities: [String]
+    topics: [topic]
+    communities: [communityInput]
     skills: [skillInput]
     badges: [badgeInput]
     currentLevel: Int
     recommendations: [recommendationsInput]
-    sessionToken: String
   }
 
   type regenquestTask {
@@ -117,6 +221,9 @@ module.exports = gql`
     sessionToken: String
   }
 
+  """
+  TODO: Modify data definition at a later time 
+  """
   type regenquestQuest {
     questID: String
     name: String
@@ -125,7 +232,7 @@ module.exports = gql`
     initiative: String
     type: String
     duration: String
-    location: String
+    location: location
     startDate: String
     endDate: String
     requirements: [String]
@@ -144,7 +251,7 @@ module.exports = gql`
     initiative: String
     type: String
     duration: String
-    location: String
+    location: locationInput
     startDate: String
     endDate: String
     requirements: [String]
@@ -156,16 +263,6 @@ module.exports = gql`
     hashtags: [String]
   }
 
-  type Comment {
-    username: String
-    body: String
-  }
-
-  input commentInput {
-    username: String
-    body: String
-  }
-
   type regenquestPost {
     postID: String
     userID: String
@@ -174,7 +271,7 @@ module.exports = gql`
     likes: Int
     attachments: [String]
     createdAt: String
-    comments: [Comment]
+    comments: [comment]
   }
 
   input regenquestPostInput {
@@ -194,7 +291,7 @@ module.exports = gql`
     itemName: String
     createdAt: String
     description: String
-    image: String
+    image: [image]
     history: [String]
   }
 
@@ -204,7 +301,7 @@ module.exports = gql`
     taskLink: String
     itemName: String
     description: String
-    image: String
+    image: [imageInput]
     history: [String]
     sessionToken: String
   }
@@ -213,7 +310,7 @@ module.exports = gql`
     eventID: String
     name: String
     theme: String
-    location: String
+    location: location
     time: String
     description: String
     layer: String
@@ -224,7 +321,7 @@ module.exports = gql`
     eventID: String
     name: String
     theme: String
-    location: String
+    location: locationInput
     time: String
     description: String
     layer: String
@@ -232,35 +329,30 @@ module.exports = gql`
     sessionToken: String
   }
 
-  type Image {
-    contentType: String
-    path: String
-    img: String
-  }
-
-  input imageInput {
-    contentType: String
-    path: String
-    img: String
-  }
-
   type regenquestCommunity {
-    communityID: String
+    _id: String!
     name: String
     description: String
-    members: [String]
-    location: String
-    image: Image
+    members: [expandableUser]
+    tags: [topic]
+    location: location
+    images: [image]
+  }
+
+  input userInput {
+    type: expandedRepType!
+    objValue: regenquestUserInput
+    strValue: String
   }
 
   input regenquestCommunityInput {
-    communityID: String
+    id: String,
     name: String
     description: String
-    members: [String]
-    location: String
-    image: imageInput
-    sessionToken: String
+    members: [userInput]
+    tags: [topic]
+    location: locationInput
+    images: [imageInput]
   }
 
   type regenquestGenres {
@@ -337,13 +429,13 @@ module.exports = gql`
     getCommunities: [regenquestCommunity]
     getGenres: regenquestGenres
 
-    findUserbyID(userID: String): regenquestUser
+    findUserbyID(id: String): regenquestUser
     findTaskbyID(taskID: String): regenquestTask
     findQuestbyID(questID: String): regenquestQuest
     findPostbyID(postID: String): regenquestPost
     findInventoryItembyID(itemID: String): regenquestInventory
     findEventbyID(eventID: String): regenquestEvent
-    findCommunitybyID(communityID: String): regenquestCommunity
+    findCommunitybyID(id: String): regenquestCommunity
 
     getChatsByUserID(userID: String): [regenquestChat]
     getMessagesByChatID(chatID: String): [regenquestMessage]
@@ -361,6 +453,10 @@ module.exports = gql`
     deleteNotification(notificationID: String): mutationResponse
   }
 
+  
+  """
+  TODO: Declare and implement delete routines for all necessary models
+  """
   type Mutation {
     createRegenquestUser(userInput: regenquestUserInput): mutationResponse
     createRegenquestTask(userInput: regenquestTaskInput): mutationResponse

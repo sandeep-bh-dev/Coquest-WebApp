@@ -11,11 +11,74 @@ const Notification = require('../models/regenquestNotification');
 const Chat = require('../models/regenquestChat');
 const Message = require('../models/regenquestMessage');
 const CrossPlatformUser = require('../models/crossPlatform/User');
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const { Types: { ObjectId }} = require('mongoose');
+
+// Convert a list of expandable type schemas, `expandable`, into a list of ID strings.
+// If the object is expandable, function expects the property named `propName` to be present for use as the ID.
+function coerceExpandable(expandable, propName) {
+  return expandable?.map((e) => {
+    if(e.type === "EXPANDED_OBJ") {
+      return e.objValue[propName];
+    } else if(e.type === "ID_STRING") {
+      return e.strValue;
+    } else {
+      // *Shouldn't happen*
+      return null;
+    }
+  }) ?? null;
+}
+
+// Introspects the type of an expandable instance and sniffs out the type of the object `expandableObj`.
+// Returns one of the valid expandable member types: string or `expandedTypeName`
+function deduceExpandableType(expandableObj, expandedTypeName) {
+  if ('value' in expandableObj) {
+    return 'string';
+  } else if ('id' in expandableObj) {
+    return expandedTypeName;
+  } else {
+    // *Shouldn't happen*
+    return null;
+  }
+}
+
+// Convert expandable array elements to shape that GraphQL expects based on the output type definition in `typeDefs.js`.
+function toOutputFormat(arr) {
+  return arr.map((elem) => {
+    if(elem instanceof ObjectId) {
+      return { value: elem.toString() };
+    } else if(typeof elem === 'object') {
+      return elem;
+    } else {
+      // *Shouldn't happen*
+      return { value: '' };
+    }
+  });
+}
 
 module.exports = {
+  registered: {
+    // https://stackoverflow.com/a/62185990
+    __resolveType(obj) {
+      if ('boolValue' in obj) {
+        return 'bool'; // Return the type name as a string
+      } else if ('numValue' in obj) {
+        return 'int';
+      }
+      return null; // Handle cases where the type cannot be determined
+    },
+  },
+  expandableUser: {
+    __resolveType(obj) {
+      return deduceExpandableType(obj, 'regenquestUser');
+    }
+  },
+  expandableCommunity: {
+    __resolveType(obj) {
+      return deduceExpandableType(obj, 'regenquestCommunity');
+    }
+  },
   Query: {
     //this method returns all the regenquest users
     async getUsers() {
@@ -88,10 +151,27 @@ module.exports = {
     },
 
     //this method finds a user by their id
-    async findUserbyID(parent, { userID }, context, info) {
+    async findUserbyID(parent, { id }, context, info) {
       try {
-        const result = await User.findOne({ userID: userID });
-        return result;
+        const result = await User.findOne({ _id: id });
+
+        if(typeof result.registered === 'boolean') {
+          result.registered = {
+            boolValue: result.registered
+          };
+        } else if(typeof result.registered === 'number') {
+          result.registered = {
+            numValue: result.registered
+          };
+        } else {
+          /* Shouldn't happen */
+          result.registered = { boolValue: false };
+        }
+
+        let user = result.toObject();
+        user.communities = toOutputFormat(user.communities);
+
+        return user;
       } catch (err) {
         throw new Error('Error finding user by ID');
       }
@@ -148,10 +228,14 @@ module.exports = {
     },
 
     //this method finds a community by its id
-    async findCommunitybyID(parent, { communityID }, context, info) {
+    async findCommunitybyID(parent, { id }, context, info) {
       try {
-        result = await Community.findOne({ communityID: communityID });
-        return result;
+        const result = await Community.findOne({ _id: id });
+
+        let community = result.toObject();
+        community.members = toOutputFormat(community.members);
+
+        return community;
       } catch (err) {
         throw new Error('Error finding community by id');
       }
@@ -352,14 +436,12 @@ module.exports = {
       parent,
       {
         userInput: {
-          userID,
           name,
           username,
           email,
-          password,
           location,
-          image,
-          motive,
+          images,
+          motives,
           biography,
           topics,
           communities,
@@ -372,46 +454,45 @@ module.exports = {
       context,
       info
     ) {
-      //generate salt to hash the password
-      const saltRounds = 10;
-      const salt = await bcrypt.genSalt(saltRounds);
+      //TODO: check if session token in Auth header is valid
 
       //create a User object
       const newUser = new User({
-        userID: userID ? userID : null,
-        name: name ? name : null,
-        username: username ? username : null,
-        email: email ? email : null,
-        password: password ? await bcrypt.hash(password, salt) : null,
+        userID: null,
+        name: name,
+        username: username,
+        email: email,
+        registered: false,
         location: location ? location : null,
-        image: image ? image : null,
-        motive: motive ? motive : null,
+        images: images ? images : null,
+        motives: motives ? motives : null,
         biography: biography ? biography : null,
         topics: topics ? topics : null,
-        communities: communities ? communities : null,
+        // Map given community list to a list of IDs, if not already
+        communities: coerceExpandable(communities, 'id'),
         skills: skills ? skills : null,
         badges: badges ? badges : null,
         currentLevel: currentLevel ? currentLevel : -1,
         recommendations: recommendations ? recommendations : null,
       });
 
-      // dummy phone number
-      const phoneNumber = '1234567890';
-
-      // CrossPlatformUser manages the 3 web app users (lotuslearning, regenquest, spotstitch)
-      // If the CrossPlatformUser has not been created with other platform, create a new one
-      const crossPlatformUserExists = await CrossPlatformUser.findOne({
-        $or: [{ email: newUser.email }, { phoneNumber: phoneNumber }],
-      });
-
       //add the user to the db
       try {
-        const res = await newUser.save();
+        await newUser.save({ validateBeforeSave: false });
+        // CrossPlatformUser manages the 3 web app users (lotuslearning, regenquest, spotstitch)
+        // If the CrossPlatformUser has not been created with other platform, create a new one
+        const crossPlatformUserExists = await CrossPlatformUser.findOne({
+          email: newUser.email
+        }).exec();
 
         if (crossPlatformUserExists) {
+          newUser.userID = crossPlatformUserExists._id;
           crossPlatformUserExists.regenquestUserId = newUser._id;
           await crossPlatformUserExists.save();
         } else {
+          /*
+          Shouldn't occur because the registration logic always creates this document per user
+          */
           const newCrossPlatformUser = new CrossPlatformUser({
             email: newUser.email,
             phoneNumber: '1234567890', // dummy phone number
@@ -419,6 +500,8 @@ module.exports = {
           });
           await newCrossPlatformUser.save();
         }
+
+        await newUser.save();
 
         return { code: 0, response: 'successful' };
       } catch (err) {
@@ -717,39 +800,28 @@ module.exports = {
       parent,
       {
         userInput: {
-          communityID,
           name,
           description,
           members,
+          tags,
           location,
-          image,
-          sessionToken,
+          images,
         },
       },
       context,
       info
     ) {
-      //check if a session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      // TODO: check if session token in Auth header is valid
 
       //create a new community object
       const newCommunity = new Community({
-        communityID: communityID ? communityID : null,
-        name: name ? name : null,
-        description: description ? description : null,
-        members: members ? members : null,
-        location: location ? location : null,
-        image: image ? image : null,
+        name: name,
+        description: description,
+        // Map given members list to a list of IDs, if not already
+        members: coerceExpandable(members, 'id'),
+        tags: tags ? tags : null,
+        location: location,
+        images: images ? images : null,
       });
 
       //add the community to the db
@@ -757,6 +829,7 @@ module.exports = {
         const res = await newCommunity.save();
         return { code: 0, response: 'successful' };
       } catch (err) {
+        console.log(err);
         return { code: 1, response: 'Error creating community.' };
       }
     },
@@ -977,14 +1050,14 @@ module.exports = {
       parent,
       {
         userInput: {
-          userID,
+          id,
           name,
           username,
           email,
-          password,
+          registered,
           location,
-          image,
-          motive,
+          images,
+          motives,
           biography,
           topics,
           communities,
@@ -992,41 +1065,29 @@ module.exports = {
           badges,
           currentLevel,
           recommendations,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      // TODO: check if session token in Auth header is valid
 
       //check if user id is provided
-      if (!userID) {
+      if (!id) {
         return { code: 1, response: 'Error! must provide userID' };
       }
 
       //check is user is valid
-      if (!(await User.exists({ userID: userID }))) {
+      if (!(await User.exists({ _id: id }))) {
         return { code: 1, response: 'Error! user not found' };
       }
 
       //create an update user object
-      const updateUser = { userID: userID };
+      const updateUser = { _id: id };
 
       //update all the properties that were provided
-      if (motive) {
-        updateUser.motive = motive;
+      if (motives) {
+        updateUser.motives = motives;
       }
       if (name) {
         updateUser.name = name;
@@ -1037,17 +1098,20 @@ module.exports = {
       if (email) {
         updateUser.email = email;
       }
-      if (password) {
-        const saltRounds = 10;
-        const salt = await bcrypt.genSalt(saltRounds);
-        const pass = await bcrypt.hash(password, salt);
-        updateUser.password = pass;
+      if (registered) {
+        if(registered.type === "BOOLEAN") {
+          updateUser.registered = registered.boolValue;
+        } else if(registered.type === "NUMBER") {
+          updateUser.registered = registered.intValue;
+        } else {
+          registered.registered = null;
+        }
       }
       if (location) {
         updateUser.location = location;
       }
-      if (image) {
-        updateUser.image = image;
+      if (images) {
+        updateUser.images = images;
       }
       if (biography) {
         updateUser.biography = biography;
@@ -1056,7 +1120,7 @@ module.exports = {
         updateUser.topics = topics;
       }
       if (communities) {
-        updateUser.communities = communities;
+        updateUser.communities = coerceExpandable(communities, 'id');
       }
       if (skills) {
         updateUser.skills = skills;
@@ -1072,9 +1136,14 @@ module.exports = {
       }
 
       try {
-        const res = await User.updateOne({ userID: userID }, updateUser);
+        const res = await User.updateOne(
+          { _id: id },
+          updateUser,
+          {runValidators: true}
+        );
         return { code: 0, response: 'successful' };
       } catch (err) {
+        console.log(err);
         return { code: 1, response: 'Error updating user.' };
       }
     },
@@ -1476,42 +1545,31 @@ module.exports = {
       parent,
       {
         userInput: {
-          communityID,
+          id,
           name,
           description,
           members,
+          tags,
           location,
           image,
-          sessionToken,
         },
       },
       context,
       info
     ) {
-      //check if session token is provided
-      if (!sessionToken) {
-        return {
-          code: 1,
-          response: 'Error! Must provide session token of the user',
-        };
-      }
-
-      //check if its a valid session token
-      if (!(await LoggedIn.exists({ sessionToken: sessionToken }))) {
-        return { code: 1, response: 'Error! invalid session token' };
-      }
+      // TODO: check if session token in Auth header is valid
 
       //check if community id is provided
-      if (!communityID) {
-        return { code: 1, response: 'Error! must provide communityID' };
+      if (!id) {
+        return { code: 1, response: 'Error! must provide id' };
       }
 
       //check if community id is valid
-      if (!(await Community.exists({ communityID: communityID }))) {
+      if (!(await Community.exists({ _id: id }))) {
         return { code: 1, response: 'Error! community not found' };
       }
 
-      const updateCommunity = { communityID: communityID };
+      const updateCommunity = { id: id };
       //update all the given properties of the community
       if (name) {
         updateCommunity.name = name;
@@ -1520,22 +1578,27 @@ module.exports = {
         updateCommunity.description = description;
       }
       if (members) {
-        updateCommunity.members = members;
+        updateCommunity.members = coerceExpandable(members, 'id');
+      }
+      if(tags) {
+        updateCommunity.tags = tags;
       }
       if (location) {
         updateCommunity.location = location;
       }
       if (image) {
-        updateCommunity.image = image;
+        updateCommunity.images = images;
       }
 
       try {
         const res = await Community.updateOne(
-          { communityID: communityID },
-          updateCommunity
+          { _id: id },
+          updateCommunity,
+          { runValidators: true }
         );
         return { code: 0, response: 'successful' };
       } catch (err) {
+        console.log(err);
         return { code: 1, response: 'Error updating community.' };
       }
     },
