@@ -365,7 +365,7 @@ module.exports = {
         const uniqueFileName = `${uuid.v4()}`;
         const [url] = await storage
 	        .bucket(process.env.IMAGE_BUCKET_NAME)
-          .file(path.join(process.env.DIR_PATH, uniqueFileName))
+          .file(`${process.env.DIR_PATH}/${uniqueFileName}`)
           .getSignedUrl(options);
 
         return url;
