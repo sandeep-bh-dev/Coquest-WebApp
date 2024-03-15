@@ -357,7 +357,6 @@ module.exports = {
 	      action: 'write',
 	      expires: Date.now() + EXPIRES_IN_MINS * 60 * 1000,
         // Enforce an image mime type
-	      contentType: 'image/',
 	      conditions: [
 	        ['starts-with', '$content-type', 'image/'],
         ],
