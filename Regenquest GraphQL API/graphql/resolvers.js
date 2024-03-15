@@ -14,6 +14,10 @@ const CrossPlatformUser = require('../models/crossPlatform/User');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const { Types: { ObjectId }} = require('mongoose');
+const { Storage } = require("@google-cloud/storage");
+const path = require("path");
+
+const storage = new Storage();
 
 // Convert a list of expandable type schemas, `expandable`, into a list of ID strings.
 // If the object is expandable, function expects the property named `propName` to be present for use as the ID.
@@ -428,6 +432,32 @@ module.exports = {
         throw new Error('Error deleting notification');
       }
     },
+
+    async generatePresignedURL() {
+      const EXPIRES_IN_MINS  = 15;
+      // Option object to be passed to the 'getSignedUrl()' method
+      const options = {
+        version: 'v4',
+	      action: 'write',
+	      expires: Date.now() + EXPIRES_IN_MINS * 60 * 1000,
+        // Enforce an image mime type
+	      conditions: [
+	        ['starts-with', '$content-type', 'image/'],
+        ],
+      }
+      try {
+        const uniqueFileName = `${uuid.v4()}`;
+        const [url] = await storage
+	        .bucket(process.env.IMAGE_BUCKET_NAME)
+          .file(`${process.env.DIR_PATH}/${uniqueFileName}`)
+          .getSignedUrl(options);
+
+        return url;
+      } catch (err) {
+        console.error('Error generating signed URL:', err);
+        throw new Error(`Error generating signed URL: ${err}`);
+      }
+    }
   },
   Mutation: {
     //this method is the resolver for createRegenquestUser,
