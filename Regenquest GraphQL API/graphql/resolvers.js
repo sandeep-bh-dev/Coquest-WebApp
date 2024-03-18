@@ -1132,7 +1132,7 @@ module.exports = {
         if(registered.type === "BOOLEAN") {
           updateUser.registered = registered.boolValue;
         } else if(registered.type === "NUMBER") {
-          updateUser.registered = registered.intValue;
+          updateUser.registered = registered.numValue;
         } else {
           registered.registered = null;
         }
