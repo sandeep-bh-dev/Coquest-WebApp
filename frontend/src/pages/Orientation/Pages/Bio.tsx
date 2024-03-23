@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { userModel, userObservable } from "../../../models/userobserver";
-
+import './Bio.css';
 const MAX_CHAR_COUNT = 1000;
 
 function Bio(props: any) {
@@ -23,9 +23,13 @@ function Bio(props: any) {
     }
 
     return (
-        <div>
-            <h1>Welcome to Regenquest&#44; {userModel.name}</h1>
+        <div className="bio-page">
+            <h3 className="main-heading">Welcome to Regenquest&#44; {userModel.name}</h3>
+             <h4>Let's get to know you</h4> 
+             
             <textarea
+                className="bio-input"
+                placeholder="Add your bio"
                 value={biography}
                 onChange={onEdit}
                 maxLength={MAX_CHAR_COUNT}>

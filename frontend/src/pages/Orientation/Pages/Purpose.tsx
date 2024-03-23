@@ -3,7 +3,7 @@ import onCheck from "./utils";
 import { userModel, userObservable } from "../../../models/userobserver";
 import { Motive } from "../../../models/common";
 import { capitalize } from "./utils";
-
+import './Purpose.css';
 function Purpose(props: any) {
     const [user, setUser] = useState(userModel);
     const [motives, setMotives] = useState<Set<string>>(new Set(user.motives));
@@ -18,23 +18,29 @@ function Purpose(props: any) {
     }, []);
 
     return (
-        <div>
-            <p>What brings you to Regenquest?</p>
-            
+        <div className="purpose-page">
+            <h3 className="main-heading">Let's get you stiched in</h3>
+            <p className="sub-heading">Find your team. What brings you to Regenquest?</p>
+            <p className="sub-text">Select all that apply</p>
+                            
             {Object.values(Motive).map(
                     (motive) => (
-                        <div key={motive}>
+                        <div className="select-container" key={motive}>
                             <input
+                            className="click-button"
                             onChange={(e) => onCheck([setMotives, props.updateData], motives, e)}
-                            type="checkbox"
+                            type="button"
                             id={motive.toLowerCase()}
-                            name={motive}
+                            value={motive}
                             defaultChecked={motives.has(motive)} />
 
-                            <label htmlFor={motive.toLocaleLowerCase()}>{capitalize(motive)}</label>
+                           
                         </div>
                     )
+                    
                 )}
+                
+             
         </div>
     );
 }

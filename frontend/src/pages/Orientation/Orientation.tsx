@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 import { sanitizePage, RegistrationPages } from "./utils";
 import { Link } from "react-router-dom";
 import { userModel } from "../../models/userobserver";
-
+import './Orientation.css';
 function Orientation() {
     const [hasError, setHasError] = useState(false);
     const { id } = useParams();
@@ -66,24 +66,28 @@ function Orientation() {
 
         const SelectedPageView = RegistrationPages[index].view;
         return (
-            <Container>
-                <h1>Step {page}: {RegistrationPages[index].title}</h1>
-
+            <Container className="orientation">
+                
+                <div className="content">
                 <SelectedPageView updateData={updateData} />
-
-                <IconButton title="Previous page" onClick={() => {
+                </div>
+                <div className="icon-button-container">
+                <IconButton className="icon-button" title="Previous page" onClick={() => {
                     const newPage = page - 1;
                     changePage(newPage)
                     }}>
                     <ChevronLeft />
 
                 </IconButton>
-                <IconButton title="Next page" onClick={() => {
+                
+                
+                <IconButton className="icon-button"title="Next page" onClick={() => {
                     const newPage = page + 1;
                     changePage(newPage)
                     }}>
                     <ChevronRight />
                 </IconButton>
+                </div>
             </Container>
         );
     }

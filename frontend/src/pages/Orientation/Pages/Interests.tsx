@@ -3,7 +3,7 @@ import onCheck from "./utils";
 import { userModel, userObservable } from "../../../models/userobserver";
 import { Topic } from "../../../models/common";
 import { capitalize } from "./utils";
-
+import './Interests.css';
 function Interests(props: any) {    
     const [user, setUser] = useState(userModel);
     const [topics, setTopics] = useState(new Set<string>(user.topics));
@@ -18,9 +18,12 @@ function Interests(props: any) {
     }, []);
 
     return (
-        <div>
-            <p>What are your interests?</p>
-            
+        <div className="interests-page">
+            <h3 className="main-heading">Let's get you stiched in</h3>
+            <p className="sub-heading">What are your interests?</p>
+            <p className="sub-text">Select 3 or more</p>
+            <input type="search" className="search" name="search" />
+            <i className="fa-solid fa-magnifying-glass"></i>
             {Object.values(Topic).map(
                     (topic) => (
                         <div key={topic}>
