@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from 'react';
 import onCheck from "./utils";
 import { userModel, userObservable } from "../../../models/userobserver";
 import { Topic } from "../../../models/common";
@@ -7,7 +8,7 @@ import './Interests.css';
 function Interests(props: any) {    
     const [user, setUser] = useState(userModel);
     const [topics, setTopics] = useState(new Set<string>(user.topics));
-
+    const input = useRef<HTMLInputElement>(null);
     // Watch changes to shared userModel
     useEffect(() => {
         const subscription = userObservable.subscribe(setUser);
@@ -28,6 +29,7 @@ function Interests(props: any) {
                     (topic) => (
                         <div key={topic}>
                             <input
+                                ref={input}
                                 onChange={(e) => onCheck([setTopics, props.updateData], topics, e)}
                                 type="checkbox"
                                 id={topic.toLowerCase()}

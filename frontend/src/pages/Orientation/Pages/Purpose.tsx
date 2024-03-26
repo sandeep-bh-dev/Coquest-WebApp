@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from 'react';
 import onCheck from "./utils";
 import { userModel, userObservable } from "../../../models/userobserver";
 import { Motive } from "../../../models/common";
@@ -7,7 +8,7 @@ import './Purpose.css';
 function Purpose(props: any) {
     const [user, setUser] = useState(userModel);
     const [motives, setMotives] = useState<Set<string>>(new Set(user.motives));
-
+    const input = useRef<HTMLInputElement>(null);
     // Watch changes to shared userModel
     useEffect(() => {
         const subscribtion = userObservable.subscribe(setUser);
@@ -25,16 +26,17 @@ function Purpose(props: any) {
                             
             {Object.values(Motive).map(
                     (motive) => (
-                        <div className="select-container" key={motive}>
+                        <div key={motive}>
                             <input
-                            className="click-button"
-                            onChange={(e) => onCheck([setMotives, props.updateData], motives, e)}
-                            type="button"
+                            ref={input}
+                            
+                            onChange={(e) => { onCheck([setMotives, props.updateData], motives, e);}}
+                            type="checkbox"
                             id={motive.toLowerCase()}
                             value={motive}
                             defaultChecked={motives.has(motive)} />
 
-                           
+            <label htmlFor={motive.toLocaleLowerCase()}>{capitalize(motive)}</label>
                         </div>
                     )
                     
